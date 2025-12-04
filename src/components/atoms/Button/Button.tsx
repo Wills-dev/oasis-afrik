@@ -6,13 +6,12 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button = ({
-  children,
-  onClick,
-  className = "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition",
-}: ButtonProps) => {
+const Button = ({ children, onClick, className = "h-[40px]" }: ButtonProps) => {
   return (
-    <button onClick={onClick} className={`${className}`}>
+    <button
+      onClick={onClick}
+      className={`bg-[#009933] px-[24px] cursor-pointer text-white rounded-md hover:bg-green-700 transition ${className} `}
+    >
       {children}
     </button>
   );
