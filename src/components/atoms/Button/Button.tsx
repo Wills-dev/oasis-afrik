@@ -1,20 +1,51 @@
 "use client";
 
+import { Loader } from "lucide-react";
+import Link from "next/link";
+
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
+  type?: "button" | "submit" | "reset";
+  height?: string;
+  width?: string;
+  disabled?: boolean;
+  loading?: boolean;
+  href?: string;
+  bgColor?: string;
+  bgHoverColor?: string;
 }
 
-const Button = ({ children, onClick, className = "h-[40px]" }: ButtonProps) => {
-  return (
+const Button = ({
+  children,
+  onClick,
+  href,
+  type = "button",
+  width = "w-full",
+  height = "h-12",
+  disabled = false,
+  loading = false,
+  bgColor = "bg-green-600",
+  bgHoverColor = "hover:bg-green-700",
+  className = `relative flex items-center justify-center  text-white font-semibold px-6 rounded-lg transform hover:scale-[1.02] transition-all ${bgColor} ${
+    !loading && `${bgHoverColor}`
+  } `,
+}: ButtonProps) => {
+  const buttonElement = (
     <button
+      type={type}
       onClick={onClick}
-      className={`bg-[#009933] px-[24px] cursor-pointer text-white rounded-md hover:bg-green-700 transition ${className} `}
+      className={`${className} ${width} ${height} ${
+        loading || disabled ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+      }`}
+      disabled={disabled || loading}
     >
-      {children}
+      {loading ? <Loader className="animate-spin w-8 h-8" /> : children}
     </button>
   );
+
+  return href ? <Link href={href}>{buttonElement}</Link> : buttonElement;
 };
 
 export default Button;
