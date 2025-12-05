@@ -1,7 +1,26 @@
 import { axiosInstance } from "@/lib/axiosInstance";
-import { LoginProps } from "../types";
+import { LoginProps, SignUpProps } from "../types";
 
-export const loginAdmin = async ({ email, password }: LoginProps) => {
+export const signUp = async ({
+  email,
+  password,
+  firstName,
+  lastName,
+}: SignUpProps) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/sign-up", {
+      email,
+      firstName,
+      lastName,
+      password,
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const login = async ({ email, password }: LoginProps) => {
   try {
     const { data } = await axiosInstance.post("/auth/login", {
       email,
@@ -22,7 +41,7 @@ export const getCurrentUser = async () => {
   }
 };
 
-export const logoutAdmin = async () => {
+export const logout = async () => {
   try {
     await axiosInstance.get("/auth/log-out");
   } catch (error) {
