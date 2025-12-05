@@ -31,7 +31,7 @@ export const useSignUp = () => {
       router.push(`/verify?email=${signUpForm?.email}`);
     },
     onError: (error: ApiErrorResponse) => {
-      console.log("error logging admin", error);
+      console.log("error logging signing up", error);
       promiseErrorFunction(error);
     },
   });

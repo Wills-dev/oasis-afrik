@@ -1,11 +1,11 @@
-import LoginForm from "@/components/molecules/forms/LoginForm/LoginForm";
 import AuthLayout from "@/components/templates/AuthLayout/AuthLayout";
+import LoginForm from "@/components/molecules/forms/LoginForm/LoginForm";
 
 const LoginWrapper = () => {
   return (
     <AuthLayout
       title="Welcome Back"
-      description="Login to your OasisAfrik account and continue connecting "
+      description="Login to your OasisAfrik account and continue connecting"
     >
       <LoginForm />
     </AuthLayout>

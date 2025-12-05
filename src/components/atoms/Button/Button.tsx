@@ -26,7 +26,7 @@ const Button = ({
   height = "h-12",
   disabled = false,
   loading = false,
-  bgColor = "bg-green-600",
+  bgColor = "bg-[#009933]",
   bgHoverColor = "hover:bg-green-700",
   className = `relative flex items-center justify-center  text-white font-semibold px-6 rounded-lg transform hover:scale-[1.02] transition-all ${bgColor} ${
     !loading && `${bgHoverColor}`
