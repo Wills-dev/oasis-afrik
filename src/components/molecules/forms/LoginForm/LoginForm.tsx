@@ -1,13 +1,15 @@
 "use client";
 
+import Link from "next/link";
+
+import Alternative from "../../Alternative/Alternative";
 import Button from "@/components/atoms/Button/Button";
 import GoogleButton from "@/components/atoms/GoogleButton/GoogleButton";
 import HorizontalLine from "@/components/atoms/HorizontalLine/HorizontalLine";
 import Input from "@/components/atoms/Input/Input";
 import Label from "@/components/atoms/Label/Label";
+
 import { useLogin } from "@/features/auth/hooks/useLogin";
-import Link from "next/link";
-import Alternative from "../../Alternative/Alternative";
 
 const LoginForm = () => {
   const {

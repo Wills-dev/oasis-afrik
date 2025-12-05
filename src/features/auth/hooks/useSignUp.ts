@@ -1,39 +1,34 @@
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
-import toast from "react-hot-toast";
-
-import { useLoginState } from "./useLoginState";
-import { login } from "../api";
+import { useSignUpState } from "./useSignUpState";
+import { signUp } from "../api";
 import { toastOption } from "@/lib/helpers/toast";
-import { createAuthCookie } from "@/lib/helpers/cookie";
 import { ApiErrorResponse } from "@/lib/types";
 import { promiseErrorFunction } from "@/lib/helpers/promiseError";
-import { setUser } from "@/store/features/auth/authSlice";
 
-export const useLogin = () => {
+export const useSignUp = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const {
     showPassword,
     togglePasswordVisibility,
     handleChange,
-    loginForm,
+    signUpForm,
     resetForm,
-  } = useLoginState();
+    acceptTerms,
+    setAcceptTerms,
+  } = useSignUpState();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: login,
-    onSuccess: (data) => {
+    mutationFn: signUp,
+    onSuccess: () => {
       resetForm();
       toast.success("Login successful", toastOption);
-      createAuthCookie("oasisAfrikUserId", data.data.token);
-      dispatch(setUser(data.data.userData));
-      router.push("/dashboard/overview");
+      router.push(`/verify?email=${signUpForm?.email}`);
     },
     onError: (error: ApiErrorResponse) => {
       console.log("error logging admin", error);
@@ -43,12 +38,21 @@ export const useLogin = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!loginForm.email) {
+    if (!signUpForm.firstName) {
+      return toast.error("First name is required", toastOption);
+    } else if (!signUpForm.lastName) {
+      return toast.error("Last name is required", toastOption);
+    } else if (!signUpForm.email) {
       return toast.error("Email is required", toastOption);
-    } else if (!loginForm.password) {
+    } else if (!signUpForm.password) {
       return toast.error("Password is required", toastOption);
+    } else if (!acceptTerms) {
+      return toast.error(
+        "Please accept terms and conditions to proceed.",
+        toastOption
+      );
     }
-    mutate(loginForm);
+    mutate(signUpForm);
   };
 
   return {
@@ -56,7 +60,9 @@ export const useLogin = () => {
     togglePasswordVisibility,
     handleChange,
     handleSubmit,
-    loginForm,
+    signUpForm,
     isPending,
+    acceptTerms,
+    setAcceptTerms,
   };
 };
