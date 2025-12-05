@@ -32,6 +32,17 @@ export const login = async ({ email, password }: LoginProps) => {
   }
 };
 
+export const forgotPassword = async ({ email }: { email: string }) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/forgot-password", {
+      email,
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getCurrentUser = async () => {
   try {
     const { data } = await axiosInstance.get("/auth/current-user");

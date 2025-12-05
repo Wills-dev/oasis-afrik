@@ -36,7 +36,7 @@ export const useLogin = () => {
       router.push("/dashboard/overview");
     },
     onError: (error: ApiErrorResponse) => {
-      console.log("error logging admin", error);
+      console.log("error logging", error);
       promiseErrorFunction(error);
     },
   });
