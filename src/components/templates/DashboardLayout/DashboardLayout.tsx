@@ -26,7 +26,7 @@ const DashboardLayout = ({
       <div className="lg:ml-64">
         <DashboardNav title={title} toggleSidebar={toggleSidebar} />
         <main className="pt-20">
-          <Container>{children}</Container>
+          <Container className="xl:px-6">{children}</Container>
         </main>
       </div>
     </div>
