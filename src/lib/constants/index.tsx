@@ -125,7 +125,7 @@ export const dashboardLinks = [
           d="M5.83333 10C2.5 10 2.5 11.4917 2.5 13.3333V14.1667C2.5 16.4667 2.5 18.3333 6.66667 18.3333H13.3333C16.6667 18.3333 17.5 16.4667 17.5 14.1667V13.3333C17.5 11.4917 17.5 10 14.1667 10C13.3333 10 13.1 10.175 12.6667 10.5L11.8167 11.4C10.8333 12.45 9.16667 12.45 8.175 11.4L7.33333 10.5C6.9 10.175 6.66667 10 5.83333 10Z"
           stroke="currentColor"
           strokeWidth="1.5"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -133,7 +133,7 @@ export const dashboardLinks = [
           d="M15.8333 9.99984V4.99984C15.8333 3.15817 15.8333 1.6665 12.5 1.6665H7.49996C4.16663 1.6665 4.16663 3.15817 4.16663 4.99984V9.99984"
           stroke="currentColor"
           strokeWidth="1.5"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -176,7 +176,7 @@ export const dashboardLinks = [
           d="M5.83325 7.9165H14.1666"
           stroke="currentColor"
           strokeWidth="1.5"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -184,7 +184,7 @@ export const dashboardLinks = [
           d="M5.83325 12.083H11.6666"
           stroke="currentColor"
           strokeWidth="1.5"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -232,6 +232,75 @@ export const dashboardLinks = [
         />
         <path
           d="M1.66663 8.74984V7.08317C1.66663 4.8165 3.03329 3.23317 5.15829 2.9665C5.37496 2.93317 5.59996 2.9165 5.83329 2.9165H13.3333C13.55 2.9165 13.7583 2.92483 13.9583 2.95816C16.1083 3.20816 17.5 4.79984 17.5 7.08317V8.29151H15.7666C15.2999 8.29151 14.8749 8.47483 14.5666 8.79149C14.2166 9.13316 14.0166 9.62483 14.0666 10.1498C14.1416 11.0498 14.9666 11.7082 15.8666 11.7082H17.5V12.9165C17.5 15.4165 15.8333 17.0832 13.3333 17.0832H11.25"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+];
+
+export const otherDashboardLinks = [
+  {
+    title: "Settings",
+    link: "/dashboard/settings",
+    icon: (
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M1.66675 10.7334V9.2667C1.66675 8.40003 2.37508 7.68336 3.25008 7.68336C4.75841 7.68336 5.37508 6.6167 4.61675 5.30836C4.18341 4.55836 4.44175 3.58336 5.20008 3.15003L6.64175 2.32503C7.30008 1.93336 8.15008 2.1667 8.54175 2.82503L8.63341 2.98336C9.38341 4.2917 10.6167 4.2917 11.3751 2.98336L11.4667 2.82503C11.8584 2.1667 12.7084 1.93336 13.3667 2.32503L14.8084 3.15003C15.5667 3.58336 15.8251 4.55836 15.3917 5.30836C14.6334 6.6167 15.2501 7.68336 16.7584 7.68336C17.6251 7.68336 18.3417 8.3917 18.3417 9.2667V10.7334C18.3417 11.6 17.6334 12.3167 16.7584 12.3167C15.2501 12.3167 14.6334 13.3834 15.3917 14.6917C15.8251 15.45 15.5667 16.4167 14.8084 16.85L13.3667 17.675C12.7084 18.0667 11.8584 17.8334 11.4667 17.175L11.3751 17.0167C10.6251 15.7084 9.39175 15.7084 8.63341 17.0167L8.54175 17.175C8.15008 17.8334 7.30008 18.0667 6.64175 17.675L5.20008 16.85C4.44175 16.4167 4.18341 15.4417 4.61675 14.6917C5.37508 13.3834 4.75841 12.3167 3.25008 12.3167C2.37508 12.3167 1.66675 11.6 1.66675 10.7334Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Support",
+    link: "/dashboard/support",
+    icon: (
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M14.1667 15.3583H10.8334L7.12507 17.8249C6.57507 18.1916 5.83341 17.8 5.83341 17.1333V15.3583C3.33341 15.3583 1.66675 13.6916 1.66675 11.1916V6.19157C1.66675 3.69157 3.33341 2.0249 5.83341 2.0249H14.1667C16.6667 2.0249 18.3334 3.69157 18.3334 6.19157V11.1916C18.3334 13.6916 16.6667 15.3583 14.1667 15.3583Z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeMiterlimit="10"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M10 9.4668V9.29183C10 8.72516 10.35 8.42515 10.7 8.18348C11.0417 7.95015 11.3833 7.65016 11.3833 7.10016C11.3833 6.33349 10.7667 5.7168 10 5.7168C9.23334 5.7168 8.6167 6.33349 8.6167 7.10016"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.99617 11.4582H10.0037"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"

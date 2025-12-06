@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Container from "@/components/atoms/Container/Container";
 import DashboardSidebar from "@/components/organisms/DashboardSidebar/DashboardSidebar";
+import DashboardNav from "@/components/organisms/DashboardNav/DashboardNav";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -15,9 +16,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <DashboardSidebar
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        setIsSidebarOpen={setIsSidebarOpen}
       />
       <div className="lg:ml-64">
+        <DashboardNav toggleSidebar={toggleSidebar} />
         <main className="pt-20">
           <Container>{children}</Container>
         </main>
