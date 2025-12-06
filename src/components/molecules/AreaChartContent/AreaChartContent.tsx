@@ -1,20 +1,14 @@
 "use client";
-import { TrendingUp } from "lucide-react";
+
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import TimeFilterDropdown from "../TimeFilterDropdown/TimeFilterDropdown";
 
 const chartData = [
   { month: "January", desktop: 186 },
@@ -26,20 +20,18 @@ const chartData = [
 ];
 const chartConfig = {
   desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
+    label: "Orders",
+    color: "#0099331F",
   },
 } satisfies ChartConfig;
 
 const AreaChartContent = () => {
   return (
-    <div className="">
-      <Card>
+    <div className="max-w-[484px] w-full border border-gray-200 rounded-md">
+      <Card className="shadow-none border-0">
         <CardHeader className="flex item-center justify-between">
-          <CardTitle>Area Chart</CardTitle>
-          <CardDescription>
-            Showing total visitors for the last 6 months
-          </CardDescription>
+          <CardTitle>Order overview</CardTitle>
+          <TimeFilterDropdown />
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
