@@ -6,12 +6,14 @@ import OverviewChartWrapper from "../OverviewChartWrapper/OverviewChartWrapper";
 const OverviewWrapper = () => {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between gap-6">
+      <div className="flex sm:items-center justify-between gap-6  max-sm:flex-col">
         <DashboardTitle
           title="Welcome back, Simeon!"
           description="Here is what is happening with your orders today"
         />
-        <Button href="/products/new">Add a product</Button>
+        <Button href="/products/new" width="w-fit">
+          Add a product
+        </Button>
       </div>
       <div className="pt-10">
         <OverviewCards />
