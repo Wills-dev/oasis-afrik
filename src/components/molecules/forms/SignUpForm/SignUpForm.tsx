@@ -16,9 +16,9 @@ const SignUpForm = () => {
     showPassword,
     togglePasswordVisibility,
     handleChange,
-    handleSubmit,
+    // handleSubmit,
+    // isPending,
     signUpForm,
-    isPending,
     acceptTerms,
     setAcceptTerms,
   } = useSignUp();
