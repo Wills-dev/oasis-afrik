@@ -21,7 +21,7 @@ const DashboardSidebar = ({
         <DashboardSidebarHeader toggleSidebar={toggleSidebar} />
         <div className="flex-1 h-full flex flex-col justify-between">
           <DashboardMainNavWrapper />
-          <div className="space-y-16">
+          <div className="space-y-16 pb-20">
             <OtherDashboardLinks />
           </div>
         </div>
