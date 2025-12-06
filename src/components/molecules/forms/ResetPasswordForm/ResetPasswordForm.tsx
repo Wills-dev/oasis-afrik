@@ -10,8 +10,8 @@ import { useResetPassword } from "@/features/auth/hooks/useResetPassword";
 
 const ResetPasswordForm = () => {
   const {
-    handleSubmit,
-    isPending,
+    // handleSubmit,
+    // isPending,
     password,
     setPassword,
     confirmPassword,

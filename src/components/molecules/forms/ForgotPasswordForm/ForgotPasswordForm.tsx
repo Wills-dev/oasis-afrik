@@ -9,8 +9,14 @@ import NotificationCard from "../../NotificationCard/NotificationCard";
 import { useForgotPassword } from "@/features/auth/hooks/useForgotPassword";
 
 const ForgotPasswordForm = () => {
-  const { handleSubmit, email, setEmail, setOnSucces, onSuccess, isPending } =
-    useForgotPassword();
+  const {
+    // handleSubmit,
+    // isPending,
+    email,
+    setEmail,
+    setOnSucces,
+    onSuccess,
+  } = useForgotPassword();
 
   return (
     <div className="">

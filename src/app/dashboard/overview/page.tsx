@@ -3,7 +3,7 @@ import DashboardLayout from "@/components/templates/DashboardLayout/DashboardLay
 
 const page = () => {
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Overview">
       <OverviewWrapper />
     </DashboardLayout>
   );

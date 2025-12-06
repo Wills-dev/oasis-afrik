@@ -15,7 +15,7 @@ const DashboardNavLink = ({ link, title, icon }: DashboardNavLinkProps) => {
   return (
     <Link
       href={link}
-      className={`flex items-center gap-2 p-2 rounded hover:bg-gray-100  transition-all duration-300 text-sm font-medium ${
+      className={`flex items-center gap-2 px-2 py-3 rounded hover:bg-gray-100  transition-all duration-300 text-sm font-medium ${
         isActive ? "text-[#009933]" : "text-gray-800"
       }`}
     >

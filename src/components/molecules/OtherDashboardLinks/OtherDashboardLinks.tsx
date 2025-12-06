@@ -1,11 +1,10 @@
 import DashboardNavLink from "@/components/atoms/DashboardNavLink/DashboardNavLink";
+import { otherDashboardLinks } from "@/lib/constants";
 
-import { dashboardLinks } from "@/lib/constants";
-
-const DashboardMainNavWrapper = () => {
+const OtherDashboardLinks = () => {
   return (
-    <div className="space-y-1 py-6">
-      {dashboardLinks?.map((link) => (
+    <div className="space-y-1">
+      {otherDashboardLinks?.map((link) => (
         <DashboardNavLink
           key={link?.title}
           link={link?.link}
@@ -17,4 +16,4 @@ const DashboardMainNavWrapper = () => {
   );
 };
 
-export default DashboardMainNavWrapper;
+export default OtherDashboardLinks;

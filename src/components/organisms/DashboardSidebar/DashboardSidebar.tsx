@@ -1,16 +1,15 @@
 import DashboardMainNavWrapper from "@/components/molecules/DashboardMainNavWrapper/DashboardMainNavWrapper";
 import DashboardSidebarHeader from "@/components/molecules/DashboardSidebarHeader/DashboardSidebarHeader";
+import OtherDashboardLinks from "@/components/molecules/OtherDashboardLinks/OtherDashboardLinks";
 
 interface DashboardSidebarProps {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
-  setIsSidebarOpen: (isOpen: boolean) => void;
 }
 
 const DashboardSidebar = ({
   isSidebarOpen,
   toggleSidebar,
-  setIsSidebarOpen,
 }: DashboardSidebarProps) => {
   return (
     <div
@@ -18,10 +17,13 @@ const DashboardSidebar = ({
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       } lg:translate-x-0`}
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col h-full">
         <DashboardSidebarHeader toggleSidebar={toggleSidebar} />
         <div className="flex-1 h-full flex flex-col justify-between">
           <DashboardMainNavWrapper />
+          <div className="space-y-16">
+            <OtherDashboardLinks />
+          </div>
         </div>
       </div>
     </div>
