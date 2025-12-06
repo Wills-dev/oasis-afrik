@@ -31,7 +31,7 @@ const Sidebar = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
               </motion.span>
             </button>
           </div>
-          <div className="flex flex-col justify-between gap-10 flex-1">
+          <div className="flex flex-col justify-between gap-10 flex-1 pb-20">
             <NavWrapper />
             <AuthPanelButtons />
           </div>
