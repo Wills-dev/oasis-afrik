@@ -6,7 +6,13 @@ import Container from "@/components/atoms/Container/Container";
 import DashboardSidebar from "@/components/organisms/DashboardSidebar/DashboardSidebar";
 import DashboardNav from "@/components/organisms/DashboardNav/DashboardNav";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
@@ -18,7 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         toggleSidebar={toggleSidebar}
       />
       <div className="lg:ml-64">
-        <DashboardNav toggleSidebar={toggleSidebar} />
+        <DashboardNav title={title} toggleSidebar={toggleSidebar} />
         <main className="pt-20">
           <Container>{children}</Container>
         </main>
