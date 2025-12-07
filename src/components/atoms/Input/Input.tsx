@@ -36,6 +36,7 @@ const Input = ({
     <div className="relative flex items-center backdrop-blur-2xl bg-white/25 rounded-lg border border-gray-200 transition-all focus-within:border-[#009933] duration-300">
       {icon && icon}
       <input
+        style={{ fontSize: "16px" }}
         type={type}
         value={value}
         onChange={onChange}

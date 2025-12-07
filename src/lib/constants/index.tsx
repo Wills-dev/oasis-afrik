@@ -317,3 +317,8 @@ export const timePeriods = [
   { value: "monthly", label: "Monthly" },
   { value: "yearly", label: "Yearly" },
 ];
+
+export const currency = [
+  { value: "NGN", label: "NGN" },
+  { value: "USD", label: "USD" },
+];

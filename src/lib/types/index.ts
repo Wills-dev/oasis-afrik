@@ -32,3 +32,8 @@ export interface TableWrapperProps<TData = unknown> {
   limit: number;
   setLimit: (limit: number) => void;
 }
+
+export interface optionsType {
+  label: string;
+  value: number | string;
+}
