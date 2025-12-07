@@ -1,7 +1,12 @@
-import React from "react";
+import DashboardLayout from "@/components/templates/DashboardLayout/DashboardLayout";
+import ProductsWrapper from "@/features/products/components/ProductsWrapper/ProductsWrapper";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <DashboardLayout title="Products">
+      <ProductsWrapper />
+    </DashboardLayout>
+  );
 };
 
 export default page;
