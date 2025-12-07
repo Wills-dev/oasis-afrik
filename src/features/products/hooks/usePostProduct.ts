@@ -5,7 +5,6 @@ export const usePostProduct = () => {
   const {
     product,
     step,
-    setProduct,
     handleChange,
     nextStep,
     prevStep,
@@ -26,14 +25,10 @@ export const usePostProduct = () => {
     nextStep,
     prevStep,
     product,
-    setProduct,
     handleChange,
     selectedImages,
-    selectedImageFiles,
     onSelectFile,
     handleImageDelete,
-    setSelectedImageFiles,
-    setSelectedImages,
     handleDropdownChange,
   };
 };
