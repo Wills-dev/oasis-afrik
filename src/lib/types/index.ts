@@ -1,3 +1,5 @@
+import { ColumnDef } from "@tanstack/react-table";
+
 export interface ApiErrorResponse {
   response?: {
     data?: {
@@ -6,4 +8,27 @@ export interface ApiErrorResponse {
       errors?: string[];
     };
   };
+}
+
+export interface fetchDataProps {
+  currentPage: number;
+  limit: number;
+  status?: string;
+  search: string | null;
+  filter?: string;
+}
+
+export interface TableWrapperProps<TData = unknown> {
+  columns: ColumnDef<TData>[];
+  data: TData[];
+  totalPages: number;
+  currentPage: number;
+  prevPage: () => void;
+  nextPage: (totalPages: number) => void;
+  goToLastPage: (totalPages: number) => void;
+  goToFirstPage: () => void;
+  isFirstPage: () => boolean;
+  isLastPage: (totalPages: number) => boolean;
+  limit: number;
+  setLimit: (limit: number) => void;
 }
