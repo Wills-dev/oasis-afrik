@@ -76,8 +76,8 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
           </Button>
           <Button
             width="flex-1 w-full"
-            bgColor="bg-gray-400"
-            bgHoverColor="hover:bg-gray-500"
+            bgColor="bg-white border border-gray-300 text-gray-600"
+            bgHoverColor="hover:bg-gray-50"
           >
             Delete product
           </Button>
