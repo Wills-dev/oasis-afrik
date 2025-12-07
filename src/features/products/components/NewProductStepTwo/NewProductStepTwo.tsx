@@ -57,7 +57,7 @@ const NewProductStepTwo = ({
           selectedImages.map((image, index) => (
             <div
               key={index}
-              className="bg-gray-100 rounded-md sm:w-[218px] sm:h-[205px] w-[120px] h-[120px] relative overflow-hidden"
+              className="bg-gray-100 rounded-md sm:w-[218px] sm:min-w-[218px] sm:h-[205px] w-[120px] min-w-[120px] h-[120px] relative overflow-hidden"
             >
               <Image
                 src="/assets/icons/cancel.svg"
