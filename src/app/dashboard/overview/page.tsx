@@ -1,7 +1,7 @@
 import OverviewWrapper from "@/components/organisms/OverviewWrapper/OverviewWrapper";
 import DashboardLayout from "@/components/templates/DashboardLayout/DashboardLayout";
 
-const page = () => {
+const OverviewPage = () => {
   return (
     <DashboardLayout title="Overview">
       <OverviewWrapper />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default OverviewPage;

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 
 export const useTableState = () => {
   const [currentPage, setCurrentPage] = useState(1);

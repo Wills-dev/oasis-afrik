@@ -45,7 +45,13 @@ const Button = ({
     </button>
   );
 
-  return href ? <Link href={href}>{buttonElement}</Link> : buttonElement;
+  return href ? (
+    <Link href={href} className={`flex-1 ${width}`}>
+      {buttonElement}
+    </Link>
+  ) : (
+    buttonElement
+  );
 };
 
 export default Button;
