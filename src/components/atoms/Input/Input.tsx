@@ -41,7 +41,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         name={name}
-        className={`w-full bg-transparent sm:h-12 h-11 text-gray-900 placeholder-gray-400 outline-none ${paddingX}`}
+        className={`w-full bg-transparent sm:h-11 h-10 text-gray-900 placeholder-gray-400 outline-none ${paddingX}`}
         placeholder={placeholder}
       />
       {showPassword !== undefined && (

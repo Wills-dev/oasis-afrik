@@ -11,7 +11,7 @@ const OverviewWrapper = () => {
           title="Welcome back, Simeon!"
           description="Here is what is happening with your orders today"
         />
-        <Button href="/products/new" width="w-fit">
+        <Button href="/dashboard/products/new" width="w-fit">
           Add a product
         </Button>
       </div>
