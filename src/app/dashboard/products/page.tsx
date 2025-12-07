@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/templates/DashboardLayout/DashboardLayout";
 import ProductsWrapper from "@/features/products/components/ProductsWrapper/ProductsWrapper";
 
-const page = () => {
+const ProductPage = () => {
   return (
     <DashboardLayout title="Products">
       <ProductsWrapper />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProductPage;

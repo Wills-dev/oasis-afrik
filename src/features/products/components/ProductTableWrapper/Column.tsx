@@ -4,7 +4,7 @@ import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-import { convertDateFormat, numberWithCommas } from "@/lib/helpers";
+import { convertDateFormat } from "@/lib/helpers";
 import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { ProductType } from "../../types";
@@ -167,7 +167,9 @@ export const Column = [
         <>
           <ColumnActionDropdown>
             <DropdownMenuItem>
-              <Link href={`/products/info/${product?.id}`}>View info</Link>
+              <Link href={`/dashboard/products/info/${product?.id}`}>
+                View info
+              </Link>
             </DropdownMenuItem>
           </ColumnActionDropdown>
         </>

@@ -1,6 +1,7 @@
 import Logo from "@/components/atoms/Logo/Logo";
 import Button from "@/components/atoms/Button/Button";
 import Container from "@/components/atoms/Container/Container";
+import BackButton from "@/components/atoms/BackButton/BackButton";
 
 const NotFound = () => {
   return (
@@ -27,7 +28,10 @@ const NotFound = () => {
               <p className="text-center text-gray-600">
                 Oops! The page you are looking for does not exist.
               </p>
-              <Button href="/">Go back to Home</Button>
+              <div className="flex items-center justify-center gap-4">
+                <Button href="/">Go back to Home</Button>
+                <BackButton />
+              </div>
             </div>
           </div>
         </div>

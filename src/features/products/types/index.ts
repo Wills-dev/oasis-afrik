@@ -1,3 +1,8 @@
+export type ProductImageType = {
+  id: string;
+  imgUrl: string;
+};
+
 export type ProductType = {
   id: string;
   productName: string;
@@ -12,9 +17,8 @@ export type ProductType = {
   maxLead: number;
   maxLeadPeriod: string;
   description: string;
-  productImages: {
-    id: string;
-    imgUrl: string;
-  }[];
+  productImages: ProductImageType[];
   category: string;
+  reviews?: number;
+  rating?: number;
 };

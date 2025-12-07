@@ -5,7 +5,9 @@ const StatusBubble = ({ status }: { status: string }) => {
     unavailable: "text-orange-400 bg-orange-50",
     completed: "text-green-400 bg-green-50",
     approved: "text-green-400 bg-green-50",
+    verified: "text-green-400 bg-green-50",
     declined: "text-red-400 bg-red-50",
+    unverified: "text-red-400 bg-red-50",
     blocked: "text-red-400 bg-red-50",
     inactive: "text-yellow-400 bg-yellow-50",
   };

@@ -18,3 +18,13 @@ export const getProducts = async ({
     throw error;
   }
 };
+
+export const getProductInfo = async ({ productId }: { productId: string }) => {
+  try {
+    const url = `/products/${productId}`;
+    const { data } = await axiosInstance.get(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};

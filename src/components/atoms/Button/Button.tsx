@@ -26,9 +26,9 @@ const Button = ({
   height = "h-12",
   disabled = false,
   loading = false,
-  bgColor = "bg-[#009933]",
+  bgColor = "bg-[#009933] text-white",
   bgHoverColor = "hover:bg-green-700",
-  className = `relative flex items-center justify-center whitespace-nowrap text-white font-semibold px-6 rounded-lg transform hover:scale-[1.02] transition-all ${bgColor} ${
+  className = `relative flex items-center justify-center whitespace-nowrap font-semibold px-6 rounded-lg transform hover:scale-[1.02] transition-all ${bgColor} ${
     !loading && `${bgHoverColor}`
   } `,
 }: ButtonProps) => {
@@ -45,7 +45,13 @@ const Button = ({
     </button>
   );
 
-  return href ? <Link href={href}>{buttonElement}</Link> : buttonElement;
+  return href ? (
+    <Link href={href} className={`flex-1 ${width}`}>
+      {buttonElement}
+    </Link>
+  ) : (
+    buttonElement
+  );
 };
 
 export default Button;
