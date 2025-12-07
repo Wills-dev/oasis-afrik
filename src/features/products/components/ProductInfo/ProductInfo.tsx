@@ -1,5 +1,3 @@
-("");
-
 import { MapPin, Star } from "lucide-react";
 import { ProductType } from "../../types";
 
