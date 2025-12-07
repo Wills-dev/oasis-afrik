@@ -1,16 +1,22 @@
+"use client";
+
 import { MapPin, Star } from "lucide-react";
 import { ProductType } from "../../types";
 
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
 import Button from "@/components/atoms/Button/Button";
+import { useState } from "react";
+import RequestQuote from "@/components/molecules/modals/RequestQuote/RequestQuote";
 
 interface ProductInfoProps {
   productInfo: ProductType;
 }
 
 const ProductInfo = ({ productInfo }: ProductInfoProps) => {
-  const isProductOwner = true;
+  const [showQuote, setShowQuote] = useState(false);
+
+  const isProductOwner = false;
   return (
     <div className="max-w-[576px] md:min-w-[450px] min-w-[300px] w-full space-y-6">
       <div className="space-y-1">
@@ -83,8 +89,9 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
           </Button>
         </div>
       ) : (
-        <Button>Request a quote</Button>
+        <Button onClick={() => setShowQuote(true)}>Request a quote</Button>
       )}
+      <RequestQuote showQuoteForm={showQuote} setShowQuoteForm={setShowQuote} />
     </div>
   );
 };

@@ -46,7 +46,7 @@ const Button = ({
   );
 
   return href ? (
-    <Link href={href} className={`flex-1 ${width}`}>
+    <Link href={href} className={`${width}`}>
       {buttonElement}
     </Link>
   ) : (
