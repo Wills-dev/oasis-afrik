@@ -23,7 +23,7 @@ export const usePostProductState = () => {
   });
 
   const nextStep = () => {
-    if (step === 3 || step > 3) {
+    if (step === 2 || step > 2) {
       return;
     }
     setStep((prev) => prev + 1);

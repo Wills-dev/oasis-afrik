@@ -21,8 +21,8 @@ const NewProductWrapper = () => {
   } = usePostProduct();
 
   const showPrevButton = step !== 1;
-  const showNextButton = step !== 3;
-  const showSubmitButton = step === 3;
+  const showNextButton = step !== 2;
+  const showSubmitButton = step === 2;
 
   return (
     <div className="space-y-6 max-w-5xl w-full">
@@ -58,7 +58,7 @@ const NewProductWrapper = () => {
               Next step
             </Button>
           )}
-          {showSubmitButton && <Button width="w-fit">Submit</Button>}
+          {showSubmitButton && <Button width="w-fit">Upload product</Button>}
         </div>
       </form>
     </div>
