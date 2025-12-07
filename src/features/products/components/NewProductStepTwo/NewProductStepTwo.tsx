@@ -52,12 +52,12 @@ const NewProductStepTwo = ({
           or click to browse files ({imgLength}/5)
         </p>
       </label>
-      <div className="flex gap-2">
+      <div className="flex gap-2 overflow-x-auto">
         {selectedImages &&
           selectedImages.map((image, index) => (
             <div
               key={index}
-              className="bg-gray-100 rounded-md sm:w-[218px] sm:h-[205px] sm:w-[120px] sm:h-[120px] relative overflow-hidden"
+              className="bg-gray-100 rounded-md sm:w-[218px] sm:h-[205px] w-[120px] h-[120px] relative overflow-hidden"
             >
               <Image
                 src="/assets/icons/cancel.svg"
