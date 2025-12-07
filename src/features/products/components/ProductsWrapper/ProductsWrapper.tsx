@@ -15,7 +15,7 @@ const ProductsWrapper = () => {
               title="Products"
               description="Manage your product catalog"
             />
-            <Button href="/products/new" width="w-fit">
+            <Button href="/dashboard/products/new" width="w-fit">
               Add a product
             </Button>
           </div>

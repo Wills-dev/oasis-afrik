@@ -22,3 +22,20 @@ export type ProductType = {
   reviews?: number;
   rating?: number;
 };
+
+export type ProductFormData = {
+  productName: string;
+  category: string;
+  quantity: string;
+  unit: string;
+  country: string;
+  price: string;
+  currency: string;
+  minOrder: string;
+  minLead: string;
+  minLeadPeriod: string;
+  maxLead: string;
+  maxLeadPeriod: string;
+  description: string;
+  minOrderUnit: string;
+};
