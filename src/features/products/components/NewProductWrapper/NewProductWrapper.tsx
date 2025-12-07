@@ -1,8 +1,11 @@
 "use client";
-import Button from "@/components/atoms/Button/Button";
+
 import { usePostProduct } from "../../hooks/usePostProduct";
+
+import Button from "@/components/atoms/Button/Button";
 import NewProductHeader from "../NewProductHeader/NewProductHeader";
 import NewProductStepOne from "../NewProductStepOne/NewProductStepOne";
+import NewProductStepTwo from "../NewProductStepTwo/NewProductStepTwo";
 
 const NewProductWrapper = () => {
   const {
@@ -10,14 +13,10 @@ const NewProductWrapper = () => {
     nextStep,
     prevStep,
     product,
-    setProduct,
     handleChange,
     selectedImages,
-    selectedImageFiles,
     onSelectFile,
     handleImageDelete,
-    setSelectedImageFiles,
-    setSelectedImages,
     handleDropdownChange,
   } = usePostProduct();
 
@@ -26,7 +25,7 @@ const NewProductWrapper = () => {
   const showSubmitButton = step === 3;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-5xl w-full">
       <NewProductHeader step={step} />
       <form className="space-y-6">
         {step === 1 && (
@@ -34,6 +33,13 @@ const NewProductWrapper = () => {
             product={product}
             handleChange={handleChange}
             handleDropdownChange={handleDropdownChange}
+          />
+        )}
+        {step === 2 && (
+          <NewProductStepTwo
+            selectedImages={selectedImages}
+            onSelectFile={onSelectFile}
+            handleImageDelete={handleImageDelete}
           />
         )}
         <div className="flex justify-end flex-wrap gap-2">
@@ -52,7 +58,7 @@ const NewProductWrapper = () => {
               Next step
             </Button>
           )}
-          {showSubmitButton && <Button>Submit</Button>}
+          {showSubmitButton && <Button width="w-fit">Submit</Button>}
         </div>
       </form>
     </div>
