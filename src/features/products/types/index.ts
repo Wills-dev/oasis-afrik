@@ -8,7 +8,7 @@ export type ProductType = {
   productName: string;
   createdAt: string;
   status: "pending" | "approved" | "unavailable" | "declined";
-  amount: string;
+  price: string;
   country: string;
   minOrder: string;
   quantity: string;
