@@ -2,13 +2,12 @@ import Link from "next/link";
 
 import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
-
 import { Button } from "@/components/ui/button";
+import { Order } from "../../types";
 import { convertDateFormat } from "@/lib/helpers";
-import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { ProductType } from "../../types";
 
+import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
 const columnHelper = createColumnHelper();
@@ -39,7 +38,7 @@ export const Column = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          ProductID
+          OrderID
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -58,16 +57,17 @@ export const Column = [
       );
     },
   }),
-  columnHelper.accessor("country", {
-    header: ({ column }) => {
+  columnHelper.accessor("quantity", {
+    header: "Quantity",
+    cell: ({ row }) => {
+      const quantity: string = row.getValue("quantity");
+      const unit = (row?.original as { unit?: string })?.unit;
+
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Country
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <p className="">
+          {quantity}
+          {unit}
+        </p>
       );
     },
   }),
@@ -95,50 +95,55 @@ export const Column = [
     //   );
     // },
   }),
-  columnHelper.accessor("minOrder", {
+  columnHelper.accessor("minLead", {
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Minimum Order
+          Min Lead Time
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    // cell: ({ row }) => {
-    //   const discountedPrice = row.getValue("discountedPrice");
-    //   const currency = (row?.original as { currency?: string })?.currency;
+    cell: ({ row }) => {
+      const minLead: string = row.getValue("minLead");
+      const minLeadPeriod = (row?.original as { minLeadPeriod?: string })
+        ?.minLeadPeriod;
 
-    //   return (
-    //     <p className="">
-    //       {currency && getCurrencySign(currency)}
-    //       {discountedPrice ? numberWithCommas(Number(discountedPrice)) : "0.00"}
-    //     </p>
-    //   );
-    // },
+      return (
+        <p className="">
+          {minLead}
+          {minLeadPeriod}
+        </p>
+      );
+    },
   }),
-  columnHelper.accessor("quantity", {
+  columnHelper.accessor("maxLead", {
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Availability Quantity
+          Max Lead Time
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    // cell: ({ row }) => {
-    //   const availableQuantity = row.getValue("availableQuantity");
-    //   return (
-    //     <p className="">
-    //       {availableQuantity ? numberWithCommas(Number(availableQuantity)) : 0}
-    //     </p>
-    //   );
-    // },
+    cell: ({ row }) => {
+      const maxLead: string = row.getValue("maxLead");
+      const maxLeadPeriod = (row?.original as { maxLeadPeriod?: string })
+        ?.maxLeadPeriod;
+
+      return (
+        <p className="">
+          {maxLead}
+          {maxLeadPeriod}
+        </p>
+      );
+    },
   }),
   columnHelper.accessor("status", {
     header: ({ column }) => {
@@ -160,15 +165,20 @@ export const Column = [
 
   {
     id: "actions",
-    cell: ({ row }: CellContext<ProductType, unknown>) => {
-      const product = row.original;
+    cell: ({ row }: CellContext<Order, unknown>) => {
+      const order = row.original;
 
       return (
         <>
           <ColumnActionDropdown>
             <DropdownMenuItem>
-              <Link href={`/dashboard/products/info/${product?.id}`}>
-                View info
+              <Link href={`/dashboard/orders/info/${order?.id}`}>
+                View order info
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/dashboard/products/info/${order?.productId}`}>
+                View product info
               </Link>
             </DropdownMenuItem>
           </ColumnActionDropdown>

@@ -24,7 +24,7 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
           {productInfo?.productName}
         </h4>
         <p className="sm:text-lg font-medium text-gray-700">
-          {productInfo.amount} per gram
+          {productInfo.price} per gram
         </p>
         <div className="flex items-center gap-1 text-gray-500 max-sm:text-sm">
           <Star className="w-4 h-4 text-yellow-500" />

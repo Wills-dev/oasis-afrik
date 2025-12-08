@@ -16,6 +16,8 @@ export interface User {
   lastName: string;
   email: string;
   phoneNumber?: string;
+  country?: string;
+  companyName?: string;
 }
 
 export interface UserState {
