@@ -16,7 +16,7 @@ const OrderStatusTrack = ({
   return (
     <div className="border border-gray-200 rounded-lg p-[24px] space-y-6">
       <h6 className="sm:text-xl text-lg font-medium">Order status</h6>
-      <div className="flex items-center">
+      <div className="flex xl:items-center max-xl:flex-col">
         <OrderStatus
           bgColor={
             isActive("processing")

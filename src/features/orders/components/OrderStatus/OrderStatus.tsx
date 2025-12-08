@@ -14,10 +14,10 @@ const OrderStatus = ({
   description,
 }: OrderStatusProps) => {
   return (
-    <div className="flex flex-col lg:items-end items-center">
-      <div className="flex max-lg:flex-col items-center">
+    <div className="flex flex-col xl:items-end items-center">
+      <div className="flex max-xl:flex-col items-center">
         <div
-          className={`lg:w-[180px] lg:min-w-[180px] lg:h-1 w-1 h-[150px] ${bgColor}`}
+          className={`xl:w-[180px] xl:min-w-[180px] xl:h-1 w-1 h-[150px] ${bgColor}`}
         />
         <div
           className={`w-[60px] h-[60px] min-w-[40px] min-h-[40px] rounded-full flex items-center justify-center ${bgColor}`}
