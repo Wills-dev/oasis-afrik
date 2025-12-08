@@ -1,7 +1,8 @@
 "use client";
 
-import TableResourceToolbar from "@/components/organisms/TableResourceToolbar/TableResourceToolbar";
 import { useGetQuotes } from "../../hooks/useGetQuotes";
+
+import TableResourceToolbar from "@/components/organisms/TableResourceToolbar/TableResourceToolbar";
 import PaginationComponent from "@/components/molecules/PaginationComponent/PaginationComponent";
 import QuoteCard from "../QuoteCard/QuoteCard";
 
@@ -16,12 +17,12 @@ const AllQuotesWrapper = () => {
     isLastPage,
     search,
     handleSearchChange,
-    data,
-    isPending,
-    isLoading,
-    isError,
-    error,
-    refetch,
+    // data,
+    // isPending,
+    // isLoading,
+    // isError,
+    // error,
+    // refetch,
     handleSearch,
     handleClear,
     currentPage,
