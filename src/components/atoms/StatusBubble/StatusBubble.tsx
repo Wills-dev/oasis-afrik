@@ -3,6 +3,7 @@ const StatusBubble = ({ status }: { status: string }) => {
     pending: "text-yellow-400 bg-yellow-50",
     active: "text-blue-400 bg-blue-50",
     in_transit: "text-blue-400 bg-blue-50",
+    replied: "text-blue-400 bg-blue-50",
     unavailable: "text-orange-400 bg-orange-50",
     processing: "text-orange-400 bg-orange-50",
     completed: "text-green-400 bg-green-50",
