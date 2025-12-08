@@ -1,4 +1,4 @@
-import { getOrders } from "@/lib/api";
+import { getOrders } from "../api";
 import { useTableState } from "@/lib/hooks/useTableState";
 
 import { useQuery } from "@tanstack/react-query";
