@@ -11,7 +11,7 @@ const InfoDisc = ({ title, value, rating, horizontal }: InfoDiscProps) => {
   return (
     <div
       className={`space-y-1 max-sm:text-sm ${
-        horizontal && "flex items-center gap-2"
+        horizontal && "flex items-center gap-2 flex-wrap"
       }`}
     >
       <h6 className="text-gray-400">{title}</h6>

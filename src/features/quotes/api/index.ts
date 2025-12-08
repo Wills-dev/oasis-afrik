@@ -18,3 +18,13 @@ export const getQuotes = async ({
     throw error;
   }
 };
+
+export const getQuoteInfo = async ({ quoteId }: { quoteId: string }) => {
+  try {
+    const url = `/quotes/${quoteId}`;
+    const { data } = await axiosInstance.get(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
