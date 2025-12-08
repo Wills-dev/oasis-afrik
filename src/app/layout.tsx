@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     "RFQ",
   ],
   openGraph: {
-    title: "OasisAfrik: Find trusted sellers for alll your agro products",
+    title: "OasisAfrik: Find trusted sellers for all your agro products",
     description:
-      "Join OasisAfrik to find or post buy, seller, request for quote the best quality products",
+      "Join OasisAfrik to find buyers, post your products, buy  agro products, request for quote on the best quality products",
     url: baseUrl,
     siteName: "OasisAfrik",
     images: [
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OasisAfrik: Find trusted sellers for alll your agro products",
     description:
-      "Join OasisAfrik to find or post buy, seller, request for quote the best quality products",
+      "Join OasisAfrik to find buyers, post your products, buy  agro products, request for quote on the best quality products",
     images: ["https://emilist.netlify.app/images/home.png"],
   },
   alternates: {
