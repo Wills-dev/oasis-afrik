@@ -19,4 +19,5 @@ export type Quote = {
   maxLead: number;
   maxLeadPeriod: "days" | "weeks" | "months";
   quantity: string;
+  productImage?: string;
 };

@@ -152,3 +152,31 @@ export const quotes: Quote[] = [
     quantity: "1.5 tons",
   },
 ];
+
+export const quoteInfo: Quote = {
+  productName: "Raw Cashew Nuts",
+  price: "$250",
+  status: "replied",
+  updatedAt: "2025-01-12T10:20:00Z",
+  description:
+    "Looking to purchase high-quality export-grade raw cashew nuts. Moisture level must not exceed 10%.",
+
+  buyer: {
+    firstName: "John",
+    lastName: "Adeyemi",
+  },
+
+  seller: {
+    firstName: "Tunde",
+    lastName: "Okafor",
+  },
+
+  address: "Ikeja, Lagos, Nigeria",
+
+  minLead: 5,
+  minLeadPeriod: "days",
+  maxLead: 12,
+  maxLeadPeriod: "days",
+  quantity: "20 tons",
+  productImage: "/assets/dummy/prodImg.jpg",
+};
