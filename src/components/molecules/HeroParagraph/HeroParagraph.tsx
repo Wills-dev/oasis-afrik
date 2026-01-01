@@ -12,7 +12,7 @@ const HeroParagraph = () => {
         stiffness: 100,
       }}
     >
-      <p className="text-xl text-center text-slate-600 mb-8">
+      <p className="sm:text-xl text-center text-slate-600 mb-8">
         {"A secure digital marketplace that links African producers with global buyers and investors through verified trade, escrow payments, and trusted logistics."
           .split(" ")
           .map((word, i) => (

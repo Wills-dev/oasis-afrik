@@ -12,16 +12,16 @@ import Button from "@/components/atoms/Button/Button";
 
 const HeroSection = () => {
   return (
-    <div>
+    <div className="sm:pt-24 pt-10 pb-10">
       <Container>
-        <div className="h-[80vh] w-full flex justify-center items-center">
+        <div className="w-full flex justify-center items-center">
           <div className="max-w-[772.22px] w-full py-8 ">
-            <div className="flex flex-col justify-center items-center ">
+            <div className="flex flex-col justify-center items-center max-sm:gap-2">
               <PageSubTitle
                 imgUrl="/assets/images/globe.svg"
                 title="Connecting african trade"
               />
-              <div className=" relative w-full">
+              <div className=" relative w-full max-sm:space-y-2">
                 <div className="absolute w-full top-10 left-0 right-0 max-h-[545.18px] h-auto">
                   <Image
                     src="/assets/images/World.svg"

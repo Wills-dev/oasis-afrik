@@ -17,7 +17,7 @@ const HeroTitle = () => {
       }}
       className=""
     >
-      <h2 className="md:text-[80px] text-[65px] font-bold flex items-center justify-center flex-wrap p-0 m-0">
+      <h2 className="md:text-[80px] sm:text-[65px] text-5xl font-bold flex items-center justify-center flex-wrap p-0 m-0 leading-tight ">
         {["Connecting"].map((word, i) => (
           <motion.span
             key={i}
@@ -47,7 +47,7 @@ const HeroTitle = () => {
             stiffness: 150,
             damping: 12,
           }}
-          className="p-2 mt-8 rounded-md bg-[#009933] h-fit mx-2 inline-block"
+          className="p-2 sn:mt-8 rounded-md bg-[#009933] h-fit mx-2 inline-block"
           style={{ transformStyle: "preserve-3d" }}
         >
           <Image
