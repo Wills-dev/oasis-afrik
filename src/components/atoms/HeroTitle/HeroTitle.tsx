@@ -47,7 +47,7 @@ const HeroTitle = () => {
             stiffness: 150,
             damping: 12,
           }}
-          className="p-2 sn:mt-8 rounded-md bg-[#009933] h-fit mx-2 inline-block"
+          className="p-2 sm:mt-8 rounded-md bg-[#009933] h-fit mx-2 inline-block"
           style={{ transformStyle: "preserve-3d" }}
         >
           <Image
