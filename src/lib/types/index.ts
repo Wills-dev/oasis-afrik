@@ -37,3 +37,15 @@ export interface optionsType {
   label: string;
   value: number | string;
 }
+
+export interface Testimonial {
+  id: number;
+  type: "Buyer Testimonial" | "Producer Testimonial" | "Investor Testimonial";
+  content: string;
+  author: {
+    name: string;
+    company: string;
+    initials: string;
+  };
+  highlighted?: boolean;
+}
