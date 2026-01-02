@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { testimonials } from "@/lib/constants/dummy";
+
 import PageSubTitle from "../../atoms/PageSubTitle/PageSubTitle";
 import TestimonialTitle from "../../atoms/TestimonialTitle/TestimonialTitle";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "@/components/atoms/Container/Container";
 
 const TestimonialSlider = () => {
@@ -75,7 +77,6 @@ const TestimonialSlider = () => {
               </div>
             </div>
 
-            {/* Navigation buttons */}
             <div className="flex justify-center gap-4 mt-8">
               <button
                 onClick={prevSlide}
