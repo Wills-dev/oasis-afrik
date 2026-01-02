@@ -8,17 +8,19 @@ const PageSubTitle = ({
   imgUrl,
   alt,
   title,
+  borderColor = "border-gray-200",
 }: {
   alt?: string;
   imgUrl?: string;
   title: string;
+  borderColor?: string;
 }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5, duration: 0.3, ease: "easeInOut" }}
-      className="py-1 px-4 rounded-full border border-gray-200 flex items-center gap-1"
+      className={`py-1 px-4 rounded-full border flex items-center gap-1 w-fit ${borderColor}`}
     >
       {imgUrl && (
         <Image
