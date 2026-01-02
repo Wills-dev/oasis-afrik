@@ -1,17 +1,11 @@
-"use client";
-
-import { motion } from "framer-motion";
+import SectionTitleWrapper from "@/components/atoms/SectionTitleWrapper/SectionTitleWrapper";
 
 const SolutionTitle = () => {
   return (
-    <motion.h6
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      className="sm:text-6xl text-4xl text-center font-medium"
-    >
+    <SectionTitleWrapper>
       <span className="text-[#009933]">Solutions</span> for Producers, Buyers &
       Investors
-    </motion.h6>
+    </SectionTitleWrapper>
   );
 };
 
