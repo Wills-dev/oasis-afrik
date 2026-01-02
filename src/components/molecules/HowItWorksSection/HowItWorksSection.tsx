@@ -7,7 +7,7 @@ import PageSubTitle from "@/components/atoms/PageSubTitle/PageSubTitle";
 
 const HowItWorksSection = () => {
   return (
-    <section className="pb-24">
+    <section className="pb-24" id="how-it-works">
       <Container>
         <div className="flex justify-center flex-col items-center sm:pt-20 gap-10">
           <div className="max-w-[870px] w-full flex flex-col justify-center items-center gap-2">

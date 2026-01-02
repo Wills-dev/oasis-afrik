@@ -1,3 +1,4 @@
+import FaqSection from "@/components/molecules/FaqSection/FaqSection";
 import HeroSection from "@/components/molecules/HeroSection/HeroSection";
 import HowItWorksSection from "@/components/molecules/HowItWorksSection/HowItWorksSection";
 import ProductionSection from "@/components/molecules/ProductionSection/ProductionSection";
@@ -15,6 +16,7 @@ export default function Home() {
       <HowItWorksSection />
       <ProductionSection />
       <TestimonialSlider />
+      <FaqSection />
     </MainLayout>
   );
 }

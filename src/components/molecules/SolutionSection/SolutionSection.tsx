@@ -8,7 +8,7 @@ import Container from "@/components/atoms/Container/Container";
 
 const SolutionSection = () => {
   return (
-    <section className="py-24">
+    <section className="py-24" id="services">
       <Container>
         <div className="flex justify-center flex-col items-center sm:pt-20 gap-10">
           <div className="max-w-[706px] w-full flex flex-col justify-center items-center gap-2">
