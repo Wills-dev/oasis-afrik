@@ -8,7 +8,7 @@ const SectionTitleWrapper = ({ children }: { children: React.ReactNode }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
       className="sm:text-6xl text-4xl text-center font-medium"
     >
       {children}
