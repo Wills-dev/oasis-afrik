@@ -1,5 +1,6 @@
 import HeroSection from "@/components/molecules/HeroSection/HeroSection";
 import SolutionSection from "@/components/molecules/SolutionSection/SolutionSection";
+import TrustSection from "@/components/molecules/TrustSection/TrustSection";
 import MainLayout from "@/components/templates/MainLayout/MainLayout";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <MainLayout>
       <HeroSection />
       <SolutionSection />
+      <TrustSection />
     </MainLayout>
   );
 }
