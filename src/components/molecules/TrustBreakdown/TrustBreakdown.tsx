@@ -15,21 +15,33 @@ const TrustBreakdown = () => {
         imgUrl="/assets/icons/dollar.svg"
         title="Secure Escrow Payments"
         className="sm:-left-[79px] -left-4 sm:top-32 top-6"
+        delay={0.4}
+        initialX={-100}
+        initialY={-100}
       />
       <TurstBubble
         imgUrl="/assets/icons/van.svg"
         title="Swift delivery"
         className="sm:-left-[79px] -left-4 sm:bottom-20 bottom-20"
+        delay={0.6}
+        initialX={-100}
+        initialY={100}
       />
       <TurstBubble
         imgUrl="/assets/icons/money.svg"
         title="Verified Sellers "
         className="sm:-right-[79px] -right-4 sm:top-40 top-20"
+        delay={0.4}
+        initialX={100}
+        initialY={-100}
       />
       <TurstBubble
         imgUrl="/assets/icons/box.svg"
         title=" Authentic Products"
         className="sm:-right-[79px] -right-4 sm:bottom-24 bottom-6"
+        delay={0.6}
+        initialX={100}
+        initialY={100}
       />
     </div>
   );
