@@ -1,14 +1,16 @@
 import Image from "next/image";
 
-const ApproachCard = ({
+const CommitmentCard = ({
   imgUrl,
   content,
+  title,
 }: {
   imgUrl: string;
   content: string;
+  title: string;
 }) => {
   return (
-    <div className="max-w-[310px] w-full min-w-[280px] rounded-[20px] sm:p-6 py-6 px-4 space-y-2 bg-white">
+    <div className="min-w-[260px] w-full max-w-[405px] rounded-[20px] sm:p-6 py-6 px-4 bg-gray-50 space-y-4">
       <div className="bg-[#0099331A] rounded-full w-[60px] min-w-[60px] h-[60px] flex justify-center items-center">
         <Image
           src={imgUrl}
@@ -18,9 +20,12 @@ const ApproachCard = ({
           className="object-contain"
         />
       </div>
-      <p className="sm:text-xl text-lg">{content}</p>
+      <div className="space-y-2">
+        <h6 className="sm:text-xl text-lg font-medium">{title}</h6>
+        <p className="max-sm:text-sm text-[#848484]">{content}</p>
+      </div>
     </div>
   );
 };
 
-export default ApproachCard;
+export default CommitmentCard;
