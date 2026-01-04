@@ -33,7 +33,7 @@ const Input = ({
       : "px-2";
 
   return (
-    <div className="relative flex items-center backdrop-blur-2xl bg-white/25 rounded-lg border border-gray-200 transition-all focus-within:border-[#009933] duration-300">
+    <div className="relative flex items-center backdrop-blur-2xl bg-white/25 rounded-lg border border-gray-200 transition-all focus-within:border-[#009933] duration-300 p-1">
       {icon && icon}
       <input
         style={{ fontSize: "16px" }}
