@@ -1,6 +1,10 @@
+import UserAvatarLoader from "@/components/atoms/Loader/UserAvatarLoader/UserAvatarLoader";
 import UserAvatar from "@/components/molecules/UserAvatar/UserAvatar";
+import { useCurrentUser } from "@/features/auth/hooks/useCurrentUser";
+import { RootState } from "@/store";
 
 import { Bell, Menu } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const DashboardNav = ({
   toggleSidebar,
@@ -9,7 +13,9 @@ const DashboardNav = ({
   toggleSidebar: () => void;
   title: string;
 }) => {
-  //   const isLoading = false;
+  const { isLoading } = useCurrentUser();
+  const { user } = useSelector((state: RootState) => state.auth);
+
   return (
     <header className="fixed top-0 right-0 left-0 lg:left-64 z-30 h-16 bg-[#FAFAFB] border-b border-[#EDEDED]">
       <div className="sm:px-6 px-4 py-2 flex items-center justify-between gap-8 h-full w-full">
@@ -28,7 +34,11 @@ const DashboardNav = ({
             <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
           </button>
           <div className="">
-            <UserAvatar imgUrl="/assets/dummy/dummy-avatar.jpg" name="O" />
+            {isLoading ? (
+              <UserAvatarLoader />
+            ) : (
+              <UserAvatar name={user?.firstName || "O"} />
+            )}
           </div>
         </div>
       </div>

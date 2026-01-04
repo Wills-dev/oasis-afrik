@@ -48,7 +48,7 @@ export const login = async ({ email, password }: LoginProps) => {
       email,
       password,
     });
-    return data;
+    return data?.data;
   } catch (error) {
     throw error;
   }
@@ -85,8 +85,8 @@ export const resetPassword = async ({
 
 export const getCurrentUser = async () => {
   try {
-    const { data } = await axiosInstance.get("/auth/current-user");
-    return data;
+    const { data } = await axiosInstance.get("/auth/me");
+    return data?.data;
   } catch (error) {
     throw error;
   }
