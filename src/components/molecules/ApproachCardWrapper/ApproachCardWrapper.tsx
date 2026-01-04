@@ -4,7 +4,7 @@ import { approachContents } from "@/lib/constants";
 
 const ApproachCardWrapper = () => {
   return (
-    <div className="flex gap-4 flex-wrap">
+    <div className="flex gap-4 justify-center flex-wrap">
       {approachContents?.map((content) => (
         <ApproachCard
           key={content?.content}

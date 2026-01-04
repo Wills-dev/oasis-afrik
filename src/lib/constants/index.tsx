@@ -395,3 +395,24 @@ export const approachContents = [
       "Tools for investors to access Africa’s emerging agro opportunities.",
   },
 ];
+
+export const commitmentContents = [
+  {
+    imgUrl: "/assets/icons/streamline.svg",
+    title: "Transparency",
+    content:
+      "We ensure all products, sellers, and transactions are verified, documented, and trackable.",
+  },
+  {
+    imgUrl: "/assets/icons/partnership.svg",
+    title: "Partnership",
+    content:
+      "We collaborate closely with farmers, processors, exporters, logistics partners, and global buyers to create a unified ecosystem.",
+  },
+  {
+    imgUrl: "/assets/icons/support.svg",
+    title: "Long-Term Value Creation",
+    content:
+      "Built to support sustainable growth helping African businesses scale while giving global investors clear, reliable access to opportunities .",
+  },
+];

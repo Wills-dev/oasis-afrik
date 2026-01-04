@@ -1,5 +1,6 @@
 import AboutUsTitle from "@/components/atoms/AboutUsTitle/AboutUsTitle";
 import Container from "@/components/atoms/Container/Container";
+import Commitment from "@/components/molecules/Commitment/Commitment";
 import HeroParagraph from "@/components/molecules/HeroParagraph/HeroParagraph";
 import OurValues from "@/components/molecules/OurValues/OurValues";
 import WhyChooseUs from "@/components/molecules/WhyChooseUs/WhyChooseUs";
@@ -18,6 +19,7 @@ const AboutUsWrapper = () => {
         </div>
         <OurValues />
         <WhyChooseUs />
+        <Commitment />
       </Container>
     </div>
   );
