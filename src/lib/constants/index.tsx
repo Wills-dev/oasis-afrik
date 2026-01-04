@@ -17,11 +17,11 @@ export const homeLinks = [
   },
   {
     label: "Contact us",
-    link: "#contact-us",
+    link: "/contact-us",
   },
   {
     label: "insights",
-    link: "#insights",
+    link: "/insights",
   },
 ];
 
