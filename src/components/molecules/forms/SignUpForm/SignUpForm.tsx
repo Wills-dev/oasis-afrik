@@ -2,29 +2,31 @@
 
 import Input from "@/components/atoms/Input/Input";
 import Label from "@/components/atoms/Label/Label";
-
-import { useSignUp } from "@/features/auth/hooks/useSignUp";
 import TermsAcceptance from "../../TermsAcceptance/TermsAcceptance";
-import Link from "next/link";
 import Button from "@/components/atoms/Button/Button";
 import HorizontalLine from "@/components/atoms/HorizontalLine/HorizontalLine";
 import GoogleButton from "@/components/atoms/GoogleButton/GoogleButton";
 import Alternative from "../../Alternative/Alternative";
+
+import { useSignUp } from "@/features/auth/hooks/useSignUp";
+import { areAllFieldsFilled } from "@/lib/helpers/areAllFieldsFilled";
 
 const SignUpForm = () => {
   const {
     showPassword,
     togglePasswordVisibility,
     handleChange,
-    // handleSubmit,
-    // isPending,
+    handleSubmit,
+    isPending,
     signUpForm,
     acceptTerms,
     setAcceptTerms,
   } = useSignUp();
 
+  const isFormFilled = areAllFieldsFilled(signUpForm);
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="space-y-2">
         <Label title="First Name" />
         <Input
@@ -69,9 +71,13 @@ const SignUpForm = () => {
       </div>
       <TermsAcceptance accepted={acceptTerms} setAccepted={setAcceptTerms} />
       <div className="w-full">
-        <Link href="/verify">
-          <Button>Sign up</Button>
-        </Link>
+        <Button
+          type="submit"
+          disabled={!isFormFilled || !acceptTerms}
+          loading={isPending}
+        >
+          Sign up
+        </Button>
       </div>
       <div className="py-3 flex items-center justify-center gap-2">
         <HorizontalLine />

@@ -8,13 +8,35 @@ export const signUp = async ({
   lastName,
 }: SignUpProps) => {
   try {
-    const { data } = await axiosInstance.post("/auth/sign-up", {
+    const { data } = await axiosInstance.post("/auth/register", {
       email,
       firstName,
       lastName,
       password,
     });
     return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const verifyRegistration = async ({ otp }: { otp: string }) => {
+  try {
+    const { data } = await axiosInstance.post(`/auth/verify-email`, {
+      otp,
+    });
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resendOtp = async ({ email }: { email: string }) => {
+  try {
+    const { data } = await axiosInstance.post(`/auth/resend-verification`, {
+      email,
+    });
+    return data?.data;
   } catch (error) {
     throw error;
   }

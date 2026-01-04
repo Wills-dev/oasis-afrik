@@ -27,7 +27,7 @@ export const useSignUp = () => {
     mutationFn: signUp,
     onSuccess: () => {
       resetForm();
-      toast.success("Login successful", toastOption);
+      toast.success("Sign up successful", toastOption);
       router.push(`/verify?email=${signUpForm?.email}`);
     },
     onError: (error: ApiErrorResponse) => {

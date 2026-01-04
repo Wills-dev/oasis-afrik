@@ -37,7 +37,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       className={`${className} ${width} ${height} ${
-        loading || disabled ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+        loading || disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer"
       }`}
       disabled={disabled || loading}
     >
