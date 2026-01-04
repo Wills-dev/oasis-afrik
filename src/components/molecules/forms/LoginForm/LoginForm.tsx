@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import Alternative from "../../Alternative/Alternative";
 import Button from "@/components/atoms/Button/Button";
 import GoogleButton from "@/components/atoms/GoogleButton/GoogleButton";
@@ -10,19 +8,22 @@ import Input from "@/components/atoms/Input/Input";
 import Label from "@/components/atoms/Label/Label";
 
 import { useLogin } from "@/features/auth/hooks/useLogin";
+import { areAllFieldsFilled } from "@/lib/helpers/areAllFieldsFilled";
 
 const LoginForm = () => {
   const {
     showPassword,
     handleChange,
     loginForm,
-    // isPending,
-    // handleSubmit,
+    isPending,
+    handleSubmit,
     togglePasswordVisibility,
   } = useLogin();
 
+  const isFormFilled = areAllFieldsFilled(loginForm);
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="space-y-2">
         <Label title="Email" />
         <Input
@@ -53,10 +54,9 @@ const LoginForm = () => {
         />
       </div>
       <div className="w-full">
-        <Link href="/dashboard/overview">
-          {" "}
-          <Button>Login</Button>
-        </Link>
+        <Button type="submit" loading={isPending} disabled={!isFormFilled}>
+          Login
+        </Button>
       </div>
       <div className="py-3 flex items-center justify-center gap-2">
         <HorizontalLine />

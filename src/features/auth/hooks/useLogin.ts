@@ -31,8 +31,8 @@ export const useLogin = () => {
     onSuccess: (data) => {
       resetForm();
       toast.success("Login successful", toastOption);
-      createAuthCookie("oasisAfrikUserId", data.data.token);
-      dispatch(setUser(data.data.userData));
+      createAuthCookie("oasisAfrikUserId", data?.accessToken);
+      dispatch(setUser(data.user));
       router.push("/dashboard/overview");
     },
     onError: (error: ApiErrorResponse) => {
