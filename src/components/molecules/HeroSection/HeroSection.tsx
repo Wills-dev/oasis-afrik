@@ -33,6 +33,7 @@ const HeroSection = () => {
                   />
                 </div>
                 <HeroTitle />
+
                 <HeroParagraph paragraph="A secure digital marketplace that links African producers with global buyers and investors through verified trade, escrow payments, and trusted logistics." />
                 <AnimatePresence>
                   <motion.div
