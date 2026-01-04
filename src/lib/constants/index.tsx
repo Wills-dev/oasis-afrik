@@ -374,3 +374,24 @@ export const currency = [
   { value: "NGN", label: "NGN" },
   { value: "USD", label: "USD" },
 ];
+
+export const approachContents = [
+  {
+    imgUrl: "/assets/icons/marketplace.svg",
+    content: "A verified digital marketplace for agro products.",
+  },
+  {
+    imgUrl: "/assets/icons/transaction-filled.svg",
+    content: "Secure transactions backed by escrow and real-time monitoring.",
+  },
+  {
+    imgUrl: "/assets/icons/solar_graph-bold.svg",
+    content:
+      "Market insights  to help buyers and sellers make informed decisions.",
+  },
+  {
+    imgUrl: "/assets/icons/tools.svg",
+    content:
+      "Tools for investors to access Africa’s emerging agro opportunities.",
+  },
+];
