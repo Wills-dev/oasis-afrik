@@ -92,9 +92,11 @@ export const getCurrentUser = async () => {
   }
 };
 
-export const logout = async () => {
+export const logout = async ({ refreshToken }: { refreshToken: string }) => {
   try {
-    await axiosInstance.get("/auth/log-out");
+    await axiosInstance.post("/auth/logout", {
+      refreshToken,
+    });
   } catch (error) {
     throw error;
   }

@@ -1,17 +1,16 @@
 "use client";
 
-import Link from "next/link";
-
 import Label from "@/components/atoms/Label/Label";
 import Input from "@/components/atoms/Input/Input";
 import Button from "@/components/atoms/Button/Button";
 
 import { useResetPassword } from "@/features/auth/hooks/useResetPassword";
+import { areAllFieldsFilled } from "@/lib/helpers/areAllFieldsFilled";
 
 const ResetPasswordForm = () => {
   const {
-    // handleSubmit,
-    // isPending,
+    handleSubmit,
+    isPending,
     password,
     setPassword,
     confirmPassword,
@@ -20,8 +19,10 @@ const ResetPasswordForm = () => {
     togglePasswordVisibility,
   } = useResetPassword();
 
+  const isFormFilled = areAllFieldsFilled({ password, confirmPassword });
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <div className="space-y-2">
         <Label title="Password" />
         <Input
@@ -47,10 +48,9 @@ const ResetPasswordForm = () => {
         />
       </div>
       <div className="w-full">
-        <Link href="/login">
-          {" "}
-          <Button>Proceed</Button>
-        </Link>
+        <Button type="submit" loading={isPending} disabled={!isFormFilled}>
+          Proceed
+        </Button>
       </div>
     </form>
   );

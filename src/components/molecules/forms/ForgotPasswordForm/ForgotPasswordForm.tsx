@@ -9,14 +9,8 @@ import NotificationCard from "../../NotificationCard/NotificationCard";
 import { useForgotPassword } from "@/features/auth/hooks/useForgotPassword";
 
 const ForgotPasswordForm = () => {
-  const {
-    // handleSubmit,
-    // isPending,
-    email,
-    setEmail,
-    setOnSucces,
-    onSuccess,
-  } = useForgotPassword();
+  const { handleSubmit, isPending, email, setEmail, onSuccess } =
+    useForgotPassword();
 
   return (
     <div className="">
@@ -26,7 +20,7 @@ const ForgotPasswordForm = () => {
           description="A password reset link has been sent to your email if it’s associated with an account. Please check your inbox and spam folder."
         />
       ) : (
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <Label title="Email" />
             <Input
@@ -45,7 +39,9 @@ const ForgotPasswordForm = () => {
             />
           </div>
           <div className="w-full">
-            <Button onClick={() => setOnSucces(true)}>Proceed</Button>
+            <Button type="submit" loading={isPending} disabled={!email}>
+              Proceed
+            </Button>
           </div>
         </form>
       )}

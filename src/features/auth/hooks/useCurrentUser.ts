@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 import { useDispatch } from "react-redux";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -14,7 +13,6 @@ import {
 
 export const useCurrentUser = (enabled: boolean = true) => {
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const queryClient = useQueryClient();
 
@@ -39,12 +37,12 @@ export const useCurrentUser = (enabled: boolean = true) => {
   useEffect(() => {
     if (isError) {
       dispatch(clearUser());
-      router.push("/login");
       clearAuthClear("oasisAfrikUserId");
+      clearAuthClear("refreshToken");
       queryClient.clear();
       console.log("error fetching current user", error);
     }
-  }, [isError, error, dispatch, router, queryClient]);
+  }, [isError, error, dispatch, queryClient]);
 
   return {
     isLoading,
