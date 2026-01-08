@@ -55,7 +55,7 @@ const HowItWorksCardWrapper = ({
       whileInView={animate ? "visible" : "hidden"}
       viewport={{ once: true }}
       whileTap={{ scale: 0.95 }}
-      className="max-w-[427px] w-full sm:h-[407px] h-[300px] rounded-[20px] bg-white overflow-hidden"
+      className="max-w-[427px] w-full sm:h-[407px] rounded-[20px] bg-white overflow-hidden"
     >
       {showJustImg ? (
         <Image
@@ -63,7 +63,7 @@ const HowItWorksCardWrapper = ({
           alt="how it works"
           width={427}
           height={407}
-          className="w-full h-full object-cover"
+          className="w-full sm:h-full h-[300px]  object-cover"
         />
       ) : (
         <div className="flex flex-col justify-between gap-2 h-full w-full ">

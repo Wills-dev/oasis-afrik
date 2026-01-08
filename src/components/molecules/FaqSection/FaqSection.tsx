@@ -40,7 +40,7 @@ const FaqSection = () => {
                       className="w-full px-6 py-5 flex items-start justify-between text-left hover:bg-slate-50 transition-colors"
                     >
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-slate-900 mb-1">
+                        <h3 className="sm:text-lg font-semibold text-slate-900 mb-1">
                           {faq.question}
                         </h3>
                       </div>
