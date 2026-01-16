@@ -18,10 +18,10 @@ export interface User {
   phoneNumber?: string;
   country?: string;
   companyName?: string;
-  role: string;
-  status: string;
-  emailVerified: boolean;
-  isCompanyVerified: boolean;
+  role?: string;
+  status?: string;
+  emailVerified?: boolean;
+  isCompanyVerified?: boolean;
 }
 
 export interface UserState {
