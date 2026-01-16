@@ -1,7 +1,12 @@
-import React from "react";
+import CompanyVerification from "@/components/organisms/CompanyVerification/CompanyVerification";
+import DashboardLayout from "@/components/templates/DashboardLayout/DashboardLayout";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <DashboardLayout title="Verify company">
+      <CompanyVerification />
+    </DashboardLayout>
+  );
 };
 
 export default page;

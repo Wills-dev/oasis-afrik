@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/axiosInstance";
-import { LoginProps, SignUpProps } from "../types";
+import { LoginProps, SignUpProps, VerifyCompanyDataType } from "../types";
 
 export const signUp = async ({
   email,
@@ -97,6 +97,37 @@ export const logout = async ({ refreshToken }: { refreshToken: string }) => {
     await axiosInstance.post("/auth/logout", {
       refreshToken,
     });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const verifyCompanyDetails = async ({
+  adminName,
+  companyName,
+  businessRegistrationNumber,
+  phoneNumber,
+  companyAddress,
+  companyEmail,
+  validId,
+  cacDocument,
+  utilityDocument,
+}: VerifyCompanyDataType) => {
+  try {
+    console.log("doc", validId, cacDocument, utilityDocument);
+    const formData = new FormData();
+    formData.append("adminName", adminName);
+    formData.append("companyName", companyName);
+    formData.append("businessRegistrationNumber", businessRegistrationNumber);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("companyAddress", companyAddress);
+    formData.append("companyEmail", companyEmail);
+    formData.append("validId", validId);
+    formData.append("cacDocument", cacDocument);
+    formData.append("utilityDocument", utilityDocument);
+
+    const { data } = await axiosInstance.post("/verification/submit", formData);
+    return data;
   } catch (error) {
     throw error;
   }

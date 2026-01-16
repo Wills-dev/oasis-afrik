@@ -22,7 +22,7 @@ const OrderDetails = ({
   address,
 }: OrderDetailsProps) => {
   return (
-    <div className="border border-gray-200 rounded-lg p-[24px] flex max-md:flex-col gap-4">
+    <div className="border border-gray-200 rounded-lg p-6 flex max-md:flex-col gap-4">
       <div className="max-w-[203px] w-full min-w-[203px]">
         <Image
           src={productInfo?.productImages[0]?.imgUrl}
