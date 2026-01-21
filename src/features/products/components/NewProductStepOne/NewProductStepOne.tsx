@@ -2,19 +2,19 @@ import { ChangeEvent } from "react";
 
 import Input from "@/components/atoms/Input/Input";
 import Label from "@/components/atoms/Label/Label";
+import SearchableDropdown from "@/components/molecules/SearchableDropdown/SearchableDropdown";
+import Textarea from "@/components/atoms/TextArea/Textarea";
 
 import { ProductFormData } from "../../types";
-import SearchableDropdown from "@/components/molecules/SearchableDropdown/SearchableDropdown";
-import { countries } from "@/lib/constants/countries";
-import { agroCategories } from "../../constants";
-import { quantityUnits } from "@/lib/constants/productUnits";
-import { timePeriods } from "@/lib/constants";
-import Textarea from "@/components/atoms/TextArea/Textarea";
+import { useGetCountries } from "../../hooks/useGetCountries";
+import { useGetUnits } from "../../hooks/useGetUnits";
+import { useGetCategories } from "../../hooks/useGetCategories";
+import { useGetPeriods } from "../../hooks/useGetPeriods";
 
 interface NewProductStepOneProps {
   product: ProductFormData;
   handleChange: (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => void;
   handleDropdownChange: (name: keyof ProductFormData, value: string) => void;
 }
@@ -23,6 +23,11 @@ const NewProductStepOne = ({
   handleChange,
   handleDropdownChange,
 }: NewProductStepOneProps) => {
+  const { countries, loadingCountries } = useGetCountries();
+  const { units, loadingUnits } = useGetUnits();
+  const { loadingCategories, categories } = useGetCategories();
+  const { periods, loadingPeriods } = useGetPeriods();
+
   return (
     <div className="space-y-6">
       <h6 className="sm:text-lg font-medium">Product information</h6>
@@ -40,12 +45,16 @@ const NewProductStepOne = ({
         <div className="space-y-1 w-full md:col-span-1 col-span-2">
           <Label title="Category" />
           <SearchableDropdown
-            options={agroCategories}
+            options={categories}
             value={product.category}
             onChange={(value) =>
               handleDropdownChange("category", value.toString())
             }
-            placeholder="Select a category..."
+            placeholder={
+              loadingCategories
+                ? "Loading categories..."
+                : "Select a category..."
+            }
           />
         </div>
         <div className="space-y-1 w-full md:col-span-1 col-span-2">
@@ -56,7 +65,9 @@ const NewProductStepOne = ({
             onChange={(value) =>
               handleDropdownChange("country", value.toString())
             }
-            placeholder="Select a country..."
+            placeholder={
+              loadingCountries ? "Loading countries..." : "Select a country..."
+            }
           />
         </div>
         <div className="space-y-1 w-full md:col-span-1 col-span-2 flex gap-2">
@@ -74,21 +85,17 @@ const NewProductStepOne = ({
           <div className="flex-1 w-full">
             <Label title="Unit" />
             <SearchableDropdown
-              options={quantityUnits}
+              options={units}
               value={product.minOrderUnit}
               onChange={(value) =>
                 handleDropdownChange("minOrderUnit", value.toString())
               }
-              placeholder="unit..."
+              placeholder={loadingUnits ? "Loading units..." : "units..."}
             />
           </div>
         </div>
         <div className="space-y-1 md:col-span-1 col-span-2">
-          <Label
-            title={`Price ${
-              product?.minOrderUnit && `/ ${product.minOrderUnit}`
-            }`}
-          />
+          <Label title={`Price`} />
           <Input
             value={product.price}
             onChange={handleChange}
@@ -112,12 +119,12 @@ const NewProductStepOne = ({
           <div className="flex-1 w-full">
             <Label title="Unit" />
             <SearchableDropdown
-              options={quantityUnits}
+              options={units}
               value={product.unit}
               onChange={(value) =>
                 handleDropdownChange("unit", value.toString())
               }
-              placeholder="unit..."
+              placeholder={loadingUnits ? "Loading units..." : "units..."}
             />
           </div>
         </div>
@@ -136,12 +143,12 @@ const NewProductStepOne = ({
           <div className="flex-1 w-full">
             <Label title="Period" />
             <SearchableDropdown
-              options={timePeriods}
+              options={periods}
               value={product.minLeadPeriod}
               onChange={(value) =>
                 handleDropdownChange("minLeadPeriod", value.toString())
               }
-              placeholder="period..."
+              placeholder={loadingPeriods ? "Loading periods..." : "period..."}
             />
           </div>
         </div>
@@ -160,12 +167,12 @@ const NewProductStepOne = ({
           <div className="flex-1 w-full">
             <Label title="Period" />
             <SearchableDropdown
-              options={timePeriods}
+              options={periods}
               value={product.maxLeadPeriod}
               onChange={(value) =>
                 handleDropdownChange("maxLeadPeriod", value.toString())
               }
-              placeholder="period..."
+              placeholder={loadingPeriods ? "Loading periods..." : "period..."}
             />
           </div>
         </div>

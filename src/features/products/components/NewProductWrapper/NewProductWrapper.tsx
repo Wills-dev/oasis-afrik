@@ -13,11 +13,13 @@ const NewProductWrapper = () => {
     nextStep,
     prevStep,
     product,
+    isPending,
     handleChange,
     selectedImages,
     onSelectFile,
     handleImageDelete,
     handleDropdownChange,
+    handleSubmit,
   } = usePostProduct();
 
   const showPrevButton = step !== 1;
@@ -27,7 +29,7 @@ const NewProductWrapper = () => {
   return (
     <div className="space-y-6 max-w-5xl w-full">
       <NewProductHeader step={step} />
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         {step === 1 && (
           <NewProductStepOne
             product={product}
@@ -58,7 +60,11 @@ const NewProductWrapper = () => {
               Next step
             </Button>
           )}
-          {showSubmitButton && <Button width="w-fit">Upload product</Button>}
+          {showSubmitButton && (
+            <Button width="w-fit" type="submit" loading={isPending}>
+              Upload product
+            </Button>
+          )}
         </div>
       </form>
     </div>

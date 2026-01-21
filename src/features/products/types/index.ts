@@ -3,24 +3,73 @@ export type ProductImageType = {
   imgUrl: string;
 };
 
+export type Timestamped = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Category = Timestamped & {
+  name: string;
+  description: string | null;
+};
+
+export type Country = Timestamped & {
+  name: string;
+  code: string;
+};
+
+export type LeadTimePeriod = Timestamped & {
+  name: string;
+};
+
+export type Unit = Timestamped & {
+  name: string;
+  abbreviation: string;
+};
+
+export type QuantityUnit = Timestamped & {
+  name: string;
+  abbreviation: string;
+};
+
+export type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
 export type ProductType = {
   id: string;
-  productName: string;
-  createdAt: string;
-  status: string;
-  price: string;
-  country: string;
-  minOrder: string;
-  quantity: string;
-  minLead: number;
-  minLeadPeriod: string;
-  maxLead: number;
-  maxLeadPeriod: string;
+  productId: string;
+  name: string;
   description: string;
-  productImages: ProductImageType[];
-  category: string;
-  reviews?: number;
-  rating?: number;
+  status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
+  price: string;
+  quantity: string;
+  minOrder: string;
+  images: string[];
+  mainImage: string;
+  minLeadTime: number;
+  maxLeadTime: number;
+  createdAt: string;
+  updatedAt: string;
+  category: Category;
+  categoryId: string;
+  country: Country;
+  countryId: string;
+  minLeadTimePeriod: LeadTimePeriod;
+  minLeadTimePeriodId: string;
+  maxLeadTimePeriod: LeadTimePeriod;
+  maxLeadTimePeriodId: string;
+  minOrderUnit: Unit;
+  minOrderUnitId: string;
+  quantityUnit: QuantityUnit;
+  quantityUnitId: string;
+  user: User;
+  userId: string;
+  currency: string;
 };
 
 export type ProductFormData = {

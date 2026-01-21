@@ -16,6 +16,9 @@ export interface fetchDataProps {
   status?: string;
   search: string | null;
   filter?: string;
+  categoryId?: string;
+  countryId?: string;
+  dateRange?: string;
 }
 
 export interface TableWrapperProps<TData = unknown> {

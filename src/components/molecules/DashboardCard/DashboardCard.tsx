@@ -20,7 +20,7 @@ const DashboardCard = ({
     <div className="rounded-md p-2 border border-gray-200  flex-1 w-full min-w-[270px] h-[165px] flex flex-col justify-between">
       <div className="flex items-center justify-between">
         <h6 className="max-sm:text-sm text-gray-600">{title}</h6>
-        <div className="w-[48px] h-[48px] min-w-[48px] min-h-[48px] rounded-full bg-gray-100 flex justify-center items-center">
+        <div className="w-12 h-12 min-w-12 min-h-12 rounded-full bg-gray-100 flex justify-center items-center">
           <Image src={icon} alt="icon" width={21} height={21} />
         </div>
       </div>

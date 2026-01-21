@@ -114,7 +114,6 @@ export const verifyCompanyDetails = async ({
   utilityDocument,
 }: VerifyCompanyDataType) => {
   try {
-    console.log("doc", validId, cacDocument, utilityDocument);
     const formData = new FormData();
     formData.append("adminName", adminName);
     formData.append("companyName", companyName);
@@ -126,7 +125,15 @@ export const verifyCompanyDetails = async ({
     formData.append("cacDocument", cacDocument);
     formData.append("utilityDocument", utilityDocument);
 
-    const { data } = await axiosInstance.post("/verification/submit", formData);
+    const { data } = await axiosInstance.post(
+      "/verification/submit",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return data;
   } catch (error) {
     throw error;

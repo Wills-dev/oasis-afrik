@@ -5,39 +5,51 @@ import { ColumnDef } from "@tanstack/react-table";
 import TableResourceToolbar from "@/components/organisms/TableResourceToolbar/TableResourceToolbar";
 import TableWrapper from "@/components/organisms/TableWrapper/TableWrapper";
 
-import { agroProducts } from "../../constants/dummy";
 import { Column } from "./Column";
-import { useGetProducts } from "../../hooks/useGetProducts";
 
-const ProductTableWrapper = () => {
-  const {
-    setLimit,
-    nextPage,
-    prevPage,
-    goToFirstPage,
-    goToLastPage,
-    isFirstPage,
-    isLastPage,
-    search,
-    handleSearchChange,
-    handleSearch,
-    currentPage,
-    limit,
-    handleClear,
-    // data,
-    // isPending,
-    // isLoading,
-    // isError,
-    // error,
-    // refetch,
-    filter,
-    setFilter,
-  } = useGetProducts();
+interface ProductTableWrapperProps<TData = unknown> {
+  search: string;
+  handleSearchChange: (search: string) => void;
+  filter: string;
+  setFilter: (filter: string) => void;
+  handleSearch: () => void;
+  handleClear: () => void;
+  data: TData[];
+  totalPages: number;
+  currentPage: number;
+  prevPage: () => void;
+  nextPage: (totalPages: number) => void;
+  goToLastPage: (totalPages: number) => void;
+  goToFirstPage: () => void;
+  isFirstPage: () => boolean;
+  isLastPage: (totalPages: number) => boolean;
+  limit: number;
+  setLimit: (limit: number) => void;
+}
 
+const ProductTableWrapper = ({
+  search,
+  handleSearchChange,
+  filter,
+  setFilter,
+  handleSearch,
+  handleClear,
+  data,
+  totalPages,
+  currentPage,
+  prevPage,
+  nextPage,
+  goToLastPage,
+  goToFirstPage,
+  isFirstPage,
+  isLastPage,
+  limit,
+  setLimit,
+}: ProductTableWrapperProps) => {
   const typedColumns = Column as ColumnDef<unknown>[];
 
   return (
-    <div className="space-y-6 p-[24px] border border-gray-200 rounded-lg">
+    <div className="space-y-6 p-6 border border-gray-200 rounded-lg">
       <TableResourceToolbar
         search={search}
         handleChange={handleSearchChange}
@@ -50,8 +62,8 @@ const ProductTableWrapper = () => {
       <div className="">
         <TableWrapper
           columns={typedColumns}
-          data={agroProducts}
-          totalPages={1}
+          data={data || []}
+          totalPages={totalPages || 0}
           currentPage={currentPage}
           prevPage={prevPage}
           nextPage={nextPage}

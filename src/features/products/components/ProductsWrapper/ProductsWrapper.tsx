@@ -10,9 +10,31 @@ import ScreenDisplayUnverifiedUser from "@/components/organisms/ScreenDisplayUnv
 import ProductTableWrapper from "../ProductTableWrapper/ProductTableWrapper";
 import ProductCards from "../ProductCards/ProductCards";
 import MainLoader from "@/components/atoms/MainLoader/MainLoader";
+import TableLoader from "@/components/atoms/skeletonLoader/TableLoader";
+
+import { useGetUserProducts } from "../../hooks/useGetUserProducts";
 
 const ProductsWrapper = () => {
   const { user, isLoading } = useSelector((state: RootState) => state.auth);
+  const {
+    setLimit,
+    nextPage,
+    prevPage,
+    goToFirstPage,
+    goToLastPage,
+    isFirstPage,
+    isLastPage,
+    search,
+    handleSearchChange,
+    data,
+    isLoading: isFetching,
+    handleSearch,
+    handleClear,
+    currentPage,
+    limit,
+    filter,
+    setFilter,
+  } = useGetUserProducts();
 
   const isCompanyVerified = user?.isCompanyVerified;
 
@@ -34,9 +56,34 @@ const ProductsWrapper = () => {
                 </Button>
               </div>
               <div className="pt-10">
-                <ProductCards />
+                <ProductCards
+                  isLoading={isFetching}
+                  statistics={data?.statistics}
+                />
               </div>
-              <ProductTableWrapper />
+              {isFetching ? (
+                <TableLoader />
+              ) : (
+                <ProductTableWrapper
+                  totalPages={data?.pagination?.totalPages}
+                  currentPage={currentPage}
+                  prevPage={prevPage}
+                  nextPage={nextPage}
+                  goToFirstPage={goToFirstPage}
+                  goToLastPage={goToLastPage}
+                  isFirstPage={isFirstPage}
+                  isLastPage={isLastPage}
+                  limit={limit}
+                  setLimit={setLimit}
+                  search={search}
+                  handleSearchChange={handleSearchChange}
+                  handleSearch={handleSearch}
+                  filter={filter}
+                  setFilter={setFilter}
+                  handleClear={handleClear}
+                  data={data?.data}
+                />
+              )}
             </div>
           ) : (
             <ScreenDisplayUnverifiedUser />

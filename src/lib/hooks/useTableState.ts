@@ -4,7 +4,7 @@ export const useTableState = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("daily");
+  const [filter, setFilter] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState<string | null>(null);
 
   const nextPage = (totalPages: number) => {

@@ -1,19 +1,10 @@
 import { getProducts } from "../api";
 import { useTableState } from "@/lib/hooks/useTableState";
 
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const useGetProducts = () => {
   const {
-    currentPage,
-    limit,
-    setLimit,
-    nextPage,
-    prevPage,
-    goToFirstPage,
-    goToLastPage,
-    isFirstPage,
-    isLastPage,
     search,
     handleSearchChange,
     handleClear,
@@ -23,36 +14,55 @@ export const useGetProducts = () => {
     setFilter,
   } = useTableState();
 
-  const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["products", submittedQuery, limit, currentPage, filter],
-    queryFn: () =>
-      getProducts({ currentPage, limit, search: submittedQuery, filter }),
+  const limit = 20;
+
+  const {
+    data,
+    isPending,
+    isLoading,
+    isError,
+    error,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["products", submittedQuery, filter],
+    queryFn: ({ pageParam = 1 }) =>
+      getProducts({
+        currentPage: pageParam,
+        limit,
+        search: submittedQuery,
+        filter,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      const { page, totalPages } = lastPage.pagination;
+      return page < totalPages ? page + 1 : undefined;
+    },
     enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,
   });
 
+  const allProducts = data?.pages.flatMap((page) => page.data) ?? [];
+
   return {
-    setLimit,
-    nextPage,
-    prevPage,
-    goToFirstPage,
-    goToLastPage,
-    isFirstPage,
-    isLastPage,
     search,
     handleSearchChange,
-    data,
+    products: allProducts,
     isPending,
     isLoading,
     isError,
     error,
     handleSearch,
     handleClear,
-    currentPage,
     limit,
     refetch,
     filter,
     setFilter,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   };
 };

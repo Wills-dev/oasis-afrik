@@ -41,3 +41,20 @@ export interface VerifyCompanyDataType {
   cacDocument: File;
   utilityDocument: File;
 }
+
+export interface ProductData {
+  name: string;
+  price: string;
+  quantity: string;
+  minOrder: string;
+  description: string;
+  minLeadTime: string;
+  maxLeadTime: string;
+  categoryId: string;
+  countryId: string;
+  minOrderUnitId: string;
+  quantityUnitId: string;
+  minLeadTimePeriodId: string;
+  maxLeadTimePeriodId: string;
+  images: File[];
+}
