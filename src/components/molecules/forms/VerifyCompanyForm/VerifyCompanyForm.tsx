@@ -33,16 +33,20 @@ const VerifyCompanyForm = () => {
   return (
     <>
       {isSubmitted ? (
-        <div className="flex justify-center items-center flex-col h-[60vh] w-full">
-          <h4 className="text-lg font-medium mb-4">
-            Thank you for submitting your company verification details!
-          </h4>
-          <p className="text-gray-600 mb-6 text-center">
-            We have received your information and our team is currently
-            reviewing it. You will be notified via email once the verification
-            process is complete.
-          </p>
-          <Button href="/dashboard/overview">Dashboard</Button>
+        <div className="flex justify-center items-center flex-col">
+          <div className="max-w-xl h-[60vh] flex justify-center items-center flex-col w-full">
+            <h4 className="text-lg text-center font-medium mb-4">
+              Thank you for submitting your company details for verification!
+            </h4>
+            <p className="text-gray-600 mb-6 text-center">
+              We have received your information and our team is currently
+              reviewing it. You will be notified via email once the verification
+              process is complete.
+            </p>
+            <Button width="w-fit" href="/dashboard/overview">
+              Dashboard
+            </Button>
+          </div>
         </div>
       ) : (
         <form className="space-y-4" onSubmit={handleSubmit}>

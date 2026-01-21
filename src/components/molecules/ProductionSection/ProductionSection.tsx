@@ -1,13 +1,20 @@
+"use client";
+
 import Link from "next/link";
 
 import Container from "@/components/atoms/Container/Container";
 import ProductCard from "@/components/atoms/ProductCard/ProductCard";
 import ProductTitle from "@/components/atoms/ProductTitle/ProductTitle";
+import ProductCardLoader from "@/components/atoms/skeletonLoader/ProductCardLoader";
 
-import { agroProducts } from "@/features/products/constants/dummy";
 import { ArrowRightIcon } from "lucide-react";
+import { useGetProducts } from "@/features/products/hooks/useGetProducts";
+import { ProductType } from "@/features/products/types";
+import { numberWithCommas } from "@/lib/helpers";
 
 const ProductionSection = () => {
+  const { products, isLoading } = useGetProducts();
+
   return (
     <section className="pb-24">
       <Container>
@@ -16,18 +23,29 @@ const ProductionSection = () => {
             <ProductTitle />
           </div>
           <div className="w-full grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-            {agroProducts?.slice(0, 8).map((prod) => (
-              <ProductCard
-                key={prod?.id}
-                productId={prod?.id}
-                productName={prod?.productName}
-                price={prod?.price}
-                unit="ton"
-                businessName="Kenyan highlands Co."
-                rating="4.5"
-                productImg="/assets/dummy/prodImg1.jpg"
-              />
-            ))}
+            {isLoading ? (
+              <ProductCardLoader />
+            ) : (
+              <>
+                {products?.slice(0, 8).map((prod: ProductType) => {
+                  const formatedPrice =
+                    prod?.price && numberWithCommas(Number(prod?.price));
+                  return (
+                    <ProductCard
+                      key={prod?.id}
+                      productId={prod?.id}
+                      productName={prod?.name}
+                      price={formatedPrice}
+                      unit={prod?.quantityUnit?.abbreviation}
+                      businessName={"Kenyan highlands Co."}
+                      rating="4.5"
+                      currency={prod?.currency || "₦"}
+                      productImg={prod?.mainImage}
+                    />
+                  );
+                })}
+              </>
+            )}
           </div>
           <div className="flex justify-center w-full">
             <Link

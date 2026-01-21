@@ -14,6 +14,9 @@ const StatusBubble = ({ status }: { status: string }) => {
     unverified: "text-red-400 bg-red-50",
     blocked: "text-red-400 bg-red-50",
     inactive: "text-yellow-400 bg-yellow-50",
+    DRAFT: "text-blue-400 bg-blue-50",
+    PUBLISHED: "text-green-400 bg-green-50",
+    ARCHIVED: "text-yellow-400 bg-yellow-50",
   };
 
   return (

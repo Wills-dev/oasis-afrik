@@ -1,5 +1,3 @@
-import { ProductType } from "../types";
-
 export const agroProducts = [
   {
     id: "PRD001",
@@ -102,31 +100,3 @@ export const agroProducts = [
     quantity: "50 tons",
   },
 ];
-
-export const productInfo: ProductType = {
-  id: "PRD001",
-  productName: "Raw Cashew Nuts",
-  createdAt: "2025-01-05T10:22:00Z",
-  status: "pending",
-  price: "$250",
-  country: "Nigeria",
-  minOrder: "10 tons",
-  quantity: "50 tons",
-
-  minLead: 7,
-  minLeadPeriod: "days",
-  maxLead: 14,
-  maxLeadPeriod: "days",
-  description:
-    "High-quality raw cashew nuts sourced directly from Nigerian farmers. Well-dried, clean, and export-ready.",
-  productImages: [
-    { id: "IMG01", imgUrl: "/assets/dummy/prodImg.jpg" },
-    { id: "IMG02", imgUrl: "/assets/dummy/prodImg1.jpg" },
-    { id: "IMG03", imgUrl: "/assets/dummy/prodImg2.jpg" },
-    { id: "IMG04", imgUrl: "/assets/dummy/prodImg3.jpg" },
-    { id: "IMG05", imgUrl: "/assets/dummy/prodImg4.jpg" },
-  ],
-  category: "Nuts & Seeds",
-  rating: 4.5,
-  reviews: 20,
-};

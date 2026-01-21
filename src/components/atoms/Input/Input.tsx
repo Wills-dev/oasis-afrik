@@ -27,10 +27,10 @@ const Input = ({
     icon !== undefined && showPassword !== undefined
       ? "px-10"
       : icon !== undefined && showPassword === undefined
-      ? "pl-10 pr-2"
-      : icon === undefined && showPassword !== undefined
-      ? "pl-2 pr-10"
-      : "px-2";
+        ? "pl-10 pr-2"
+        : icon === undefined && showPassword !== undefined
+          ? "pl-2 pr-10"
+          : "px-2";
 
   return (
     <div className="relative flex items-center backdrop-blur-2xl bg-white/25 rounded-lg border border-gray-200 transition-all focus-within:border-[#009933] duration-300 p-1">
@@ -41,7 +41,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         name={name}
-        className={`w-full bg-transparent sm:h-11 h-10 text-gray-900 placeholder-gray-400 outline-none ${paddingX}`}
+        className={`w-full bg-transparent h-9 text-gray-900 placeholder-gray-400 outline-none ${paddingX} placeholder:text-xs`}
         placeholder={placeholder}
       />
       {showPassword !== undefined && (

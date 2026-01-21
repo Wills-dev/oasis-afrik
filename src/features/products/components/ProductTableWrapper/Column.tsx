@@ -4,14 +4,18 @@ import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-import { convertDateFormat } from "@/lib/helpers";
+import {
+  convertDateFormat,
+  getCurrencySign,
+  numberWithCommas,
+} from "@/lib/helpers";
 import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { ProductType } from "../../types";
+import { ProductType, Unit } from "../../types";
 
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
-const columnHelper = createColumnHelper();
+const columnHelper = createColumnHelper<ProductType>();
 
 export const Column = [
   columnHelper.accessor("createdAt", {
@@ -32,7 +36,7 @@ export const Column = [
       return <div className="">{formatted}</div>;
     },
   }),
-  columnHelper.accessor("id", {
+  columnHelper.accessor("productId", {
     header: ({ column }) => {
       return (
         <Button
@@ -45,7 +49,7 @@ export const Column = [
       );
     },
   }),
-  columnHelper.accessor("productName", {
+  columnHelper.accessor("name", {
     header: ({ column }) => {
       return (
         <Button
@@ -58,7 +62,7 @@ export const Column = [
       );
     },
   }),
-  columnHelper.accessor("country", {
+  columnHelper.accessor("country.name", {
     header: ({ column }) => {
       return (
         <Button
@@ -83,17 +87,17 @@ export const Column = [
         </Button>
       );
     },
-    // cell: ({ row }) => {
-    //   const price = row.getValue("amount");
-    //   const currency = (row?.original as { currency?: string })?.currency;
+    cell: ({ row }) => {
+      const price = row.getValue("price");
+      const currency = (row?.original as { currency?: string })?.currency;
 
-    //   return (
-    //     <p className="">
-    //       {currency && getCurrencySign(currency)}
-    //       {price ? numberWithCommas(Number(price)) : "0.00"}
-    //     </p>
-    //   );
-    // },
+      return (
+        <p className="">
+          {currency ? getCurrencySign(currency) : "₦"}
+          {price ? numberWithCommas(Number(price)) : "0.00"}
+        </p>
+      );
+    },
   }),
   columnHelper.accessor("minOrder", {
     header: ({ column }) => {
@@ -107,17 +111,18 @@ export const Column = [
         </Button>
       );
     },
-    // cell: ({ row }) => {
-    //   const discountedPrice = row.getValue("discountedPrice");
-    //   const currency = (row?.original as { currency?: string })?.currency;
+    cell: ({ row }) => {
+      const minOrder = row.getValue("minOrder");
+      const minOrderUnit = (row?.original as { minOrderUnit: Unit })
+        ?.minOrderUnit;
 
-    //   return (
-    //     <p className="">
-    //       {currency && getCurrencySign(currency)}
-    //       {discountedPrice ? numberWithCommas(Number(discountedPrice)) : "0.00"}
-    //     </p>
-    //   );
-    // },
+      return (
+        <p className="">
+          {minOrder ? numberWithCommas(Number(minOrder)) : "0"}{" "}
+          <span className="uppercase">{minOrderUnit?.abbreviation}</span>
+        </p>
+      );
+    },
   }),
   columnHelper.accessor("quantity", {
     header: ({ column }) => {
@@ -131,14 +136,17 @@ export const Column = [
         </Button>
       );
     },
-    // cell: ({ row }) => {
-    //   const availableQuantity = row.getValue("availableQuantity");
-    //   return (
-    //     <p className="">
-    //       {availableQuantity ? numberWithCommas(Number(availableQuantity)) : 0}
-    //     </p>
-    //   );
-    // },
+    cell: ({ row }) => {
+      const availableQuantity = row.getValue("quantity");
+      const quantityUnit = (row?.original as { quantityUnit: Unit })
+        ?.quantityUnit;
+      return (
+        <p className="">
+          {availableQuantity ? numberWithCommas(Number(availableQuantity)) : 0}{" "}
+          <span className="uppercase">{quantityUnit?.abbreviation}</span>
+        </p>
+      );
+    },
   }),
   columnHelper.accessor("status", {
     header: ({ column }) => {

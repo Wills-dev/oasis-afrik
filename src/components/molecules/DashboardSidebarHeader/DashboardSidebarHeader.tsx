@@ -8,7 +8,7 @@ const DashboardSidebarHeader = ({
 }) => {
   return (
     <div className="flex justify-between items-center pb-4">
-      <Logo url="/logo-icon.svg" />
+      <Logo />
       <button
         type="button"
         onClick={toggleSidebar}

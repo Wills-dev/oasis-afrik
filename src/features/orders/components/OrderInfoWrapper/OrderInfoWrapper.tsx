@@ -16,7 +16,6 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
     <div className="space-y-6">
       <BackButton />
       <OrderDetails
-        productInfo={orderInfo?.product}
         seller={orderInfo?.seller}
         buyer={orderInfo?.buyer}
         address={orderInfo?.addrees}

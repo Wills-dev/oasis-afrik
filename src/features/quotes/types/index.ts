@@ -21,3 +21,17 @@ export type Quote = {
   quantity: string;
   productImage?: string;
 };
+
+export interface QuotePayloadType {
+  productId: string;
+  amount: string;
+  currency: string;
+  quantity: string;
+  quantityUnitId: string;
+  address: string;
+  minLeadTime?: string;
+  minLeadTimePeriodId?: string;
+  maxLeadTime?: string;
+  maxLeadTimePeriodId?: string;
+  description?: string;
+}

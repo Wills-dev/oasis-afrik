@@ -4,12 +4,10 @@ import Link from "next/link";
 
 import Button from "@/components/atoms/Button/Button";
 
-import { useCurrentUser } from "@/features/auth/hooks/useCurrentUser";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 const AuthPanelButtons = () => {
-  useCurrentUser();
   const { user } = useSelector((state: RootState) => state.auth);
 
   return (
