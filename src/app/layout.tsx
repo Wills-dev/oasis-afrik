@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import QueryProvider from "@/components/QueryProvider";
 import { Providers } from "@/store/provider";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/providers/AuthProvider";
 // import { helveticaNeue } from "../../public/fonts/HelveticaNeue";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -84,9 +85,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Toaster />
-        <QueryProvider>
-          <Providers>{children}</Providers>
-        </QueryProvider>
+        <Providers>
+          <QueryProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </QueryProvider>
+        </Providers>
       </body>
     </html>
   );

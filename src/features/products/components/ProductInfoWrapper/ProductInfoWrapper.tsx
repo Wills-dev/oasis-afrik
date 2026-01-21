@@ -4,10 +4,11 @@ import ProductInfo from "../ProductInfo/ProductInfo";
 import ProductInfoLoader from "@/components/atoms/skeletonLoader/ProductInfoLoader";
 
 import { useGetProductInfo } from "../../hooks/useGetProductInfo";
-import { useCurrentUser } from "@/features/auth/hooks/useCurrentUser";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const ProductInfoWrapper = ({ productId }: { productId: string }) => {
-  const { isLoading } = useCurrentUser();
+  const { isLoading } = useSelector((state: RootState) => state.auth);
   const { data, isPending, currentImage, setCurrentImage } =
     useGetProductInfo(productId);
 

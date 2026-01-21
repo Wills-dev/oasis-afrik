@@ -29,10 +29,11 @@ export const useCurrentUser = (enabled: boolean = true) => {
   }, [isLoading, dispatch]);
 
   useEffect(() => {
-    if (data) {
-      dispatch(setUser(data?.user));
+    if (data?.user) {
+      dispatch(setUser(data.user));
     }
-  }, [data, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.user?.id, dispatch]);
 
   useEffect(() => {
     if (isError) {
