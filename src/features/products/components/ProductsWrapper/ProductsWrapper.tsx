@@ -13,6 +13,7 @@ import MainLoader from "@/components/atoms/MainLoader/MainLoader";
 import TableLoader from "@/components/atoms/skeletonLoader/TableLoader";
 
 import { useGetUserProducts } from "../../hooks/useGetUserProducts";
+import EmptyStatePage from "@/components/molecules/EmptyStatePage/EmptyStatePage";
 
 const ProductsWrapper = () => {
   const { user, isLoading } = useSelector((state: RootState) => state.auth);
@@ -37,6 +38,7 @@ const ProductsWrapper = () => {
   } = useGetUserProducts();
 
   const isCompanyVerified = user?.isCompanyVerified;
+  const noProduct = !isFetching && data?.data < 1;
 
   return (
     <div>
@@ -55,34 +57,44 @@ const ProductsWrapper = () => {
                   Add a product
                 </Button>
               </div>
-              <div className="pt-10">
-                <ProductCards
-                  isLoading={isFetching}
-                  statistics={data?.statistics}
+              {noProduct ? (
+                <EmptyStatePage
+                  title="Let’s get you selling"
+                  description="Your product list is empty for now. Upload your products and start connecting with buyers today"
+                  type="products"
                 />
-              </div>
-              {isFetching ? (
-                <TableLoader />
               ) : (
-                <ProductTableWrapper
-                  totalPages={data?.pagination?.totalPages}
-                  currentPage={currentPage}
-                  prevPage={prevPage}
-                  nextPage={nextPage}
-                  goToFirstPage={goToFirstPage}
-                  goToLastPage={goToLastPage}
-                  isFirstPage={isFirstPage}
-                  isLastPage={isLastPage}
-                  limit={limit}
-                  setLimit={setLimit}
-                  search={search}
-                  handleSearchChange={handleSearchChange}
-                  handleSearch={handleSearch}
-                  filter={filter}
-                  setFilter={setFilter}
-                  handleClear={handleClear}
-                  data={data?.data}
-                />
+                <>
+                  <div className="pt-10">
+                    <ProductCards
+                      isLoading={isFetching}
+                      statistics={data?.statistics}
+                    />
+                  </div>
+                  {isFetching ? (
+                    <TableLoader />
+                  ) : (
+                    <ProductTableWrapper
+                      totalPages={data?.pagination?.totalPages}
+                      currentPage={currentPage}
+                      prevPage={prevPage}
+                      nextPage={nextPage}
+                      goToFirstPage={goToFirstPage}
+                      goToLastPage={goToLastPage}
+                      isFirstPage={isFirstPage}
+                      isLastPage={isLastPage}
+                      limit={limit}
+                      setLimit={setLimit}
+                      search={search}
+                      handleSearchChange={handleSearchChange}
+                      handleSearch={handleSearch}
+                      filter={filter}
+                      setFilter={setFilter}
+                      handleClear={handleClear}
+                      data={data?.data}
+                    />
+                  )}
+                </>
               )}
             </div>
           ) : (

@@ -34,6 +34,7 @@ const ProductCard = ({
           width={320}
           height={255}
           priority
+          unoptimized
           className="w-full h-full object-cover rounded-[10px] group-hover:scale-105 duration-300 transition-all"
         />
       </div>

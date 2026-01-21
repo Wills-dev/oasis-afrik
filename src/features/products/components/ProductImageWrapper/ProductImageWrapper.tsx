@@ -22,6 +22,7 @@ const ProductImageWrapper = ({
             alt={productName}
             width={592}
             height={586}
+            unoptimized
             className="w-full h-full object-cover"
           />
         )}
@@ -38,6 +39,7 @@ const ProductImageWrapper = ({
               alt={productName}
               width={139}
               height={141}
+              unoptimized
               className="object-cover w-full h-full rounded-md"
             />
           </div>
