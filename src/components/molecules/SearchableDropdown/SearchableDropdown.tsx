@@ -35,7 +35,7 @@ const SearchableDropdown: React.FC<SearchableDropdownProps> = ({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="relative w-full flex items-center justify-between sm:h-11 h-10 backdrop-blur-2xl bg-white/25 rounded-lg border border-gray-200 transition-all focus:border-[#009933] duration-300 disabled:cursor-not-allowed disabled:opacity-50 px-2 text-xs"
+        className={`relative w-full flex items-center justify-between sm:h-11 h-10 backdrop-blur-2xl bg-white/25 rounded-lg border border-gray-200 transition-all focus:border-[#009933] duration-300 disabled:cursor-not-allowed disabled:opacity-50 px-2  ${selectedOption ? "" : "text-xs"}`}
       >
         <span
           className={

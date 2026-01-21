@@ -6,9 +6,16 @@ import QueryProvider from "@/components/QueryProvider";
 import { Providers } from "@/store/provider";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/providers/AuthProvider";
-// import { helveticaNeue } from "../../public/fonts/HelveticaNeue";
+
+import { Exo_2 } from "next/font/google";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+const exo2 = Exo_2({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-exo2",
+});
 
 export const metadata: Metadata = {
   title: "OasisAfrik",
@@ -82,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${exo2.variable}`}>
       <body>
         <Toaster />
         <Providers>
