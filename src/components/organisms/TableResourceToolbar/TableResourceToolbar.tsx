@@ -1,5 +1,6 @@
 import SearchComponent from "@/components/molecules/SearchComponent/SearchComponent";
 import TimeFilterDropdown from "@/components/molecules/TimeFilterDropdown/TimeFilterDropdown";
+import { FormEvent } from "react";
 
 interface TableResourceToolbarProps {
   title: string;
@@ -7,7 +8,7 @@ interface TableResourceToolbarProps {
   handleChange: (search: string) => void;
   filter: string;
   setFilter: (filter: string) => void;
-  initiateSearch: () => void;
+  initiateSearch: (e: FormEvent) => void;
   handleClear: () => void;
 }
 

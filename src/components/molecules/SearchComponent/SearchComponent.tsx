@@ -5,7 +5,7 @@ import { SearchIcon, X } from "lucide-react";
 interface SearchComponentProps {
   search: string;
   handleChange: (search: string) => void;
-  initiateSearch: () => void;
+  initiateSearch: (e: FormEvent) => void;
   handleClear: () => void;
 }
 
@@ -15,14 +15,9 @@ const SearchComponent = ({
   initiateSearch,
   handleClear,
 }: SearchComponentProps) => {
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-    initiateSearch();
-  };
-
   return (
     <form
-      onSubmit={handleSearch}
+      onSubmit={initiateSearch}
       className="focus-within:border-green-600 border border-gray-200 transition-all duration-300 px-2 flex items-center h-10 gap-2 rounded-full max-w-sm w-full"
     >
       <button type="submit" className="text-gray-300">

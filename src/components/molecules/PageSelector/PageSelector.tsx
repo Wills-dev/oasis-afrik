@@ -16,7 +16,7 @@ const PageSelector = ({
       {options?.map((label) => (
         <div
           key={label?.label}
-          className={`py-[8px] px-[16px] rounded-[10px] cursor-pointer capitalize  max-sm:text-sm font-medium hover:scale-105 transition-all duration-300 ${
+          className={`py-2 px-4 rounded-[10px] cursor-pointer capitalize  max-sm:text-sm font-medium hover:scale-105 transition-all duration-300 ${
             selectPage === label?.value ? "bg-white" : "text-gray-600"
           }`}
           onClick={() => setSelectPage(label?.value.toString())}

@@ -3,7 +3,7 @@ import React from "react";
 
 const QuoteResponseCard = ({ isUserBuyer }: { isUserBuyer: boolean }) => {
   return (
-    <div className="p-[10px] rounded-[10px] bg-gray-100 hover:bg-[#00993314] transition-all duration-300">
+    <div className="p-2.5 rounded-[10px] bg-gray-100 hover:bg-[#00993314] transition-all duration-300">
       <h6 className="sm:text-lg font-medium">
         {isUserBuyer ? "Buyer's note" : "Seller's note"}
       </h6>

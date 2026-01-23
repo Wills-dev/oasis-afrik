@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getQuotes } from "../api";
 import { useTableState } from "@/lib/hooks/useTableState";
-import { quotes } from "../constants/dummy";
 
 export const useGetQuotes = () => {
   const {
@@ -22,12 +21,14 @@ export const useGetQuotes = () => {
     handleSearch,
     filter,
     setFilter,
+    tab,
+    setTab,
   } = useTableState();
 
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["quotes", submittedQuery, limit, currentPage, filter],
+    queryKey: ["quotes", submittedQuery, limit, currentPage, filter, tab],
     queryFn: () =>
-      getQuotes({ currentPage, limit, search: submittedQuery, filter }),
+      getQuotes({ currentPage, limit, search: submittedQuery, filter, tab }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,
@@ -55,6 +56,7 @@ export const useGetQuotes = () => {
     refetch,
     filter,
     setFilter,
-    quotes,
+    tab,
+    setTab,
   };
 };
