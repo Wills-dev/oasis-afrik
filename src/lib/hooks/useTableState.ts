@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export const useTableState = () => {
+  const [tab, setTab] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
@@ -70,5 +71,7 @@ export const useTableState = () => {
     handleSearch,
     setFilter,
     filter,
+    tab,
+    setTab,
   };
 };

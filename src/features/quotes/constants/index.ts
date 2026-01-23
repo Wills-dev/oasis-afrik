@@ -1,10 +1,10 @@
 export const pageSelectors = [
   {
     label: "Sent",
-    value: "Sent",
+    value: "outgoing",
   },
   {
     label: "Incoming",
-    value: "Incoming",
+    value: "incoming",
   },
 ];

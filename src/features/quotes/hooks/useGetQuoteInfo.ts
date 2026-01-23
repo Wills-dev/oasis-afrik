@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getQuoteInfo } from "../api";
-import { quoteInfo } from "../constants/dummy";
 
 export const useGetQuoteInfo = (quoteId: string) => {
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
@@ -14,7 +13,6 @@ export const useGetQuoteInfo = (quoteId: string) => {
 
   return {
     data,
-    quoteInfo,
     isPending,
     isLoading,
     isError,

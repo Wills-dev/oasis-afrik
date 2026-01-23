@@ -8,14 +8,15 @@ export const getQuotes = async ({
   limit,
   search,
   filter,
+  tab,
 }: fetchDataProps) => {
   try {
-    const url = `/quotes?page=${currentPage}&limit=${limit}${
+    const url = `/quotes?type=${tab || "outgoing"}&page=${currentPage}&limit=${limit}${
       filter ? `&filter=${filter}` : ""
     }${search ? `&search=${search}` : ""}`;
 
     const { data } = await axiosInstance.get(url);
-    return data?.data;
+    return data;
   } catch (error) {
     throw error;
   }
@@ -73,6 +74,58 @@ export const requestQuote = async ({
     const { data } = await axiosInstance.post(`/quotes/request`, payload);
 
     return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const acceptQuote = async ({ quoteId }: { quoteId: string }) => {
+  try {
+    const url = `/quotes/${quoteId}/accept`;
+    const { data } = await axiosInstance.put(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const rejectQuote = async ({ quoteId }: { quoteId: string }) => {
+  try {
+    const url = `/quotes/${quoteId}/reject`;
+    const { data } = await axiosInstance.put(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const negotiateQuote = async ({
+  quoteId,
+  message,
+  quantity,
+  amount,
+  address,
+}: {
+  quoteId: string;
+  message: string;
+  quantity?: string;
+  amount?: string;
+  address?: string;
+}) => {
+  try {
+    const payload: {
+      message: string;
+      quantity?: string;
+      amount?: string;
+      address?: string;
+    } = { message };
+    if (quantity) payload.quantity = quantity;
+    if (amount) payload.amount = amount;
+    if (address) payload.address = address;
+
+    const url = `/quotes/${quoteId}/notes`;
+    const { data } = await axiosInstance.put(url);
+    return data?.data;
   } catch (error) {
     throw error;
   }

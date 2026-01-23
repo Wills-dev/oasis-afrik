@@ -19,6 +19,7 @@ export interface fetchDataProps {
   categoryId?: string;
   countryId?: string;
   dateRange?: string;
+  tab?: string;
 }
 
 export interface TableWrapperProps<TData = unknown> {
