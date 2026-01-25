@@ -1,22 +1,56 @@
 import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
-import React from "react";
 
-const QuoteResponseCard = ({ isUserBuyer }: { isUserBuyer: boolean }) => {
+import { QuoteNote } from "../../types";
+import { numberWithCommas } from "@/lib/helpers";
+
+const QuoteResponseCard = ({
+  responseInfo,
+  currency,
+  buyerId,
+}: {
+  responseInfo: QuoteNote;
+  currency: string;
+  buyerId: string;
+}) => {
+  const quantity = `${responseInfo?.quantity ? numberWithCommas(Number(responseInfo?.quantity)) : responseInfo?.effectiveQuantity && numberWithCommas(Number(responseInfo?.effectiveQuantity))}`;
+
+  const quantityUnit = `${responseInfo?.quantityUnit?.abbreviation ? responseInfo?.quantityUnit?.abbreviation : responseInfo?.effectiveQuantityUnit?.abbreviation && responseInfo?.effectiveQuantityUnit?.abbreviation}`;
+
+  const amount = responseInfo?.amount
+    ? numberWithCommas(Number(responseInfo?.amount))
+    : responseInfo?.effectiveAmount &&
+      numberWithCommas(Number(responseInfo?.effectiveAmount));
+
+  const isUserBuyer = buyerId === responseInfo?.authorId;
+
   return (
     <div className="p-2.5 rounded-[10px] bg-gray-100 hover:bg-[#00993314] transition-all duration-300">
       <h6 className="sm:text-lg font-medium">
         {isUserBuyer ? "Buyer's note" : "Seller's note"}
       </h6>
       <p className="sm:text-sm text-xs text-gray-600">
-        Looking for bulk pricing on organic shea butter. Need delivery to Lagos
-        by end of month. Can you provide certification?
+        {responseInfo?.message}
       </p>
-      <InfoDisc title="Requested quantity:" value="5000g" horizontal />
-      <InfoDisc title="Proposed amount:" value="$200" horizontal />
-      <InfoDisc title="Buyer:" value="John Doe" horizontal />
+      <InfoDisc
+        title={
+          responseInfo?.quantity ? "Proposed quantity:" : "Requested quantity:"
+        }
+        value={`${quantity}${quantityUnit}`}
+        horizontal
+      />
+      <InfoDisc
+        title="Offered amount:"
+        value={`${currency}${amount}`}
+        horizontal
+      />
+      <InfoDisc
+        title="From"
+        value={`${responseInfo?.author?.firstName} ${responseInfo?.author?.lastName}`}
+        horizontal
+      />
       <InfoDisc
         title="Delivery address:"
-        value="32 Ezekiel Uvoh Crescent"
+        value={responseInfo?.address || responseInfo?.effectiveAddress || ""}
         horizontal
       />
     </div>

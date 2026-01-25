@@ -105,26 +105,30 @@ export const negotiateQuote = async ({
   quantity,
   amount,
   address,
+  quantityUnitId,
 }: {
   quoteId: string;
   message: string;
   quantity?: string;
   amount?: string;
   address?: string;
+  quantityUnitId?: string;
 }) => {
   try {
     const payload: {
       message: string;
       quantity?: string;
-      amount?: string;
+      amount?: number;
       address?: string;
+      quantityUnitId?: string;
     } = { message };
     if (quantity) payload.quantity = quantity;
-    if (amount) payload.amount = amount;
+    if (quantityUnitId) payload.quantityUnitId = quantityUnitId;
+    if (amount) payload.amount = Number(removeCommas(amount));
     if (address) payload.address = address;
 
     const url = `/quotes/${quoteId}/notes`;
-    const { data } = await axiosInstance.put(url);
+    const { data } = await axiosInstance.post(url, payload);
     return data?.data;
   } catch (error) {
     throw error;

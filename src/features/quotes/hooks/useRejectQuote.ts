@@ -5,14 +5,22 @@ import { ApiErrorResponse } from "@/lib/types";
 import { rejectQuote } from "../api";
 import { toastOption } from "@/lib/helpers/toast";
 import { promiseErrorFunction } from "@/lib/helpers/promiseError";
+import { useState } from "react";
 
 export const useRejectQuote = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const queryClient = useQueryClient();
+
+  const onCancel = () => {
+    setIsOpen(false);
+  };
 
   const { mutate, isPending } = useMutation({
     mutationFn: rejectQuote,
     onSuccess: (data, variable) => {
       toast.success("Quote successful rejected", toastOption);
+      onCancel();
       queryClient.invalidateQueries({
         queryKey: ["quotes"],
       });
@@ -31,7 +39,10 @@ export const useRejectQuote = () => {
   };
 
   return {
-    isPending,
+    isOpen,
+    setIsOpen,
+    onCancel,
     handleRejectQuote,
+    isRejecting: isPending,
   };
 };

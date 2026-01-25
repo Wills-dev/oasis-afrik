@@ -135,3 +135,13 @@ export const getProductUnits = async () => {
     throw error;
   }
 };
+
+export const getCurrencies = async () => {
+  try {
+    const url = `/products/currencies`;
+    const { data } = await axiosInstance.get(url);
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
