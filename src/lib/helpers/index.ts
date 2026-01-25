@@ -6,7 +6,7 @@ import {
 } from "date-fns";
 
 export const getCurrencySign = (currency: string): string => {
-  switch (currency.toUpperCase()) {
+  switch (currency?.toUpperCase()) {
     case "NGN":
       return "₦";
     case "USD":

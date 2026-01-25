@@ -61,6 +61,19 @@ export type QuoteNote = {
   effectiveAmount?: string;
   effectiveQuantity?: string;
   quoteId?: string;
+  effectiveQuantityUnit?: QuantityUnit;
+  quantity: string | null;
+  quantityUnit?: QuantityUnit | null;
+  quantityUnitId?: string;
+};
+
+export type CurrencyObject = {
+  id: string;
+  code: string;
+  name: string;
+  symbol: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Quote = BaseEntity & {
@@ -68,7 +81,7 @@ export type Quote = BaseEntity & {
   buyerId: string;
   sellerId: string;
   amount: string;
-  currency: string;
+  currency: CurrencyObject;
   quantity: string;
   quantityUnitId: string;
   address: string;
@@ -86,3 +99,15 @@ export type Quote = BaseEntity & {
   maxLeadTimePeriod: LeadTimePeriod;
   notes: QuoteNote[];
 };
+
+export interface NegotiateQuoteForm {
+  message: string;
+  quantity?: string;
+  amount?: string;
+  address?: string;
+  quantityUnitId?: string;
+  minLeadTime?: string;
+  minLeadTimePeriodId?: string;
+  maxLeadTime?: string;
+  maxLeadTimePeriodId?: string;
+}

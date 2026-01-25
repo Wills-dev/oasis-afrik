@@ -8,6 +8,7 @@ import { negotiateQuote } from "../api";
 import { toastOption } from "@/lib/helpers/toast";
 import { promiseErrorFunction } from "@/lib/helpers/promiseError";
 import { formatInputTextNumberWithCommas } from "@/lib/helpers/formatInputTextNumberWithCommas";
+import { formatInputTextNumber } from "@/lib/helpers/formatNumbers";
 
 export const useNegotiateQuote = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,17 +17,28 @@ export const useNegotiateQuote = () => {
     amount: "",
     address: "",
     quantity: "",
+    quantityUnitId: "",
+    minLeadTime: "",
+    minLeadTimePeriodId: "",
+    maxLeadTime: "",
+    maxLeadTimePeriodId: "",
   });
 
   const queryClient = useQueryClient();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value } = e.target;
     setNegotiateInfo((prev) => ({
       ...prev,
       [name]: ["amount", "quantity"].includes(name)
         ? formatInputTextNumberWithCommas(value)
-        : value,
+        : ["minLeadTime", "maxLeadTime"].includes(name)
+          ? formatInputTextNumber(value)
+          : value,
     }));
   };
 
@@ -36,6 +48,11 @@ export const useNegotiateQuote = () => {
       amount: "",
       address: "",
       quantity: "",
+      minLeadTime: "",
+      quantityUnitId: "",
+      minLeadTimePeriodId: "",
+      maxLeadTime: "",
+      maxLeadTimePeriodId: "",
     });
   };
 
@@ -60,7 +77,8 @@ export const useNegotiateQuote = () => {
 
   const handleSubmit = (e: FormEvent, quoteId: string) => {
     e.preventDefault();
-    const { message, amount, quantity, address } = negotiateInfo;
+    const { message, amount, quantity, address, quantityUnitId } =
+      negotiateInfo;
     if (!message) {
       return toast.error("Message is required", toastOption);
     }
@@ -70,6 +88,7 @@ export const useNegotiateQuote = () => {
       amount,
       quoteId,
       quantity,
+      quantityUnitId,
     });
   };
 
@@ -78,7 +97,7 @@ export const useNegotiateQuote = () => {
     setShowModal,
     negotiateInfo,
     handleChange,
-    isPending,
     handleSubmit,
+    isSubmitting: isPending,
   };
 };

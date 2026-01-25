@@ -13,7 +13,9 @@ import PageSelector from "@/components/molecules/PageSelector/PageSelector";
 import QuoteLoader from "@/components/atoms/skeletonLoader/QuoteLoader";
 
 const QuoteWrapper = () => {
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user, isLoading: isFetching } = useSelector(
+    (state: RootState) => state.auth,
+  );
 
   const isUserSeller = user?.isCompanyVerified || false;
 
@@ -38,6 +40,8 @@ const QuoteWrapper = () => {
     tab,
     setTab,
   } = useGetQuotes();
+
+  const loading = isFetching || isLoading;
 
   const showEmptyState = !isLoading && data?.data.length < 1;
 
@@ -64,7 +68,7 @@ const QuoteWrapper = () => {
           options={pageSelectors}
         />
       )}
-      {isLoading ? (
+      {loading ? (
         <QuoteLoader />
       ) : (
         <>
