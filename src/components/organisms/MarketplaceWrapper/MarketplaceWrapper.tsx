@@ -67,7 +67,7 @@ const MarketplaceWrapper = () => {
                   unit={prod?.quantityUnit?.abbreviation}
                   businessName={"Kenyan highlands Co."}
                   rating="4.5"
-                  currency={prod?.currency || "₦"}
+                  currency={prod?.currency?.symbol || "₦"}
                   productImg={prod?.mainImage}
                 />
               );

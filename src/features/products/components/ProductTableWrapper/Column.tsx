@@ -4,16 +4,13 @@ import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-import {
-  convertDateFormat,
-  getCurrencySign,
-  numberWithCommas,
-} from "@/lib/helpers";
+import { convertDateFormat, numberWithCommas } from "@/lib/helpers";
 import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { ProductType, Unit } from "../../types";
 
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
+import { CurrencyObject } from "@/features/quotes/types";
 
 const columnHelper = createColumnHelper<ProductType>();
 
@@ -89,11 +86,12 @@ export const Column = [
     },
     cell: ({ row }) => {
       const price = row.getValue("price");
-      const currency = (row?.original as { currency?: string })?.currency;
+      const currency = (row?.original as { currency?: CurrencyObject })
+        ?.currency?.symbol;
 
       return (
         <p className="">
-          {currency ? getCurrencySign(currency) : "₦"}
+          {currency || "₦"}
           {price ? numberWithCommas(Number(price)) : "0.00"}
         </p>
       );

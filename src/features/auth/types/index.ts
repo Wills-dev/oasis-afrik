@@ -57,4 +57,6 @@ export interface ProductData {
   minLeadTimePeriodId: string;
   maxLeadTimePeriodId: string;
   images: File[];
+  productId?: string;
+  currencyId: string;
 }

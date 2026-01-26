@@ -12,6 +12,8 @@ import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
 import Button from "@/components/atoms/Button/Button";
 import RequestQuote from "@/components/molecules/modals/RequestQuote/RequestQuote";
 import { useRequestQuote } from "@/features/quotes/hooks/useRequestQuote";
+import { useDeleteProduct } from "../../hooks/useDeleteProduct";
+import ConfirmAction from "@/components/molecules/ConfirmAction/ConfirmAction";
 
 interface ProductInfoProps {
   productInfo: ProductType;
@@ -26,6 +28,8 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
     handleSubmit,
     isPending,
   } = useRequestQuote(productInfo?.id || "");
+  const { handleDelete, isDeleting, isOpen, setIsOpen, onCancel } =
+    useDeleteProduct();
 
   const { user } = useSelector((state: RootState) => state.auth);
 
@@ -42,7 +46,7 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
           {productInfo?.name}
         </h4>
         <p className="sm:text-lg font-medium text-gray-700">
-          {productInfo?.currency || "₦"}
+          {productInfo?.currency?.symbol || "₦"}
           {productInfo?.price &&
             numberWithCommas(Number(productInfo?.price))}{" "}
           per MOR
@@ -101,11 +105,13 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
         <div className="flex items-center flex-wrap gap-4">
           <Button
             width="flex-1 w-full"
-            href={`/products/info/${productInfo?.id}/edit`}
+            href={`/dashboard/products/info/${productInfo?.id}/edit`}
           >
             Edit product
           </Button>
           <Button
+            onClick={() => setIsOpen(true)}
+            loading={isDeleting}
             width="flex-1 w-full"
             bgColor="bg-white border border-gray-300 text-gray-600"
             bgHoverColor="hover:bg-gray-50"
@@ -123,6 +129,15 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isPending={isPending}
+      />
+      <ConfirmAction
+        isPending={isDeleting}
+        open={isOpen}
+        setOpen={setIsOpen}
+        onCancel={onCancel}
+        onConfirm={() => handleDelete(productInfo?.id)}
+        title="Delete product"
+        description="You’re about to delete this product. Please confirm to proceed."
       />
     </div>
   );

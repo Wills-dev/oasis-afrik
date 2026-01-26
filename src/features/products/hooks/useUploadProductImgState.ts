@@ -7,9 +7,7 @@ import { toastOption } from "@/lib/helpers/toast";
 
 export const useUploadProductImgState = () => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
-  const [fetchedImages, setFetchedImages] = useState<ProductImageType[] | []>(
-    []
-  );
+  const [fetchedImages, setFetchedImages] = useState<string[] | []>([]);
   const [selectedImageFiles, setSelectedImageFiles] = useState<File[]>([]);
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +23,7 @@ export const useUploadProductImgState = () => {
     if (totalImages > maxImages) {
       toast(
         `You can only upload a maximum of ${maxImages} images. Currently selected: ${selectedImageFiles.length}`,
-        toastOption
+        toastOption,
       );
       return;
     }
@@ -34,7 +32,7 @@ export const useUploadProductImgState = () => {
     if (selectedImageFiles.length >= maxImages) {
       toast(
         `Maximum of ${maxImages} images allowed. Please remove some images before adding new ones.`,
-        toastOption
+        toastOption,
       );
       return;
     }
@@ -55,7 +53,7 @@ export const useUploadProductImgState = () => {
       if (!validExtensions.includes(file.type)) {
         toast(
           `Unsupported file type for ${file.name}. Only jpg, jpeg, and png are allowed.`,
-          toastOption
+          toastOption,
         );
         return;
       }
@@ -70,11 +68,11 @@ export const useUploadProductImgState = () => {
     ) {
       toast(
         `Only ${newImages.length} image(s) were added. Maximum of ${maxImages} images allowed.`,
-        toastOption
+        toastOption,
       );
     }
     setSelectedImages((prev) =>
-      prev ? prev.concat(newImageUrls) : newImageUrls
+      prev ? prev.concat(newImageUrls) : newImageUrls,
     );
     setSelectedImageFiles((prev) => [...prev, ...newImages]);
   };

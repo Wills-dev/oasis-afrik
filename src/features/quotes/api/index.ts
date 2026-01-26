@@ -117,12 +117,12 @@ export const negotiateQuote = async ({
   try {
     const payload: {
       message: string;
-      quantity?: string;
+      quantity?: number;
       amount?: number;
       address?: string;
       quantityUnitId?: string;
     } = { message };
-    if (quantity) payload.quantity = quantity;
+    if (quantity) payload.quantity = Number(removeCommas(quantity));
     if (quantityUnitId) payload.quantityUnitId = quantityUnitId;
     if (amount) payload.amount = Number(removeCommas(amount));
     if (address) payload.address = address;

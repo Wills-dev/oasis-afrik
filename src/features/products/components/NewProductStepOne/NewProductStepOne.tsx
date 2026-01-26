@@ -10,6 +10,7 @@ import { useGetCountries } from "../../hooks/useGetCountries";
 import { useGetUnits } from "../../hooks/useGetUnits";
 import { useGetCategories } from "../../hooks/useGetCategories";
 import { useGetPeriods } from "../../hooks/useGetPeriods";
+import { useGetCurrency } from "../../hooks/useGetCurrency";
 
 interface NewProductStepOneProps {
   product: ProductFormData;
@@ -27,6 +28,7 @@ const NewProductStepOne = ({
   const { units, loadingUnits } = useGetUnits();
   const { loadingCategories, categories } = useGetCategories();
   const { periods, loadingPeriods } = useGetPeriods();
+  const { currencies, loadingCurrencies } = useGetCurrency();
 
   return (
     <div className="space-y-6">
@@ -94,15 +96,30 @@ const NewProductStepOne = ({
             />
           </div>
         </div>
-        <div className="space-y-1 md:col-span-1 col-span-2">
-          <Label title={`Price`} />
-          <Input
-            value={product.price}
-            onChange={handleChange}
-            type="text"
-            name="price"
-            placeholder=""
-          />
+        <div className="space-y-1 md:col-span-1 col-span-2 flex gap-2">
+          <div className="w-4/6">
+            <Label title={`Price`} />
+            <Input
+              value={product.price}
+              onChange={handleChange}
+              type="text"
+              name="price"
+              placeholder=""
+            />
+          </div>
+          <div className="flex-1 w-full">
+            <Label title="Currency" />
+            <SearchableDropdown
+              options={currencies}
+              value={product.currency}
+              onChange={(value) =>
+                handleDropdownChange("currency", value.toString())
+              }
+              placeholder={
+                loadingCurrencies ? "Loading currencies..." : "currencies..."
+              }
+            />
+          </div>
         </div>
         <div className="space-y-1 w-full md:col-span-1 col-span-2 flex gap-2">
           <div className="w-4/6">

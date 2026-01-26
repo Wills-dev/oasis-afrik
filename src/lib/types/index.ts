@@ -5,7 +5,9 @@ export interface ApiErrorResponse {
     data?: {
       message?: string;
       detail?: string;
-      errors?: string[];
+      errors?: {
+        message: string;
+      }[];
     };
   };
 }

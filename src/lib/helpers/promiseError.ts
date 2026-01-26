@@ -7,15 +7,16 @@ const isApiError = (error: unknown): error is ApiErrorResponse => {
 };
 
 export const promiseErrorFunction = (error: ApiErrorResponse) => {
-  if (error?.response?.data?.message) {
+  if (
+    error?.response?.data?.errors &&
+    error?.response?.data?.errors?.length > 0 &&
+    error?.response?.data?.errors[0]?.message
+  ) {
+    toast.error(`${error?.response?.data?.errors[0]?.message}`, toastOption);
+  } else if (error?.response?.data?.message) {
     toast.error(`${error?.response?.data?.message}`, toastOption);
   } else if (error?.response?.data?.detail) {
     toast.error(`${error?.response?.data?.detail}`, toastOption);
-  } else if (
-    error?.response?.data?.errors &&
-    error?.response?.data?.errors?.length > 0
-  ) {
-    toast.error(`${error?.response?.data?.errors[0]}`, toastOption);
   } else {
     return toast.error(`Internal Server Error! Contact support`, toastOption);
   }
@@ -41,9 +42,10 @@ export const displayError = (error: unknown): string | undefined => {
     return error.response.data.detail;
   } else if (
     error.response?.data?.errors &&
-    error.response.data.errors.length > 0
+    error.response.data.errors.length > 0 &&
+    error?.response?.data?.errors[0]?.message
   ) {
-    return error.response.data.errors[0];
+    return error.response.data.errors[0].message;
   } else {
     return "Internal Server Error! Contact support";
   }
