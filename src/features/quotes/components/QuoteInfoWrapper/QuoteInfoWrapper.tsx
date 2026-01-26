@@ -7,12 +7,13 @@ import BackButton from "@/components/atoms/BackButton/BackButton";
 import Button from "@/components/atoms/Button/Button";
 import QuoteResponseCard from "../QuoteResponseCard/QuoteResponseCard";
 import QuoteInfoLoader from "@/components/atoms/skeletonLoader/QuoteInfoLoader";
+import ConfirmAction from "@/components/molecules/ConfirmAction/ConfirmAction";
+import QuoteInfoModal from "@/components/molecules/modals/QuoteInfoModal/QuoteInfoModal";
 
 import { QuoteNote } from "../../types";
 import { useGetQuoteInfo } from "../../hooks/useGetQuoteInfo";
 import { useRejectQuote } from "../../hooks/useRejectQuote";
-import ConfirmAction from "@/components/molecules/ConfirmAction/ConfirmAction";
-import QuoteInfoModal from "@/components/molecules/modals/QuoteInfoModal/QuoteInfoModal";
+import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
 const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
   const { handleRejectQuote, isRejecting, isOpen, setIsOpen, onCancel } =
@@ -22,6 +23,9 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
 
   const { data, isLoading } = useGetQuoteInfo(quoteId);
 
+  const removeActionBtn =
+    data?.statusLabel === "ACCEPTED" || data?.statusLabel === "REJECTED";
+
   return (
     <div className="space-y-6">
       <BackButton />
@@ -29,6 +33,9 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
         <QuoteInfoLoader />
       ) : (
         <div className="max-w-xl w-full space-y-4">
+          <div className="flex justify-end">
+            <StatusBubble status={data?.statusLabel} />
+          </div>
           <div className=" space-y-2 border-b border-gray-100 pb-4">
             {data?.product?.mainImage && (
               <div className="w-full h-[186px]">
@@ -57,20 +64,27 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Button
-              width="flex-1 w-full"
-              onClick={() => setShowAcceptModal(true)}
-            >
-              Accept / negotiate
-            </Button>
-            <Button
-              width="flex-1 w-full"
-              bgColor="bg-white border border-gray-300 text-gray-600"
-              onClick={() => setIsOpen(true)}
-              bgHoverColor="hover:bg-gray-50"
-            >
-              Decline quote
-            </Button>
+            {!removeActionBtn && (
+              <>
+                <Button
+                  width="flex-1 w-full"
+                  onClick={() => setShowAcceptModal(true)}
+                >
+                  Accept / negotiate
+                </Button>
+                <Button
+                  width="flex-1 w-full"
+                  bgColor="bg-white border border-gray-300 text-gray-600"
+                  onClick={() => setIsOpen(true)}
+                  bgHoverColor="hover:bg-gray-50"
+                >
+                  Decline quote
+                </Button>
+              </>
+            )}
+            {data?.statusLabel === "ACCEPTED" && (
+              <Button width="flex-1 w-full">Make order payment</Button>
+            )}
           </div>
         </div>
       )}

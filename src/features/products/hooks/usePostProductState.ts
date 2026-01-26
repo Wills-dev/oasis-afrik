@@ -16,9 +16,9 @@ export const usePostProductState = () => {
     minOrder: "",
     minOrderUnit: "",
     minLead: "",
-    minLeadPeriod: "days",
+    minLeadPeriod: "",
     maxLead: "",
-    maxLeadPeriod: "days",
+    maxLeadPeriod: "",
     description: "",
   });
 
@@ -37,7 +37,7 @@ export const usePostProductState = () => {
   };
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setProduct((prev) => ({
@@ -45,8 +45,8 @@ export const usePostProductState = () => {
       [name]: ["price", "quantity", "minOrder"].includes(name)
         ? formatInputTextNumberWithCommas(value)
         : ["minLead", "maxLead"].includes(name)
-        ? formatInputTextNumber(value)
-        : value,
+          ? formatInputTextNumber(value)
+          : value,
     }));
   };
 

@@ -1,17 +1,21 @@
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { usePostProductState } from "./usePostProductState";
 import { useUploadProductImgState } from "./useUploadProductImgState";
-import { newProducts } from "../api";
+import { editProducts } from "../api";
 import { ApiErrorResponse } from "@/lib/types";
 import { toastOption } from "@/lib/helpers/toast";
 import { promiseErrorFunction } from "@/lib/helpers/promiseError";
 import { removeCommas } from "@/lib/helpers/removeCommas";
+import { useGetProductInfo } from "./useGetProductInfo";
 
-export const usePostProduct = () => {
+export const useEditProduct = (productId: string) => {
+  const { data, isLoading } = useGetProductInfo(productId);
+
   const {
     product,
     step,
@@ -20,6 +24,7 @@ export const usePostProduct = () => {
     prevStep,
     handleReset,
     handleDropdownChange,
+    setProduct,
   } = usePostProductState();
   const {
     selectedImages,
@@ -28,18 +33,53 @@ export const usePostProduct = () => {
     handleImageDelete,
     setSelectedImageFiles,
     setSelectedImages,
+    fetchedImages,
+    setFetchedImages,
   } = useUploadProductImgState();
 
   const router = useRouter();
 
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (data && !isLoading) {
+      setProduct({
+        productName: data?.name,
+        category: data?.categoryId,
+        quantity: data?.quantity,
+        unit: data?.quantityUnitId,
+        country: data?.countryId,
+        price: data?.price,
+        currency: data?.currencyId,
+        minOrder: data?.minOrder,
+        minOrderUnit: data?.minOrderUnitId,
+        minLead: data?.minLeadTime,
+        minLeadPeriod: data?.minLeadTimePeriodId,
+        maxLead: data?.maxLeadTime,
+        maxLeadPeriod: data?.maxLeadTimePeriodId,
+        description: data?.description,
+      });
+      setFetchedImages(data?.images);
+    }
+  }, [isLoading, data, setProduct, setFetchedImages]);
+
   const { mutate, isPending } = useMutation({
-    mutationFn: newProducts,
-    onSuccess: () => {
+    mutationFn: editProducts,
+    onSuccess: (data, variables) => {
       handleReset();
       setSelectedImageFiles([]);
       setSelectedImages([]);
-      toast.success("New products uploaded successfully.", toastOption);
-      router.push(`/dashboard/products`);
+      toast.success("Products edited successfully.", toastOption);
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["seller's products"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["product info", variables?.productId],
+      });
+      router.push(`/dashboard/products/info/${productId}`);
     },
     onError: (error: ApiErrorResponse) => {
       console.log("error posting product", error);
@@ -94,7 +134,7 @@ export const usePostProduct = () => {
     } else if (!description) {
       return toast.error("Description is required", toastOption);
     }
-    if (selectedImageFiles?.length < 1) {
+    if (selectedImageFiles?.length < 1 && fetchedImages?.length < 1) {
       return toast.error("Product image is required", toastOption);
     }
 
@@ -114,6 +154,7 @@ export const usePostProduct = () => {
       maxLeadTimePeriodId: maxLeadPeriod,
       images: selectedImageFiles,
       currencyId: currency,
+      productId,
     });
   };
 
@@ -129,5 +170,7 @@ export const usePostProduct = () => {
     handleImageDelete,
     handleDropdownChange,
     handleSubmit,
+    fetchedImages,
+    isLoading,
   };
 };

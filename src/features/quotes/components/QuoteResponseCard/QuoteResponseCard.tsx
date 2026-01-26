@@ -1,7 +1,7 @@
 import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
 
 import { QuoteNote } from "../../types";
-import { numberWithCommas } from "@/lib/helpers";
+import { convertDateFormat, numberWithCommas } from "@/lib/helpers";
 
 const QuoteResponseCard = ({
   responseInfo,
@@ -51,6 +51,16 @@ const QuoteResponseCard = ({
       <InfoDisc
         title="Delivery address:"
         value={responseInfo?.address || responseInfo?.effectiveAddress || ""}
+      />
+      {/* <InfoDisc
+        title="Proposed delivery duration:"
+        value={responseInfo?.address || responseInfo?.effectiveAddress || ""}
+      /> */}
+      <InfoDisc
+        title="Date:"
+        value={
+          responseInfo?.createdAt && convertDateFormat(responseInfo?.createdAt)
+        }
         horizontal
       />
     </div>

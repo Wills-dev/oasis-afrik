@@ -94,7 +94,7 @@ const NegotiateQuoteModal = ({
             />
           </div>
           <div className="">
-            <Label title="Min Lead Time" />
+            <Label title="Min Lead Time (optional)" />
             <div className="flex gap-2">
               <div className="w-4/6">
                 <Input
@@ -119,7 +119,7 @@ const NegotiateQuoteModal = ({
             </div>
           </div>
           <div className="">
-            <Label title="Max Lead Time" />
+            <Label title="Max Lead Time (optional)" />
             <div className="flex gap-2">
               <div className="w-4/6">
                 <Input

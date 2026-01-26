@@ -6,17 +6,28 @@ interface NewProductStepTwoProps {
   selectedImages: string[] | null;
   onSelectFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleImageDelete: (index: number) => void;
+  fetchedImages?: string[];
 }
 
 const NewProductStepTwo = ({
   selectedImages,
   onSelectFile,
   handleImageDelete,
+  fetchedImages,
 }: NewProductStepTwoProps) => {
   const disableImageInput = selectedImages
     ? selectedImages?.length >= 5
     : false;
-  const imgLength = selectedImages ? selectedImages?.length : 0;
+
+  const isFetchedImageAvailable = fetchedImages && fetchedImages?.length > 0;
+
+  const fetchedImageLength = isFetchedImageAvailable
+    ? fetchedImages?.length
+    : 0;
+
+  const selectedImageLength = selectedImages?.length || 0;
+
+  const imgLength = fetchedImageLength + selectedImageLength;
 
   return (
     <div className="space-y-6">
@@ -53,6 +64,29 @@ const NewProductStepTwo = ({
         </p>
       </label>
       <div className="flex gap-2 overflow-x-auto">
+        {isFetchedImageAvailable &&
+          fetchedImages?.map((image, i) => (
+            <div
+              key={i}
+              className="bg-gray-100 rounded-md sm:w-[218px] sm:min-w-[218px] sm:h-[205px] w-[120px] min-w-[120px] h-[120px] relative overflow-hidden"
+            >
+              <Image
+                src="/assets/icons/cancel.svg"
+                alt="product"
+                width={20}
+                height={20}
+                onClick={() => handleImageDelete(i)}
+                className="w-5 h-5 object-cover absolute top-2 right-2 cursor-pointer"
+              />
+              <Image
+                src={image}
+                alt="product"
+                width={218}
+                height={205}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         {selectedImages &&
           selectedImages.map((image, index) => (
             <div

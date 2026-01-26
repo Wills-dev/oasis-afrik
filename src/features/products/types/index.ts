@@ -1,3 +1,5 @@
+import { CurrencyObject } from "@/features/quotes/types";
+
 export type ProductImageType = {
   id: string;
   imgUrl: string;
@@ -69,7 +71,7 @@ export type ProductType = {
   quantityUnitId: string;
   user: User;
   userId: string;
-  currency: string;
+  currency: CurrencyObject;
 };
 
 export type ProductFormData = {
