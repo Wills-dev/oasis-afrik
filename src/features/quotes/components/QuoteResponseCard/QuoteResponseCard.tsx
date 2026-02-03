@@ -2,6 +2,7 @@ import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
 
 import { QuoteNote } from "../../types";
 import { convertDateFormat, numberWithCommas } from "@/lib/helpers";
+import { getCurrencySign } from "@/lib/helpers/getCurrencySign";
 
 const QuoteResponseCard = ({
   responseInfo,
@@ -40,7 +41,7 @@ const QuoteResponseCard = ({
       />
       <InfoDisc
         title="Offered amount:"
-        value={`${currency}${amount}`}
+        value={`${currency && getCurrencySign(currency)}${amount}`}
         horizontal
       />
       <InfoDisc
