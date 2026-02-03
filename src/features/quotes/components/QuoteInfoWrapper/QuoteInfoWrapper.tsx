@@ -9,22 +9,26 @@ import QuoteResponseCard from "../QuoteResponseCard/QuoteResponseCard";
 import QuoteInfoLoader from "@/components/atoms/skeletonLoader/QuoteInfoLoader";
 import ConfirmAction from "@/components/molecules/ConfirmAction/ConfirmAction";
 import QuoteInfoModal from "@/components/molecules/modals/QuoteInfoModal/QuoteInfoModal";
+import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
+import PaymentModal from "@/components/molecules/modals/PaymentModal/PaymentModal";
 
 import { QuoteNote } from "../../types";
 import { useGetQuoteInfo } from "../../hooks/useGetQuoteInfo";
 import { useRejectQuote } from "../../hooks/useRejectQuote";
-import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
 const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
   const { handleRejectQuote, isRejecting, isOpen, setIsOpen, onCancel } =
     useRejectQuote();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);
 
   const { data, isLoading } = useGetQuoteInfo(quoteId);
 
   const removeActionBtn =
     data?.statusLabel === "ACCEPTED" || data?.statusLabel === "REJECTED";
+
+  console.log("data?.order?.amount", data?.order?.amount);
 
   return (
     <div className="space-y-6">
@@ -57,7 +61,7 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
               <QuoteResponseCard
                 key={response?.id}
                 responseInfo={response}
-                currency={data?.currency?.symbol}
+                currency={data?.currency?.code || "NGN"}
                 buyerId={data?.buyerId}
               />
             ))}
@@ -83,7 +87,13 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
               </>
             )}
             {data?.statusLabel === "ACCEPTED" && (
-              <Button width="flex-1 w-full">Make order payment</Button>
+              <Button
+                type="button"
+                width="flex-1 w-full"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Make order payment
+              </Button>
             )}
           </div>
         </div>
@@ -105,6 +115,14 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
         productImg={data?.product?.mainImage}
         productName={data?.product?.name}
         response={data?.notes[data?.notes.length - 1]}
+      />
+      <PaymentModal
+        isOpen={isModalOpen}
+        onClose={setIsModalOpen}
+        orderId={data?.order?.id || ""}
+        amount={data?.order?.amount || "0"}
+        currency={data?.order?.currency || "NGN"}
+        productName={data?.product?.name || ""}
       />
     </div>
   );
