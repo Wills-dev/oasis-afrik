@@ -9,15 +9,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import Button from "@/components/atoms/Button/Button";
+import ConfirmAction from "../../ConfirmAction/ConfirmAction";
 import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
+import NegotiateQuoteModal from "../NegotiateQuoteModal/NegotiateQuoteModal";
 
 import { QuoteNote } from "@/features/quotes/types";
 import { numberWithCommas } from "@/lib/helpers";
-import Button from "@/components/atoms/Button/Button";
 import { useAcceptQuote } from "@/features/quotes/hooks/useAcceptQuote";
-import ConfirmAction from "../../ConfirmAction/ConfirmAction";
 import { useNegotiateQuote } from "@/features/quotes/hooks/useNegotiateQuote";
-import NegotiateQuoteModal from "../NegotiateQuoteModal/NegotiateQuoteModal";
+import { getCurrencySign } from "@/lib/helpers/getCurrencySign";
 
 const QuoteInfoModal = ({
   open,
@@ -27,6 +28,8 @@ const QuoteInfoModal = ({
   response,
   buyerId,
   currency,
+  isLastAuthor,
+  setIsModalOpen,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -35,9 +38,13 @@ const QuoteInfoModal = ({
   response: QuoteNote;
   buyerId: string;
   currency: string;
+  isLastAuthor: boolean;
+  setIsModalOpen: (open: boolean) => void;
 }) => {
+  const isUserBuyer = buyerId === response?.authorId;
+
   const { isOpen, setIsOpen, onCancel, isPending, handleAcceptQuote } =
-    useAcceptQuote();
+    useAcceptQuote(isUserBuyer, setIsModalOpen);
   const {
     showModal,
     setShowModal,
@@ -56,7 +63,7 @@ const QuoteInfoModal = ({
     : response?.effectiveAmount &&
       numberWithCommas(Number(response?.effectiveAmount));
 
-  const isUserBuyer = buyerId === response?.authorId;
+  const formattedCurrency = getCurrencySign(currency || "NGN");
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -97,7 +104,7 @@ const QuoteInfoModal = ({
             />
             <InfoDisc
               title="Offered amount:"
-              value={`${currency}${amount}`}
+              value={`${formattedCurrency}${amount}`}
               horizontal
             />
             <InfoDisc
@@ -112,15 +119,17 @@ const QuoteInfoModal = ({
             />
           </div>
           <div className="flex justify-end gap-2">
-            <Button
-              width="w-fit"
-              onClick={() => {
-                setOpen(false);
-                setIsOpen(true);
-              }}
-            >
-              Accept offer
-            </Button>
+            {!isLastAuthor && (
+              <Button
+                width="w-fit"
+                onClick={() => {
+                  setOpen(false);
+                  setIsOpen(true);
+                }}
+              >
+                Accept offer
+              </Button>
+            )}
             <Button
               width="w-fit"
               bgColor="bg-white border border-gray-300 text-gray-600"
@@ -151,7 +160,7 @@ const QuoteInfoModal = ({
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         isPending={isSubmitting}
-        currencySymbol={currency}
+        currencySymbol={formattedCurrency}
         quoteId={response?.quoteId || ""}
       />
     </Dialog>
