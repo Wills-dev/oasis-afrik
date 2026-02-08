@@ -18,3 +18,13 @@ export const getPayments = async ({
     throw error;
   }
 };
+
+export const paystackPayment = async ({ orderId }: { orderId: string }) => {
+  try {
+    const url = `/orders/${orderId}/initialize-payment`;
+    const { data } = await axiosInstance.post(url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

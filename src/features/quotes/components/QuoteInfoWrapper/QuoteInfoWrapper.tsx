@@ -15,25 +15,42 @@ import PaymentModal from "@/components/molecules/modals/PaymentModal/PaymentModa
 import { QuoteNote } from "../../types";
 import { useGetQuoteInfo } from "../../hooks/useGetQuoteInfo";
 import { useRejectQuote } from "../../hooks/useRejectQuote";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
+  const { user, isLoading: loading } = useSelector(
+    (state: RootState) => state.auth,
+  );
+
+  const { data, isLoading } = useGetQuoteInfo(quoteId);
+
   const { handleRejectQuote, isRejecting, isOpen, setIsOpen, onCancel } =
     useRejectQuote();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);
 
-  const { data, isLoading } = useGetQuoteInfo(quoteId);
+  const isFetching = loading || isLoading;
+
+  const isUserBuyer = user?.id === data?.buyerId;
+
+  const isQuoteNoteLength = (data?.notes?.length || 1) - 1;
+
+  const isLastAuthor = data?.notes[isQuoteNoteLength]?.author?.id === user?.id;
 
   const removeActionBtn =
     data?.statusLabel === "ACCEPTED" || data?.statusLabel === "REJECTED";
 
-  console.log("data?.order?.amount", data?.order?.amount);
+  const isOrderPaidFor = data?.order?.status === "PAID";
+
+  const showPaymentBtn =
+    data?.statusLabel === "ACCEPTED" && !isOrderPaidFor && isUserBuyer;
 
   return (
     <div className="space-y-6">
       <BackButton />
-      {isLoading ? (
+      {isFetching ? (
         <QuoteInfoLoader />
       ) : (
         <div className="max-w-xl w-full space-y-4">
@@ -86,13 +103,18 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
                 </Button>
               </>
             )}
-            {data?.statusLabel === "ACCEPTED" && (
+            {showPaymentBtn && (
               <Button
                 type="button"
                 width="flex-1 w-full"
                 onClick={() => setIsModalOpen(true)}
               >
                 Make order payment
+              </Button>
+            )}
+            {isOrderPaidFor && (
+              <Button href={`/dashboard/orders/info/${data?.order?.id}`}>
+                View Order
               </Button>
             )}
           </div>
@@ -110,16 +132,19 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
       <QuoteInfoModal
         open={showAcceptModal}
         setOpen={setShowAcceptModal}
-        currency={data?.currency?.symbol}
+        currency={data?.currency?.code}
         buyerId={data?.buyerId}
         productImg={data?.product?.mainImage}
         productName={data?.product?.name}
         response={data?.notes[data?.notes.length - 1]}
+        isLastAuthor={isLastAuthor}
+        setIsModalOpen={setIsModalOpen}
       />
       <PaymentModal
         isOpen={isModalOpen}
         onClose={setIsModalOpen}
         orderId={data?.order?.id || ""}
+        quoteId={quoteId || ""}
         amount={data?.order?.amount || "0"}
         currency={data?.order?.currency || "NGN"}
         productName={data?.product?.name || ""}

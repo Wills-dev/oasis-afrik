@@ -8,7 +8,10 @@ import { acceptQuote } from "../api";
 import { toastOption } from "@/lib/helpers/toast";
 import { promiseErrorFunction } from "@/lib/helpers/promiseError";
 
-export const useAcceptQuote = () => {
+export const useAcceptQuote = (
+  isUserBuyer: boolean,
+  setIsModalOpen: (open: boolean) => void,
+) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const queryClient = useQueryClient();
@@ -28,6 +31,7 @@ export const useAcceptQuote = () => {
       queryClient.invalidateQueries({
         queryKey: ["quote info", variable?.quoteId],
       });
+      if (isUserBuyer) setIsModalOpen(true);
     },
     onError: (error: ApiErrorResponse) => {
       console.log("error accepting quote", error);

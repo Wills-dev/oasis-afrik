@@ -26,6 +26,7 @@ interface PaymentModalProps {
   amount: number;
   currency: string;
   productName: string;
+  quoteId: string;
 }
 
 const PaymentModal = ({
@@ -35,10 +36,11 @@ const PaymentModal = ({
   amount,
   currency,
   productName,
+  quoteId,
 }: PaymentModalProps) => {
   const [selectedGateway, setSelectedGateway] = useState<string | null>(null);
 
-  const { isLoading, paymentGateways } = usePaymentOptions(orderId);
+  const { isLoading, paymentGateways } = usePaymentOptions(orderId, quoteId);
 
   const handlePayment = () => {
     if (!selectedGateway) return;

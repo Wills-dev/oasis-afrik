@@ -1,4 +1,7 @@
-export const usePaymentOptions = (orderId: string) => {
+import { usePaystackPayment } from "./usePaystackPayment";
+
+export const usePaymentOptions = (orderId: string, quoteId: string) => {
+  const { isPending, initializePaystackPayment } = usePaystackPayment(quoteId);
   const paymentGateways = [
     {
       id: "stripe",
@@ -14,13 +17,11 @@ export const usePaymentOptions = (orderId: string) => {
       name: "Paystack",
       icon: "/assets/images/payment-partners/paystack.svg",
       description: "Pay with your Paystack account",
-      onClick: () => {
-        console.log("Processing PayPal payment for order:", orderId);
-      },
+      onClick: () => initializePaystackPayment(orderId),
     },
   ];
 
-  const isLoading = false;
+  const isLoading = isPending;
 
   return { isLoading, paymentGateways };
 };
