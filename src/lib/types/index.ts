@@ -55,3 +55,12 @@ export interface Testimonial {
   };
   highlighted?: boolean;
 }
+
+export interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  location: string;
+  message: string;
+}
