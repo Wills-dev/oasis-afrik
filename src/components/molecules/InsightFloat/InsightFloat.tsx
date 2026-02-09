@@ -31,7 +31,7 @@ const InsightFloat = () => {
             >
               {duplicatedInsights.map((news, index) => (
                 <Link
-                  href={`/inghts/info/${news?.id}`}
+                  href={`/insights/info/${news?.id}`}
                   key={`${news.id}-${index}`}
                   className="text-white text-sm opacity-70 hover:text-green-600 transition-all duration-300"
                 >
