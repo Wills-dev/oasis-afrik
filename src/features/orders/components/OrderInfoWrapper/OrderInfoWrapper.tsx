@@ -7,10 +7,8 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import OrderStatusTrack from "../OrderStatusTrack/OrderStatusTrack";
 
 const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
-  const {
-    orderInfo,
-    // data, isPending, isLoading, isError, error, refetch
-  } = useGetOrderInfo(orderId);
+  const { orderInfo, data, isPending, isLoading, isError, error, refetch } =
+    useGetOrderInfo(orderId);
 
   return (
     <div className="space-y-6">

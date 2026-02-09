@@ -1,6 +1,7 @@
 import FaqSection from "@/components/molecules/FaqSection/FaqSection";
 import HeroSection from "@/components/molecules/HeroSection/HeroSection";
 import HowItWorksSection from "@/components/molecules/HowItWorksSection/HowItWorksSection";
+import InsightFloat from "@/components/molecules/InsightFloat/InsightFloat";
 import ProductionSection from "@/components/molecules/ProductionSection/ProductionSection";
 import SolutionSection from "@/components/molecules/SolutionSection/SolutionSection";
 import TestimonialSlider from "@/components/molecules/TestimonialSlider/TestimonialSlider";
@@ -17,6 +18,7 @@ export default function Home() {
       <ProductionSection />
       <TestimonialSlider />
       <FaqSection />
+      <InsightFloat />
     </MainLayout>
   );
 }
