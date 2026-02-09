@@ -3,6 +3,7 @@
 import MainLoader from "@/components/atoms/MainLoader/MainLoader";
 import Footer from "@/components/organisms/Footer/Footer";
 import Nav from "@/components/organisms/Nav/Nav";
+
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 
