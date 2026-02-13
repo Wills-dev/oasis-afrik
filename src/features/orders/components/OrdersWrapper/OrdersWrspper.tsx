@@ -3,15 +3,35 @@
 import { useState } from "react";
 
 import { pageSelectors } from "../../constants";
+import { useGetOrders } from "../../hooks/useGetOrders";
 
 import Button from "@/components/atoms/Button/Button";
 import DashboardTitle from "@/components/molecules/DashboardTitle/DashboardTitle";
 import PageSelector from "@/components/molecules/PageSelector/PageSelector";
 import OrderCards from "../OrderCards/OrderCards";
 import OrderTableWrapper from "../OrderTableWrapper/OrderTableWrapper";
+import TableLoader from "@/components/atoms/skeletonLoader/TableLoader";
 
 const OrdersWrspper = () => {
   const [selectPage, setSelectPage] = useState("Outgoing");
+  const {
+    setLimit,
+    nextPage,
+    prevPage,
+    goToFirstPage,
+    goToLastPage,
+    isFirstPage,
+    isLastPage,
+    search,
+    handleSearchChange,
+    handleSearch,
+    currentPage,
+    limit,
+    handleClear,
+    data,
+    isLoading,
+    setFilter,
+  } = useGetOrders(selectPage);
 
   return (
     <div className="space-y-6">
@@ -30,9 +50,38 @@ const OrdersWrspper = () => {
         options={pageSelectors}
       />
       <div className="pt-10">
-        <OrderCards />
+        <OrderCards
+          pending={data?.stats?.pending}
+          paid={data?.stats?.paid}
+          total={data?.stats?.total}
+          received={data?.stats?.received}
+          isLoading={isLoading}
+          setFilter={setFilter}
+        />
       </div>
-      <OrderTableWrapper />
+      {isLoading ? (
+        <TableLoader />
+      ) : (
+        <OrderTableWrapper
+          data={data?.data || []}
+          totalPages={data?.pagination?.totalPages}
+          currentPage={currentPage}
+          prevPage={prevPage}
+          nextPage={nextPage}
+          goToFirstPage={goToFirstPage}
+          goToLastPage={goToLastPage}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+          limit={limit}
+          setLimit={setLimit}
+          search={search}
+          handleChange={handleSearchChange}
+          handleClear={handleClear}
+          onSubmit={handleSearch}
+          isLoading={isLoading}
+          isBuyer={selectPage === "Outgoing" ? true : false}
+        />
+      )}
     </div>
   );
 };

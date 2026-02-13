@@ -6,14 +6,15 @@ export const getOrders = async ({
   limit,
   search,
   filter,
+  tab,
 }: fetchDataProps) => {
   try {
     const url = `/orders?page=${currentPage}&limit=${limit}${
-      filter ? `&filter=${filter}` : ""
-    }${search ? `&search=${search}` : ""}`;
+      filter ? `&status=${filter}` : ""
+    }${search ? `&search=${search}` : ""}${tab === "Incoming" ? `&type=seller` : "&type=buyer"}`;
 
     const { data } = await axiosInstance.get(url);
-    return data?.data;
+    return data;
   } catch (error) {
     throw error;
   }

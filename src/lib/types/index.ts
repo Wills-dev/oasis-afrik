@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { FormEvent } from "react";
 
 export interface ApiErrorResponse {
   response?: {
@@ -37,6 +38,26 @@ export interface TableWrapperProps<TData = unknown> {
   isLastPage: (totalPages: number) => boolean;
   limit: number;
   setLimit: (limit: number) => void;
+}
+
+export interface HistoryProps<TData = unknown> {
+  isLoading: boolean;
+  data: TData[];
+  totalPages: number;
+  currentPage: number;
+  prevPage: () => void;
+  nextPage: (totalPages: number) => void;
+  goToLastPage: (totalPages: number) => void;
+  goToFirstPage: () => void;
+  isFirstPage: () => boolean;
+  isLastPage: (totalPages: number) => boolean;
+  limit: number;
+  setLimit: (limit: number) => void;
+  search: string;
+  handleChange: (search: string) => void;
+  handleClear: () => void;
+  onSubmit: (e: FormEvent) => void;
+  isBuyer?: boolean;
 }
 
 export interface optionsType {

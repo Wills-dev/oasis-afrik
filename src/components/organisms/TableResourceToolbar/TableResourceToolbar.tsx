@@ -6,8 +6,8 @@ interface TableResourceToolbarProps {
   title: string;
   search: string;
   handleChange: (search: string) => void;
-  filter: string;
-  setFilter: (filter: string) => void;
+  filter?: string;
+  setFilter?: (filter: string) => void;
   initiateSearch: (e: FormEvent) => void;
   handleClear: () => void;
 }
@@ -21,6 +21,8 @@ const TableResourceToolbar = ({
   initiateSearch,
   handleClear,
 }: TableResourceToolbarProps) => {
+  const showFilter = filter !== undefined && setFilter !== undefined;
+
   return (
     <div className="flex md:items-center justify-between max-md:flex-col gap-6">
       <h6 className="font-medium sm:text-lg">{title}</h6>
@@ -31,7 +33,9 @@ const TableResourceToolbar = ({
           initiateSearch={initiateSearch}
           handleClear={handleClear}
         />
-        <TimeFilterDropdown value={filter} onChange={setFilter} />
+        {showFilter && (
+          <TimeFilterDropdown value={filter} onChange={setFilter} />
+        )}
       </div>
     </div>
   );

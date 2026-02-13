@@ -3,7 +3,7 @@ import { useTableState } from "@/lib/hooks/useTableState";
 
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetOrders = () => {
+export const useGetOrders = (tab: string) => {
   const {
     currentPage,
     limit,
@@ -24,9 +24,9 @@ export const useGetOrders = () => {
   } = useTableState();
 
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["orders", submittedQuery, limit, currentPage, filter],
+    queryKey: ["orders", submittedQuery, limit, currentPage, filter, tab],
     queryFn: () =>
-      getOrders({ currentPage, limit, search: submittedQuery, filter }),
+      getOrders({ currentPage, limit, search: submittedQuery, filter, tab }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
     retry: 1,

@@ -7,6 +7,7 @@ interface DashboardCardProps {
   icon: string;
   percentage: number;
   percentageState: "positive" | "negative";
+  onClick?: () => void;
 }
 
 const DashboardCard = ({
@@ -15,9 +16,13 @@ const DashboardCard = ({
   icon,
   percentage,
   percentageState,
+  onClick,
 }: DashboardCardProps) => {
   return (
-    <div className="rounded-md p-2 border border-gray-200  flex-1 w-full min-w-[270px] h-[165px] flex flex-col justify-between">
+    <div
+      className={`rounded-md p-2 border border-gray-200  flex-1 w-full min-w-[270px] h-[165px] flex flex-col justify-between ${onClick !== undefined ? "hover:shadow-md transition-all duration-300 cursor-pointer" : ""}`}
+      onClick={onClick}
+    >
       <div className="flex items-center justify-between">
         <h6 className="max-sm:text-sm text-gray-600">{title}</h6>
         <div className="w-12 h-12 min-w-12 min-h-12 rounded-full bg-gray-100 flex justify-center items-center">

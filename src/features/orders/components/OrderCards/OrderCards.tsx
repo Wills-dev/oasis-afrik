@@ -1,38 +1,57 @@
+import SummaryCardWrapper from "@/components/atoms/SummaryCardWrapper/SummaryCardWrapper";
 import DashboardCard from "@/components/molecules/DashboardCard/DashboardCard";
-import React from "react";
+import { numberWithCommas } from "@/lib/helpers";
 
-const OrderCards = () => {
+const OrderCards = ({
+  total,
+  pending,
+  received,
+  paid,
+  isLoading,
+  setFilter,
+}: {
+  total: number;
+  pending: number;
+  received: number;
+  paid: number;
+  isLoading: boolean;
+  setFilter: (item: string) => void;
+}) => {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <SummaryCardWrapper loading={isLoading}>
       <DashboardCard
         title="All Orders"
-        value={`10`}
+        value={total ? numberWithCommas(total) : "0"}
         icon="/assets/icons/solar_box.svg"
         percentage={6.3}
         percentageState="positive"
+        onClick={() => setFilter("")}
       />
       <DashboardCard
         title="Pending Orders"
-        value={`1`}
+        value={pending ? numberWithCommas(pending) : "0"}
         icon="/assets/icons/keyboard.svg"
         percentage={4.4}
         percentageState="negative"
+        onClick={() => setFilter("PENDING")}
       />
       <DashboardCard
         title="Processing Orders"
-        value={`9`}
+        value={paid ? numberWithCommas(paid) : "0"}
         icon="/assets/icons/send-sqaure-2.svg"
         percentage={1.2}
         percentageState="positive"
+        onClick={() => setFilter("PAID")}
       />
       <DashboardCard
         title="Completed Orders"
-        value={`5`}
+        value={received ? numberWithCommas(received) : "0"}
         icon="/assets/icons/keyboard.svg"
         percentage={4}
         percentageState="negative"
+        onClick={() => setFilter("RECEIVED")}
       />
-    </div>
+    </SummaryCardWrapper>
   );
 };
 
