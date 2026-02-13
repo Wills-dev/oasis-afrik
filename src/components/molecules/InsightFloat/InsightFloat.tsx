@@ -6,10 +6,19 @@ import { motion } from "framer-motion";
 
 import Container from "@/components/atoms/Container/Container";
 
-import { agroInsights } from "@/features/insights/constants/dummy";
+import { useGetInsights } from "@/features/insights/hooks/useGetInsights";
 
 const InsightFloat = () => {
-  const duplicatedInsights = [...agroInsights, ...agroInsights];
+  const limit = 20;
+  const {
+    insights,
+    // isLoading,
+    // fetchNextPage,
+    // hasNextPage,
+    // isFetchingNextPage,
+  } = useGetInsights({ limit });
+
+  const duplicatedInsights = [...insights, ...insights];
 
   return (
     <div className="fixed bottom-4 left-0 right-0 w-full z-50">

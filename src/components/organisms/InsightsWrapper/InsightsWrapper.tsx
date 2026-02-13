@@ -1,7 +1,7 @@
 import Container from "@/components/atoms/Container/Container";
 import InsightsTitle from "@/components/atoms/InsightsTitle/InsightsTitle";
 import HeroParagraph from "@/components/molecules/HeroParagraph/HeroParagraph";
-import InsightOfTheWeek from "@/components/molecules/InsightOfTheWeek/InsightOfTheWeek";
+// import InsightOfTheWeek from "@/components/molecules/InsightOfTheWeek/InsightOfTheWeek";
 import OtherInsights from "@/components/molecules/OtherInsights/OtherInsights";
 
 const InsightsWrapper = () => {
@@ -19,7 +19,7 @@ const InsightsWrapper = () => {
               </div>
             </div>
           </div>
-          <InsightOfTheWeek />
+          {/* <InsightOfTheWeek /> */}
           <OtherInsights />
         </div>
       </Container>

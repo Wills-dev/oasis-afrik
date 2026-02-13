@@ -31,7 +31,7 @@ export const useAcceptQuote = (
       queryClient.invalidateQueries({
         queryKey: ["quote info", variable?.quoteId],
       });
-      if (isUserBuyer) setIsModalOpen(true);
+      if (!isUserBuyer) setIsModalOpen(true);
     },
     onError: (error: ApiErrorResponse) => {
       console.log("error accepting quote", error);

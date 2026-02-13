@@ -3,7 +3,7 @@ import { getInsightInfo } from "../api";
 
 export const useGetInsightInfo = (id: string) => {
   const { data, isPending, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["order info", id],
+    queryKey: ["insight info", id],
     queryFn: () => getInsightInfo({ id }),
     enabled: true,
     staleTime: 5 * 60 * 1000,
@@ -12,8 +12,8 @@ export const useGetInsightInfo = (id: string) => {
 
   return {
     data,
-    isPending,
     isLoading,
+    isPending,
     isError,
     error,
     refetch,
