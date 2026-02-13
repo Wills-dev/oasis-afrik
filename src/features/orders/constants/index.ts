@@ -46,4 +46,9 @@ export const orderSteps: {
     label: "Received",
     description: "Order has been received by buyer",
   },
+  {
+    status: "SETTLED",
+    label: "Settled",
+    description: "Seller has been paid by OasisAfrik",
+  },
 ];

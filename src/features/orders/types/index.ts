@@ -30,6 +30,7 @@ export type OrderStatus =
   | "SHIPPED"
   | "DELIVERED"
   | "RECEIVED"
+  | "SETTLED"
   | "CANCELLED";
 
 export type OrderInfo = {

@@ -29,3 +29,19 @@ export const getOrderInfo = async ({ orderId }: { orderId: string }) => {
     throw error;
   }
 };
+
+export const updateOrderInfo = async ({
+  orderId,
+  status,
+}: {
+  orderId: string;
+  status: string;
+}) => {
+  try {
+    const url = `/orders/${orderId}/status`;
+    const { data } = await axiosInstance.patch(url, { status });
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};

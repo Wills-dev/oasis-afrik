@@ -46,7 +46,6 @@ const QuoteInfoModal = ({
   const { isOpen, setIsOpen, onCancel, isPending, handleAcceptQuote } =
     useAcceptQuote(isUserBuyer, setIsModalOpen);
 
-  console.log("isUserBuyer", isUserBuyer);
   const {
     showModal,
     setShowModal,

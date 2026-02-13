@@ -27,7 +27,7 @@ const OtherInsights = () => {
           </SectionTitleWrapper>
         </div>
       </div> */}
-      <div className="flex flex-wrap gap-6">
+      <div className="flex justify-center flex-wrap gap-6">
         {isLoading ? (
           <InsightLoader />
         ) : (
