@@ -23,6 +23,15 @@ export type Order = {
   maxLeadPeriod: "days" | "weeks" | "months";
 };
 
+export type OrderStatus =
+  | "PENDING_PAYMENT"
+  | "PAID"
+  | "PROCESSING"
+  | "SHIPPED"
+  | "DELIVERED"
+  | "RECEIVED"
+  | "CANCELLED";
+
 export type OrderInfo = {
   id: string;
   createdAt: string;
@@ -56,7 +65,11 @@ export type OrderTableData = {
   status: string;
   createdAt: string;
   updatedAt: string;
-
+  quantityUnit?: {
+    abbreviation: string;
+    id: string;
+    name: string;
+  };
   buyer: User;
   seller: User;
   product: ProductData;
