@@ -12,16 +12,25 @@ import UserSummary from "../UserSummary/UserSummary";
 import PaymentWarning from "@/components/molecules/PaymentWarning/PaymentWarning";
 import OrderPaymentSummary from "../OrderPaymentSummary/OrderPaymentSummary";
 import InfoSkeleton from "@/components/atoms/skeletonLoader/InfoSkeleton";
+import { useUpdateOrderStatus } from "../../hooks/useUpdateOrderStatus";
+import OrderStatusDropdown from "../OrderStatusDropdown/OrderStatusDropdown";
 
 const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
   const { user, isLoading: loading } = useSelector(
     (state: RootState) => state.auth,
   );
   const { data, isLoading } = useGetOrderInfo(orderId);
+  const { handleUpdate, isPending, isOpen, setIsOpen } = useUpdateOrderStatus();
 
   const isSeller = user?.id === data?.seller?.id;
 
   const isFetching = isLoading || loading;
+
+  const orderStatus = data?.status || "";
+
+  const showBuyerNote = !isSeller && data?.status === "DELIVERED";
+  const showSellerNote =
+    isSeller && ["PAID", "PROCESSING", "SHIPPED"].includes(orderStatus);
 
   return (
     <div className="space-y-6">
@@ -30,6 +39,22 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
         <InfoSkeleton />
       ) : (
         <>
+          <div className="flex justify-end flex-col items-end gap-2">
+            <OrderStatusDropdown
+              userRole={isSeller ? "SELLER" : "BUYER"}
+              onStatusUpdate={handleUpdate}
+              orderId={orderId}
+              currentStatus={data?.status}
+              isUpdating={isPending}
+              showConfirm={isOpen}
+              setShowConfirm={setIsOpen}
+            />
+            {(showBuyerNote || showSellerNote) && (
+              <p className="text-xs text-red-500">
+                Click on dropdown above to update order status
+              </p>
+            )}
+          </div>
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="space-y-6">
               <OrderSteps data={data} />

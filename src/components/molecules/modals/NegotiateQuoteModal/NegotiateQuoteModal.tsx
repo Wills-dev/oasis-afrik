@@ -93,7 +93,7 @@ const NegotiateQuoteModal = ({
               placeholder=""
             />
           </div>
-          <div className="">
+          {/* <div className="">
             <Label title="Min Lead Time (optional)" />
             <div className="flex gap-2">
               <div className="w-4/6">
@@ -117,8 +117,8 @@ const NegotiateQuoteModal = ({
                 />
               </div>
             </div>
-          </div>
-          <div className="">
+          </div> */}
+          {/* <div className="">
             <Label title="Max Lead Time (optional)" />
             <div className="flex gap-2">
               <div className="w-4/6">
@@ -142,7 +142,7 @@ const NegotiateQuoteModal = ({
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="w-full">
             <Label title="Message" />
             <Textarea
