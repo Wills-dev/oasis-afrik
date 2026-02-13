@@ -4,6 +4,7 @@ import {
   differenceInDays,
   differenceInWeeks,
 } from "date-fns";
+import { DateOptions } from "../types";
 
 export const getCurrencySign = (currency: string): string => {
   switch (currency?.toUpperCase()) {
@@ -51,6 +52,19 @@ export const formatCreatedAt = (date: string): string => {
     return `${weeksDiff}w ago`;
   }
 };
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const options: DateOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  };
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+}
 
 export function numberWithCommas(x: number) {
   const newNum = Number(x.toFixed(2));

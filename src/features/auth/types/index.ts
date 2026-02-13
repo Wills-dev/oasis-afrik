@@ -60,4 +60,5 @@ export interface ProductData {
   productId?: string;
   currencyId: string;
   id?: string;
+  mainImage?: string;
 }

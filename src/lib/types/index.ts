@@ -85,3 +85,12 @@ export interface ContactFormData {
   location: string;
   message: string;
 }
+
+export interface DateOptions {
+  year: "numeric" | "2-digit" | undefined;
+  month: "numeric" | "2-digit" | "short" | "long" | "narrow" | undefined;
+  day: "numeric" | "2-digit" | undefined;
+  hour: "numeric" | "2-digit" | undefined;
+  minute: "numeric" | "2-digit" | undefined;
+  hour12: boolean;
+}
