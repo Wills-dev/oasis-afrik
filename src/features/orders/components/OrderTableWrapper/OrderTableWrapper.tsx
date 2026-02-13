@@ -3,55 +3,45 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Column } from "./Column";
-import { orders } from "../../constants/dummy";
-import { useGetOrders } from "../../hooks/useGetOrders";
+import { HistoryProps } from "@/lib/types";
 
 import TableResourceToolbar from "@/components/organisms/TableResourceToolbar/TableResourceToolbar";
 import TableWrapper from "@/components/organisms/TableWrapper/TableWrapper";
 
-const OrderTableWrapper = () => {
-  const {
-    setLimit,
-    nextPage,
-    prevPage,
-    goToFirstPage,
-    goToLastPage,
-    isFirstPage,
-    isLastPage,
-    search,
-    handleSearchChange,
-    handleSearch,
-    currentPage,
-    limit,
-    handleClear,
-    // data,
-    // isPending,
-    // isLoading,
-    // isError,
-    // error,
-    // refetch,
-    filter,
-    setFilter,
-  } = useGetOrders();
-
-  const typedColumns = Column as ColumnDef<unknown>[];
+const OrderTableWrapper = ({
+  data,
+  totalPages,
+  currentPage,
+  prevPage,
+  nextPage,
+  goToFirstPage,
+  goToLastPage,
+  isFirstPage,
+  isLastPage,
+  limit,
+  setLimit,
+  search,
+  handleChange,
+  handleClear,
+  onSubmit,
+  isBuyer,
+}: HistoryProps) => {
+  const typedColumns = Column(isBuyer) as ColumnDef<unknown>[];
 
   return (
-    <div className="space-y-6 p-[24px] border border-gray-200 rounded-lg">
+    <div className="space-y-6 p-6 border border-gray-200 rounded-lg">
       <TableResourceToolbar
         search={search}
-        handleChange={handleSearchChange}
-        initiateSearch={handleSearch}
-        filter={filter}
-        setFilter={setFilter}
+        handleChange={handleChange}
+        initiateSearch={onSubmit}
         title="Orders"
         handleClear={handleClear}
       />
       <div className="">
         <TableWrapper
           columns={typedColumns}
-          data={orders}
-          totalPages={1}
+          data={data}
+          totalPages={totalPages}
           currentPage={currentPage}
           prevPage={prevPage}
           nextPage={nextPage}

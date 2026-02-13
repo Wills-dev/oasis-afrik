@@ -59,4 +59,5 @@ export interface ProductData {
   images: File[];
   productId?: string;
   currencyId: string;
+  id?: string;
 }

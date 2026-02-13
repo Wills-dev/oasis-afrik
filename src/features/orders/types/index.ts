@@ -1,5 +1,6 @@
-import { User } from "@/features/auth/types";
+import { ProductData, User } from "@/features/auth/types";
 import { ProductType } from "@/features/products/types";
+import { Quote } from "@/features/quotes/types";
 
 export type Order = {
   id: string;
@@ -35,4 +36,29 @@ export type OrderInfo = {
   product: ProductType;
   seller: User;
   buyer: User;
+};
+
+export type OrderTableData = {
+  id: string;
+  address: string;
+  amount: string;
+  amountChargedNgn: string | null;
+  buyerId: string;
+  sellerId: string;
+  productId: string;
+  quantity: string;
+  quantityUnitId: string;
+  quoteId: string;
+  currency: string;
+  currencyId: string | null;
+  paystackReference: string | null;
+  paidAt: string | null;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+
+  buyer: User;
+  seller: User;
+  product: ProductData;
+  quote: Quote;
 };

@@ -3,169 +3,129 @@ import Link from "next/link";
 import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { Order } from "../../types";
+import { OrderTableData } from "../../types";
 import { convertDateFormat } from "@/lib/helpers";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { getCurrencySign } from "@/lib/helpers/getCurrencySign";
 
 import ColumnActionDropdown from "@/components/molecules/ColumnActionDropdown/ColumnActionDropdown";
 import StatusBubble from "@/components/atoms/StatusBubble/StatusBubble";
 
-const columnHelper = createColumnHelper();
+const columnHelper = createColumnHelper<OrderTableData>();
 
-export const Column = [
+export const Column = (isBuyer?: boolean) => [
   columnHelper.accessor("createdAt", {
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Created",
     cell: ({ row }) => {
-      const date: Date = row.getValue("createdAt");
+      const date: string = row.getValue("createdAt");
       const formatted = date ? convertDateFormat(date) : "";
-      return <div className="">{formatted}</div>;
+      return <div>{formatted}</div>;
     },
   }),
-  columnHelper.accessor("id", {
-    header: ({ column }) => {
+
+  columnHelper.accessor((row) => row.product, {
+    id: "product",
+    header: "Product",
+    cell: ({ getValue }) => {
+      const product = getValue();
+
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        <Link
+          href={`/products/info/${product?.id}`}
+          className="text-primary hover:underline font-medium cursor-pointer transition-all duration-300"
         >
-          OrderID
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+          {product.name}
+        </Link>
       );
     },
   }),
-  columnHelper.accessor("productName", {
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Product Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  }),
+
+  ...(!isBuyer
+    ? [
+        columnHelper.accessor((row) => row.buyer, {
+          id: "buyer",
+          header: "Buyer",
+          cell: ({ getValue }) => {
+            const buyer = getValue();
+
+            return (
+              <div className="">
+                {buyer.firstName} {buyer.lastName}
+              </div>
+            );
+          },
+        }),
+      ]
+    : []),
+
+  ...(isBuyer
+    ? [
+        columnHelper.accessor((row) => row.seller, {
+          id: "seller",
+          header: "Seller",
+          cell: ({ getValue }) => {
+            const seller = getValue();
+
+            return (
+              <div className="">
+                {seller.firstName} {seller.lastName}
+              </div>
+            );
+          },
+        }),
+      ]
+    : []),
+
   columnHelper.accessor("quantity", {
     header: "Quantity",
-    cell: ({ row }) => {
-      const quantity: string = row.getValue("quantity");
-      const unit = (row?.original as { unit?: string })?.unit;
-
-      return (
-        <p className="">
-          {quantity}
-          {unit}
-        </p>
-      );
-    },
   }),
-  columnHelper.accessor("price", {
-    header: ({ column }) => {
-      return (
+
+  columnHelper.accessor(
+    (row) => ({
+      amount: row.amount,
+      currency: row.currency,
+    }),
+    {
+      id: "amount",
+      header: ({ column }) => (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Price
+          Amount
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      );
-    },
-    // cell: ({ row }) => {
-    //   const price = row.getValue("amount");
-    //   const currency = (row?.original as { currency?: string })?.currency;
+      ),
+      cell: ({ getValue }) => {
+        const { amount, currency } = getValue();
 
-    //   return (
-    //     <p className="">
-    //       {currency && getCurrencySign(currency)}
-    //       {price ? numberWithCommas(Number(price)) : "0.00"}
-    //     </p>
-    //   );
-    // },
-  }),
-  columnHelper.accessor("minLead", {
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Min Lead Time
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const minLead: string = row.getValue("minLead");
-      const minLeadPeriod = (row?.original as { minLeadPeriod?: string })
-        ?.minLeadPeriod;
+        const numericAmount = Number(amount);
 
-      return (
-        <p className="">
-          {minLead}
-          {minLeadPeriod}
-        </p>
-      );
+        return (
+          <div>
+            {currency && getCurrencySign(currency)}
+            {numericAmount.toLocaleString()}
+          </div>
+        );
+      },
     },
-  }),
-  columnHelper.accessor("maxLead", {
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Max Lead Time
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const maxLead: string = row.getValue("maxLead");
-      const maxLeadPeriod = (row?.original as { maxLeadPeriod?: string })
-        ?.maxLeadPeriod;
+  ),
 
-      return (
-        <p className="">
-          {maxLead}
-          {maxLeadPeriod}
-        </p>
-      );
-    },
-  }),
   columnHelper.accessor("status", {
-    header: ({ column }) => {
+    header: "Status",
+    cell: ({ getValue }) => {
+      const status = getValue() as OrderTableData["status"];
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Status
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <StatusBubble
+          status={status === "PENDING_PAYMENT" ? "PENDING" : status}
+        />
       );
-    },
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      return <StatusBubble status={status} />;
     },
   }),
 
   {
     id: "actions",
-    cell: ({ row }: CellContext<Order, unknown>) => {
+    cell: ({ row }: CellContext<OrderTableData, unknown>) => {
       const order = row.original;
 
       return (
