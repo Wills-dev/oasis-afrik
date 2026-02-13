@@ -31,6 +31,8 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAcceptModal, setShowAcceptModal] = useState(false);
 
+  console.log("isModalOpen", isModalOpen);
+
   const isFetching = loading || isLoading;
 
   const isUserBuyer = user?.id === data?.buyerId;
