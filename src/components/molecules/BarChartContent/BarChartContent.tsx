@@ -8,20 +8,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import TimeFilterDropdown from "../TimeFilterDropdown/TimeFilterDropdown";
+
 export const description = "A multiple bar chart";
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "July", desktop: 186, mobile: 80 },
-  { month: "August", desktop: 305, mobile: 200 },
-  { month: "September", desktop: 237, mobile: 120 },
-  { month: "October", desktop: 73, mobile: 190 },
-];
 
 const chartConfig = {
   desktop: {
@@ -34,31 +22,36 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const BarChartContent = () => {
+const BarChartContent = ({
+  data,
+  isSeller,
+}: {
+  data: { period: string; incoming: number; outgoing: number }[] | [];
+  isSeller: boolean;
+}) => {
   return (
     <div className="max-w-[600px] w-full border border-gray-200 rounded-md">
       <Card className="shadow-none border-0">
         <CardHeader className="flex item-center justify-between">
           <CardTitle>Quotes</CardTitle>
-          <TimeFilterDropdown />
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig}>
-            <BarChart accessibilityLayer data={chartData}>
+            <BarChart accessibilityLayer data={data}>
               <CartesianGrid vertical={false} />
               <XAxis
-                dataKey="month"
+                dataKey="period"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                tickFormatter={(value) => value.slice(0, 3)}
+                tickFormatter={(value) => value.slice(0, 11)}
               />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="dashed" />}
               />
-              <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-              <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+              <Bar dataKey="outgoing" fill="#009933" radius={4} />
+              {isSeller && <Bar dataKey="incoming" fill="#EDEDED" radius={2} />}
             </BarChart>
           </ChartContainer>
         </CardContent>

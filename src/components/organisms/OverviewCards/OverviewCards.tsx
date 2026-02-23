@@ -1,37 +1,104 @@
+import SummaryCardWrapper from "@/components/atoms/SummaryCardWrapper/SummaryCardWrapper";
 import DashboardCard from "@/components/molecules/DashboardCard/DashboardCard";
+import { numberWithCommas } from "@/lib/helpers";
 
-const OverviewCards = () => {
+export type OrderStatus =
+  | "CANCELLED"
+  | "DELIVERED"
+  | "PAID"
+  | "PENDING_PAYMENT"
+  | "PROCESSING"
+  | "RECEIVED"
+  | "SETTLED"
+  | "SHIPPED";
+
+export interface OrderStatusSummary {
+  CANCELLED: number;
+  DELIVERED: number;
+  PAID: number;
+  PENDING_PAYMENT: number;
+  PROCESSING: number;
+  RECEIVED: number;
+  SETTLED: number;
+  SHIPPED: number;
+}
+
+export interface PendingQuotes {
+  incoming: number;
+  outgoing: number;
+}
+
+export interface Metrics {
+  orderStatusSummary: OrderStatusSummary;
+  pendingOrders: number;
+  pendingQuotes: PendingQuotes;
+  productsUploaded: number;
+  revenueInNaira: string;
+  totalOrders: number;
+  totalQuotes: number;
+}
+
+const OverviewCards = ({
+  isSeller,
+  metrics,
+  analyticsLoading,
+}: {
+  isSeller: boolean;
+  metrics: Metrics | null;
+  analyticsLoading: boolean;
+}) => {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <SummaryCardWrapper loading={analyticsLoading}>
+      {isSeller && (
+        <DashboardCard
+          title="Product uploaded"
+          value={
+            metrics?.productsUploaded
+              ? numberWithCommas(metrics.productsUploaded)
+              : "0"
+          }
+          icon="/assets/icons/solar_box.svg"
+        />
+      )}
+      {isSeller && (
+        <DashboardCard
+          title="Total received orders"
+          value={
+            metrics?.totalOrders ? numberWithCommas(metrics.totalOrders) : "0"
+          }
+          icon="/assets/icons/dollar-circle.svg"
+        />
+      )}
+      {isSeller && (
+        <DashboardCard
+          title="Total received pending orders"
+          value={
+            metrics?.pendingOrders
+              ? numberWithCommas(metrics.pendingOrders)
+              : "0"
+          }
+          icon="/assets/icons/keyboard.svg"
+        />
+      )}
       <DashboardCard
-        title="Product uploaded"
-        value={`10`}
-        icon="/assets/icons/solar_box.svg"
-        percentage={6.3}
-        percentageState="positive"
-      />
-      <DashboardCard
-        title="Total orders"
-        value={`180`}
-        icon="/assets/icons/keyboard.svg"
-        percentage={4.4}
-        percentageState="negative"
-      />
-      <DashboardCard
-        title="All quotes"
-        value={`13`}
+        title="Total pending sent quotes"
+        value={
+          metrics?.pendingQuotes?.outgoing
+            ? numberWithCommas(metrics.pendingQuotes.outgoing)
+            : "0"
+        }
         icon="/assets/icons/send-sqaure-2.svg"
-        percentage={1.2}
-        percentageState="negative"
       />
-      <DashboardCard
-        title="Revenue"
-        value={`₦1,800,000`}
-        icon="/assets/icons/dollar-circle.svg"
-        percentage={4.4}
-        percentageState="positive"
-      />
-    </div>
+      {isSeller && (
+        <DashboardCard
+          title="All received quotes"
+          value={
+            metrics?.totalQuotes ? numberWithCommas(metrics.totalQuotes) : "0"
+          }
+          icon="/assets/icons/dollar-circle.svg"
+        />
+      )}
+    </SummaryCardWrapper>
   );
 };
 

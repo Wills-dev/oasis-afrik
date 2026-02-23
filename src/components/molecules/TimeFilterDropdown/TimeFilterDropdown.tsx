@@ -10,19 +10,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { timePeriods } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 
 interface TimeFilterDropdownProps {
   value?: string;
   onChange?: (value: string) => void;
   className?: string;
+  timePeriods?: { label: string; value: string }[];
 }
 
 const TimeFilterDropdown = ({
   value,
   onChange,
   className = "",
+  timePeriods = [
+    { label: "Daily", value: "daily" },
+    { label: "Weekly", value: "weekly" },
+    { label: "Monthly", value: "monthly" },
+    { label: "Yearly", value: "yearly" },
+  ],
 }: TimeFilterDropdownProps) => {
   const [selectedPeriod, setSelectedPeriod] = useState<string>(value || "");
 

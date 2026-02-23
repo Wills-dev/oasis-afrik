@@ -5,8 +5,8 @@ interface DashboardCardProps {
   title: string;
   value: string;
   icon: string;
-  percentage: number;
-  percentageState: "positive" | "negative";
+  percentage?: number;
+  percentageState?: "positive" | "negative";
   onClick?: () => void;
 }
 
@@ -31,23 +31,25 @@ const DashboardCard = ({
       </div>
       <div className="">
         <p className="sm:text-xl text-lg font-medium">{value}</p>
-        <div className="flex items-center gap-2">
-          <div
-            className={`flex items-center gap-1 px-3 py-1 rounded-full ${
-              percentageState === "positive"
-                ? "bg-green-50 text-green-400"
-                : "bg-red-50 text-red-400"
-            }`}
-          >
-            {percentageState === "positive" ? (
-              <TrendingUp className="w-3 h-3" />
-            ) : (
-              <TrendingDown className="w-3 h-3" />
-            )}
-            <p className="text-xs">{percentage}%</p>
+        {percentageState !== undefined && percentage !== undefined && (
+          <div className="flex items-center gap-2">
+            <div
+              className={`flex items-center gap-1 px-3 py-1 rounded-full ${
+                percentageState === "positive"
+                  ? "bg-green-50 text-green-400"
+                  : "bg-red-50 text-red-400"
+              }`}
+            >
+              {percentageState === "positive" ? (
+                <TrendingUp className="w-3 h-3" />
+              ) : (
+                <TrendingDown className="w-3 h-3" />
+              )}
+              <p className="text-xs">{percentage}%</p>
+            </div>
+            <p className="text-xs text-gray-400">Since last week</p>
           </div>
-          <p className="text-xs text-gray-400">Since last week</p>
-        </div>
+        )}
       </div>
     </div>
   );
