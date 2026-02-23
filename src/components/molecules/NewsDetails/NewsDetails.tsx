@@ -13,6 +13,8 @@ import MainLoader from "@/components/atoms/MainLoader/MainLoader";
 const NewsDetails = ({ id }: { id: string }) => {
   const { data, isLoading } = useGetInsightInfo(id);
 
+  const formattedContent = (data?.content || "").replace(/&nbsp;/g, " ");
+
   return (
     <div className="grow">
       {isLoading ? (
@@ -123,7 +125,7 @@ const NewsDetails = ({ id }: { id: string }) => {
                   prose-img:rounded-lg prose-img:shadow-md
                   prose-blockquote:border-l-4 prose-blockquote:border-blue-500 
                   prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600"
-                dangerouslySetInnerHTML={{ __html: data?.content }}
+                dangerouslySetInnerHTML={{ __html: formattedContent }}
               />
             </div>
           </motion.article>
