@@ -51,6 +51,7 @@ const EditProductWrapper = ({ productId }: { productId: string }) => {
               onSelectFile={onSelectFile}
               handleImageDelete={handleImageDelete}
               fetchedImages={fetchedImages}
+              productId={productId}
             />
           )}
           <div className="flex justify-end flex-wrap gap-2">

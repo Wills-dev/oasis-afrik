@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 import { ChevronDown, Check } from "lucide-react";
 import { OrderStatus } from "../../types";
 import { getStatusConfig } from "../../helpers/getStatusConfig";
@@ -17,6 +16,10 @@ interface OrderStatusDropdownProps {
   isUpdating: boolean;
   showConfirm: boolean;
   setShowConfirm: (item: boolean) => void;
+  selectedImage: string | null;
+  onSelectFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImageDelete: () => void;
+  selectedImageFile: File | null;
 }
 
 const OrderStatusDropdown = ({
@@ -28,12 +31,17 @@ const OrderStatusDropdown = ({
   isUpdating,
   showConfirm,
   setShowConfirm,
+  onSelectFile,
+  handleImageDelete,
+  selectedImage,
+  selectedImageFile,
 }: OrderStatusDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState<OrderStatus | null>(
     null,
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -72,6 +80,10 @@ const OrderStatusDropdown = ({
   const availableStatuses = getAvailableStatuses();
   const canUpdate = availableStatuses.length > 0 && !disabled;
 
+  const requiresEvidence = (status: OrderStatus | null): boolean => {
+    return status === "SHIPPED" || status === "DELIVERED";
+  };
+
   const currentConfig = getStatusConfig(currentStatus);
 
   const handleStatusSelect = (status: OrderStatus) => {
@@ -82,6 +94,7 @@ const OrderStatusDropdown = ({
 
   const handleConfirmUpdate = async () => {
     if (!selectedStatus) return;
+
     onStatusUpdate(orderId, selectedStatus);
     setShowConfirm(false);
     setSelectedStatus(null);
@@ -90,6 +103,7 @@ const OrderStatusDropdown = ({
   const handleCancelUpdate = () => {
     setShowConfirm(false);
     setSelectedStatus(null);
+    handleImageDelete();
   };
 
   if (!canUpdate) {
@@ -108,6 +122,14 @@ const OrderStatusDropdown = ({
 
   return (
     <>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/jpg,image/png,application/pdf"
+        onChange={onSelectFile}
+        className="hidden"
+      />
+
       <div className="relative w-44" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -121,7 +143,7 @@ const OrderStatusDropdown = ({
           `}
         >
           <span className={`font-semibold ${currentConfig.color}`}>
-            {currentConfig.label}{" "}
+            {currentConfig.label}
           </span>
           <ChevronDown
             className={`w-5 h-5 ${currentConfig.color} transition-transform ${
@@ -164,6 +186,7 @@ const OrderStatusDropdown = ({
           )}
         </AnimatePresence>
       </div>
+
       <AnimatePresence>
         {showConfirm && selectedStatus && (
           <ConfirmActionModal
@@ -171,12 +194,20 @@ const OrderStatusDropdown = ({
             message={`Are you sure you want to update the order status to "${
               getStatusConfig(selectedStatus).label
             }"?`}
+            selectedImageFile={selectedImageFile}
             confirmLabel={isUpdating ? "Updating..." : "Confirm Update"}
             cancelLabel="Cancel"
             onConfirm={handleConfirmUpdate}
             onCancel={handleCancelUpdate}
             isLoading={isUpdating}
             variant="primary"
+            requiresEvidence={requiresEvidence(selectedStatus)}
+            selectedImage={selectedImage}
+            onUploadClick={() => fileInputRef.current?.click()}
+            onImageDelete={handleImageDelete}
+            evidenceType={
+              selectedStatus === "SHIPPED" ? "shipment" : "delivery"
+            }
           />
         )}
       </AnimatePresence>

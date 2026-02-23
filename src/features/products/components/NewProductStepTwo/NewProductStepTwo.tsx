@@ -1,12 +1,16 @@
+"use client";
+
 import Image from "next/image";
 
 import { Upload } from "lucide-react";
+import { useDeleteProductImage } from "../../hooks/useDeleteProductImage";
 
 interface NewProductStepTwoProps {
   selectedImages: string[] | null;
   onSelectFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleImageDelete: (index: number) => void;
   fetchedImages?: string[];
+  productId: string;
 }
 
 const NewProductStepTwo = ({
@@ -14,7 +18,10 @@ const NewProductStepTwo = ({
   onSelectFile,
   handleImageDelete,
   fetchedImages,
+  productId,
 }: NewProductStepTwoProps) => {
+  const { handleDelete, isDeleting } = useDeleteProductImage();
+
   const disableImageInput = selectedImages
     ? selectedImages?.length >= 5
     : false;
@@ -31,6 +38,9 @@ const NewProductStepTwo = ({
 
   return (
     <div className="space-y-6">
+      {isDeleting && (
+        <div className="h-screen w-full fixed top-0 left-0 inset-0 bg-white z-10 opacity-65" />
+      )}
       <div className="">
         <h6 className="sm:text-lg font-medium">Media uploads</h6>
         <p className="max-sm:text-sm text-gray-500">
@@ -75,7 +85,7 @@ const NewProductStepTwo = ({
                 alt="product"
                 width={20}
                 height={20}
-                onClick={() => handleImageDelete(i)}
+                onClick={() => handleDelete(productId, i)}
                 className="w-5 h-5 object-cover absolute top-2 right-2 cursor-pointer"
               />
               <Image

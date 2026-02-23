@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import toast from "react-hot-toast";
 
-import { ProductImageType } from "../types";
 import { toastOption } from "@/lib/helpers/toast";
 
 export const useUploadProductImgState = () => {

@@ -153,6 +153,23 @@ export const getProductInfo = async ({ productId }: { productId: string }) => {
   }
 };
 
+export const deleteProductImage = async ({
+  productId,
+  imageIndex,
+}: {
+  productId: string;
+  imageIndex: number;
+}) => {
+  try {
+    const imageUrls = [imageIndex];
+    const url = `/products/${productId}/images`;
+    const { data } = await axiosInstance.delete(url, { data: { imageUrls } });
+    return data?.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const deleteProduct = async ({ productId }: { productId: string }) => {
   try {
     const url = `/products/${productId}`;

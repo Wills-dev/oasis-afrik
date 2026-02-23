@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
@@ -7,9 +5,20 @@ import { promiseErrorFunction } from "@/lib/helpers/promiseError";
 import { toastOption } from "@/lib/helpers/toast";
 import { ApiErrorResponse } from "@/lib/types";
 import { updateOrderInfo } from "../api";
+import { useUpdateOrderStatusState } from "./useUpdateOrderStatusState";
 
 export const useUpdateOrderStatus = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const {
+    isOpen,
+    setIsOpen,
+    selectedImage,
+    selectedImageFile,
+    onSelectFile,
+    handleImageDelete,
+    setSelectedImageFile,
+    setSelectedImage,
+  } = useUpdateOrderStatusState();
+
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
@@ -17,6 +26,8 @@ export const useUpdateOrderStatus = () => {
     onSuccess: (data, variables) => {
       toast.success("Order status updated successfully!", toastOption);
       setIsOpen(false);
+      setSelectedImageFile(null);
+      setSelectedImage(null);
       queryClient.invalidateQueries({
         queryKey: ["all orders"],
       });
@@ -30,7 +41,11 @@ export const useUpdateOrderStatus = () => {
   });
 
   const handleUpdate = (id: string, status: string) => {
-    mutate({ orderId: id, status });
+    if (["SHIPPED", "DELIVERED"].includes(status) && !selectedImageFile) {
+      toast.error("Please upload a proof", toastOption);
+      return;
+    }
+    mutate({ orderId: id, status, file: selectedImageFile || undefined });
   };
 
   return {
@@ -38,5 +53,9 @@ export const useUpdateOrderStatus = () => {
     isPending,
     isOpen,
     setIsOpen,
+    onSelectFile,
+    handleImageDelete,
+    selectedImage,
+    selectedImageFile,
   };
 };

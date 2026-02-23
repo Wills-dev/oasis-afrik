@@ -20,7 +20,16 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
     (state: RootState) => state.auth,
   );
   const { data, isLoading } = useGetOrderInfo(orderId);
-  const { handleUpdate, isPending, isOpen, setIsOpen } = useUpdateOrderStatus();
+  const {
+    handleUpdate,
+    isPending,
+    isOpen,
+    setIsOpen,
+    onSelectFile,
+    handleImageDelete,
+    selectedImage,
+    selectedImageFile,
+  } = useUpdateOrderStatus();
 
   const isSeller = user?.id === data?.seller?.id;
 
@@ -48,6 +57,10 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
               isUpdating={isPending}
               showConfirm={isOpen}
               setShowConfirm={setIsOpen}
+              selectedImage={selectedImage}
+              onSelectFile={onSelectFile}
+              handleImageDelete={handleImageDelete}
+              selectedImageFile={selectedImageFile}
             />
             {(showBuyerNote || showSellerNote) && (
               <p className="text-xs text-red-500">
