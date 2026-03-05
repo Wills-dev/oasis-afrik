@@ -1,5 +1,6 @@
 "use client";
 
+import pluralize from "pluralize";
 import { MapPin, Star } from "lucide-react";
 
 import { useSelector } from "react-redux";
@@ -35,9 +36,12 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
 
   const isProductOwner = user?.id === productInfo?.userId;
 
-  const formattedQuantity = `${productInfo?.quantity && numberWithCommas(Number(productInfo?.quantity))}${productInfo?.quantityUnit?.abbreviation}`;
+  const formattedQuantity = `${productInfo?.quantity && numberWithCommas(Number(productInfo?.quantity))} ${pluralize(productInfo?.quantityUnit?.abbreviation || "", Number(productInfo?.quantity))}`;
 
-  const formattedMor = `${productInfo?.minOrder && numberWithCommas(Number(productInfo?.minOrder))}${productInfo?.minOrderUnit?.abbreviation}`;
+  const formattedMor = `${productInfo?.minOrder && numberWithCommas(Number(productInfo?.minOrder))} ${pluralize(productInfo?.minOrderUnit?.abbreviation || "", Number(productInfo?.minOrder))}`;
+
+  const formattedMinLeadTime = `${productInfo?.minLeadTime} ${pluralize(productInfo?.minLeadTimePeriod?.name || "", Number(productInfo?.minLeadTime))}`;
+  const formattedMaxLeadTime = `${productInfo?.maxLeadTime} ${pluralize(productInfo?.maxLeadTimePeriod?.name || "", Number(productInfo?.maxLeadTime))}`;
 
   return (
     <div className="max-w-xl md:min-w-[450px] min-w-[300px] w-full space-y-6">
@@ -56,16 +60,8 @@ const ProductInfo = ({ productInfo }: ProductInfoProps) => {
           <p>4</p>
           <p>{`(15)`}</p>
         </div>
-        <div className="flex items-center gap-2 text-gray-500 text-sm">
-          <p>
-            {productInfo?.minLeadTime}
-            {productInfo?.minLeadTimePeriod?.name}
-          </p>{" "}
-          -{" "}
-          <p>
-            {productInfo?.maxLeadTime}
-            {productInfo?.maxLeadTimePeriod?.name}
-          </p>
+        <div className="flex items-center gap-2 text-gray-500 text-sm lowercase">
+          <p>{formattedMinLeadTime}</p> - <p>{formattedMaxLeadTime}</p>
         </div>
         <InfoDisc title="MOR:" value={formattedMor} horizontal />
         <InfoDisc

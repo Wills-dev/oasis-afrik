@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import pluralize from "pluralize";
 import { ArrowUpDown } from "lucide-react";
 import { CellContext, createColumnHelper } from "@tanstack/react-table";
 
@@ -110,14 +111,19 @@ export const Column = [
       );
     },
     cell: ({ row }) => {
-      const minOrder = row.getValue("minOrder");
+      const minOrder = row.getValue("minOrder") || 0;
       const minOrderUnit = (row?.original as { minOrderUnit: Unit })
         ?.minOrderUnit;
+
+      const formattedUnit = pluralize(
+        minOrderUnit?.abbreviation,
+        Number(minOrder),
+      );
 
       return (
         <p className="">
           {minOrder ? numberWithCommas(Number(minOrder)) : "0"}{" "}
-          <span className="uppercase">{minOrderUnit?.abbreviation}</span>
+          <span className="uppercase">{formattedUnit}</span>
         </p>
       );
     },
@@ -138,10 +144,15 @@ export const Column = [
       const availableQuantity = row.getValue("quantity");
       const quantityUnit = (row?.original as { quantityUnit: Unit })
         ?.quantityUnit;
+
+      const formattedQuantityUnit = pluralize(
+        quantityUnit?.abbreviation,
+        Number(availableQuantity),
+      );
       return (
         <p className="">
           {availableQuantity ? numberWithCommas(Number(availableQuantity)) : 0}{" "}
-          <span className="uppercase">{quantityUnit?.abbreviation}</span>
+          <span className="uppercase">{formattedQuantityUnit}</span>
         </p>
       );
     },

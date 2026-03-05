@@ -33,14 +33,31 @@ export const getOrderInfo = async ({ orderId }: { orderId: string }) => {
 export const updateOrderInfo = async ({
   orderId,
   status,
+  file,
 }: {
   orderId: string;
   status: string;
+  file?: File;
 }) => {
   try {
     const url = `/orders/${orderId}/status`;
-    const { data } = await axiosInstance.patch(url, { status });
-    return data?.data;
+
+    if (file) {
+      const formData = new FormData();
+
+      formData.append("status", status);
+      formData.append("evidence", file);
+
+      const { data } = await axiosInstance.patch(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return data?.data;
+    } else {
+      const { data } = await axiosInstance.patch(url, { status });
+      return data?.data;
+    }
   } catch (error) {
     throw error;
   }

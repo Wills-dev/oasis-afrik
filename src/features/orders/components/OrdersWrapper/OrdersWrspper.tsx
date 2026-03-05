@@ -5,7 +5,6 @@ import { useState } from "react";
 import { pageSelectors } from "../../constants";
 import { useGetOrders } from "../../hooks/useGetOrders";
 
-import Button from "@/components/atoms/Button/Button";
 import DashboardTitle from "@/components/molecules/DashboardTitle/DashboardTitle";
 import PageSelector from "@/components/molecules/PageSelector/PageSelector";
 import OrderCards from "../OrderCards/OrderCards";
@@ -40,9 +39,6 @@ const OrdersWrspper = () => {
           title="Orders"
           description="Manage and track all your orders"
         />
-        <Button href="/dashboard/orders/track" width="w-fit">
-          Track order
-        </Button>
       </div>
       <PageSelector
         selectPage={selectPage}

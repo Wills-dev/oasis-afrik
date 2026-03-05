@@ -42,10 +42,11 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
   const removeActionBtn =
     data?.statusLabel === "ACCEPTED" || data?.statusLabel === "REJECTED";
 
-  const isOrderPaidFor = data?.order?.status === "PAID";
+  const paymentConfirmed = data?.order?.status !== "PENDING_PAYMENT";
 
-  const showPaymentBtn =
-    data?.statusLabel === "ACCEPTED" && !isOrderPaidFor && isUserBuyer;
+  const orderAccepted = data?.statusLabel === "ACCEPTED";
+
+  const showPaymentBtn = orderAccepted && !paymentConfirmed && isUserBuyer;
 
   return (
     <div className="space-y-6">
@@ -103,20 +104,22 @@ const QuoteInfoWrapper = ({ quoteId }: { quoteId: string }) => {
                 </Button>
               </>
             )}
-            {showPaymentBtn && (
-              <Button
-                type="button"
-                width="flex-1 w-full"
-                onClick={() => setIsModalOpen(true)}
-              >
-                Make order payment
-              </Button>
-            )}
-            {isOrderPaidFor && (
-              <Button href={`/dashboard/orders/info/${data?.order?.id}`}>
-                View Order
-              </Button>
-            )}
+            <>
+              {showPaymentBtn && (
+                <Button
+                  type="button"
+                  width="flex-1 w-full"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  Make order payment
+                </Button>
+              )}
+              {paymentConfirmed && orderAccepted && (
+                <Button href={`/dashboard/orders/info/${data?.order?.id}`}>
+                  View Order
+                </Button>
+              )}
+            </>
           </div>
         </div>
       )}

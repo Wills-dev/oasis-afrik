@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 import { useGetOrderInfo } from "../../hooks/useGetOrderInfo";
+import { useUpdateOrderStatus } from "../../hooks/useUpdateOrderStatus";
 
 import BackButton from "@/components/atoms/BackButton/BackButton";
 import OrderSteps from "../OrderSteps/OrderSteps";
@@ -12,7 +13,6 @@ import UserSummary from "../UserSummary/UserSummary";
 import PaymentWarning from "@/components/molecules/PaymentWarning/PaymentWarning";
 import OrderPaymentSummary from "../OrderPaymentSummary/OrderPaymentSummary";
 import InfoSkeleton from "@/components/atoms/skeletonLoader/InfoSkeleton";
-import { useUpdateOrderStatus } from "../../hooks/useUpdateOrderStatus";
 import OrderStatusDropdown from "../OrderStatusDropdown/OrderStatusDropdown";
 
 const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
@@ -20,7 +20,16 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
     (state: RootState) => state.auth,
   );
   const { data, isLoading } = useGetOrderInfo(orderId);
-  const { handleUpdate, isPending, isOpen, setIsOpen } = useUpdateOrderStatus();
+  const {
+    handleUpdate,
+    isPending,
+    isOpen,
+    setIsOpen,
+    onSelectFile,
+    handleImageDelete,
+    selectedImage,
+    selectedImageFile,
+  } = useUpdateOrderStatus();
 
   const isSeller = user?.id === data?.seller?.id;
 
@@ -48,6 +57,10 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
               isUpdating={isPending}
               showConfirm={isOpen}
               setShowConfirm={setIsOpen}
+              selectedImage={selectedImage}
+              onSelectFile={onSelectFile}
+              handleImageDelete={handleImageDelete}
+              selectedImageFile={selectedImageFile}
             />
             {(showBuyerNote || showSellerNote) && (
               <p className="text-xs text-red-500">
@@ -57,7 +70,11 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
           </div>
           <div className="grid lg:grid-cols-3 gap-6">
             <div className="space-y-6">
-              <OrderSteps data={data} />
+              <OrderSteps
+                data={data}
+                shippedEvidence={data?.shippingEvidence}
+                deliveredEvidence={data?.deliveryEvidence}
+              />
               <OrderPaymentSummary data={data} />
             </div>
             <div className="space-y-6 lg:col-span-2">

@@ -3,6 +3,7 @@ import InfoDisc from "@/components/atoms/InfoDisc/InfoDisc";
 import { QuoteNote } from "../../types";
 import { convertDateFormat, numberWithCommas } from "@/lib/helpers";
 import { getCurrencySign } from "@/lib/helpers/getCurrencySign";
+import pluralize from "pluralize";
 
 const QuoteResponseCard = ({
   responseInfo,
@@ -16,6 +17,8 @@ const QuoteResponseCard = ({
   const quantity = `${responseInfo?.quantity ? numberWithCommas(Number(responseInfo?.quantity)) : responseInfo?.effectiveQuantity && numberWithCommas(Number(responseInfo?.effectiveQuantity))}`;
 
   const quantityUnit = `${responseInfo?.quantityUnit?.abbreviation ? responseInfo?.quantityUnit?.abbreviation : responseInfo?.effectiveQuantityUnit?.abbreviation && responseInfo?.effectiveQuantityUnit?.abbreviation}`;
+
+  const formattedQuantityUnit = pluralize(quantityUnit, Number(quantity));
 
   const amount = responseInfo?.amount
     ? numberWithCommas(Number(responseInfo?.amount))
@@ -36,7 +39,7 @@ const QuoteResponseCard = ({
         title={
           responseInfo?.quantity ? "Proposed quantity:" : "Requested quantity:"
         }
-        value={`${quantity}${quantityUnit}`}
+        value={`${quantity} ${formattedQuantityUnit}`}
         horizontal
       />
       <InfoDisc
