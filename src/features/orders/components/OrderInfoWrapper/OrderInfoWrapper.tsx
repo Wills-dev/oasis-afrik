@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 import { useGetOrderInfo } from "../../hooks/useGetOrderInfo";
+import { useUpdateOrderStatus } from "../../hooks/useUpdateOrderStatus";
 
 import BackButton from "@/components/atoms/BackButton/BackButton";
 import OrderSteps from "../OrderSteps/OrderSteps";
@@ -12,7 +13,6 @@ import UserSummary from "../UserSummary/UserSummary";
 import PaymentWarning from "@/components/molecules/PaymentWarning/PaymentWarning";
 import OrderPaymentSummary from "../OrderPaymentSummary/OrderPaymentSummary";
 import InfoSkeleton from "@/components/atoms/skeletonLoader/InfoSkeleton";
-import { useUpdateOrderStatus } from "../../hooks/useUpdateOrderStatus";
 import OrderStatusDropdown from "../OrderStatusDropdown/OrderStatusDropdown";
 
 const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {

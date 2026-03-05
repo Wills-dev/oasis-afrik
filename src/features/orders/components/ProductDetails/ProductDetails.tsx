@@ -9,10 +9,14 @@ import InfoCardWrapper from "@/components/atoms/InfoCardWrapper/InfoCardWrapper"
 import { OrderTableData } from "../../types";
 import { numberWithCommas } from "@/lib/helpers";
 import { getCurrencySign } from "@/lib/helpers/getCurrencySign";
+import pluralize from "pluralize";
 
 const ProductDetails = ({ data }: { data: OrderTableData }) => {
   const minLead = data?.quote.minLeadTime || data?.product.minLeadTime;
   const maxLead = data?.quote.maxLeadTime || data?.product.maxLeadTime;
+
+  const quantityUnit = data?.quantityUnit?.abbreviation || "";
+  const formattedQuantityUnit = pluralize(quantityUnit, Number(data?.quantity));
 
   return (
     <InfoCardWrapper title="Order Details">
@@ -45,7 +49,7 @@ const ProductDetails = ({ data }: { data: OrderTableData }) => {
         <div className="grid sm:grid-cols-2 gap-4">
           <DataField
             label="Quantity"
-            value={`${data?.quantity && numberWithCommas(Number(data?.quantity))} ${data?.quantityUnit?.abbreviation}`}
+            value={`${data?.quantity && numberWithCommas(Number(data?.quantity))} ${formattedQuantityUnit}`}
           />
           <DataField
             label="Unit Price"

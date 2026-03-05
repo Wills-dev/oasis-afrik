@@ -10,7 +10,7 @@ interface NewProductStepTwoProps {
   onSelectFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleImageDelete: (index: number) => void;
   fetchedImages?: string[];
-  productId: string;
+  productId?: string;
 }
 
 const NewProductStepTwo = ({
@@ -35,6 +35,8 @@ const NewProductStepTwo = ({
   const selectedImageLength = selectedImages?.length || 0;
 
   const imgLength = fetchedImageLength + selectedImageLength;
+
+  const formatttedProductId = productId || "";
 
   return (
     <div className="space-y-6">
@@ -85,7 +87,7 @@ const NewProductStepTwo = ({
                 alt="product"
                 width={20}
                 height={20}
-                onClick={() => handleDelete(productId, i)}
+                onClick={() => handleDelete(formatttedProductId, i)}
                 className="w-5 h-5 object-cover absolute top-2 right-2 cursor-pointer"
               />
               <Image

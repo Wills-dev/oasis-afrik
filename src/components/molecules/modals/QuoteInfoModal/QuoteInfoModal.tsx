@@ -19,6 +19,7 @@ import { numberWithCommas } from "@/lib/helpers";
 import { useAcceptQuote } from "@/features/quotes/hooks/useAcceptQuote";
 import { useNegotiateQuote } from "@/features/quotes/hooks/useNegotiateQuote";
 import { getCurrencySign } from "@/lib/helpers/getCurrencySign";
+import pluralize from "pluralize";
 
 const QuoteInfoModal = ({
   open,
@@ -58,6 +59,8 @@ const QuoteInfoModal = ({
   const quantity = `${response?.quantity ? numberWithCommas(Number(response?.quantity)) : response?.effectiveQuantity && numberWithCommas(Number(response?.effectiveQuantity))}`;
 
   const quantityUnit = `${response?.quantityUnit?.abbreviation ? response?.quantityUnit?.abbreviation : response?.effectiveQuantityUnit?.abbreviation && response?.effectiveQuantityUnit?.abbreviation}`;
+
+  const formattedQuantityUnit = pluralize(quantityUnit, Number(quantity));
 
   const amount = response?.amount
     ? numberWithCommas(Number(response?.amount))
@@ -100,7 +103,7 @@ const QuoteInfoModal = ({
                   ? "Proposed quantity:"
                   : "Requested quantity:"
               }
-              value={`${quantity}${quantityUnit}`}
+              value={`${quantity} ${formattedQuantityUnit}`}
               horizontal
             />
             <InfoDisc
