@@ -46,7 +46,7 @@ export const updateOrderInfo = async ({
       const formData = new FormData();
 
       formData.append("status", status);
-      formData.append("file", file);
+      formData.append("evidence", file);
 
       const { data } = await axiosInstance.patch(url, formData, {
         headers: {

@@ -4,14 +4,29 @@ import { motion } from "framer-motion";
 
 import { orderSteps } from "../../constants";
 import { OrderTableData } from "../../types";
+import EvidenceBlock from "@/components/molecules/EvidenceBlock/EvidenceBlock";
 
-const OrderSteps = ({ data }: { data: OrderTableData }) => {
+const OrderSteps = ({
+  data,
+  shippedEvidence,
+  deliveredEvidence,
+}: {
+  data: OrderTableData;
+  shippedEvidence?: string;
+  deliveredEvidence?: string;
+}) => {
   const getCurrentStepIndex = () => {
     if (data?.status === "CANCELLED") return -1;
     return orderSteps.findIndex((step) => step.status === data?.status);
   };
 
   const currentStepIndex = getCurrentStepIndex();
+
+  const getEvidenceForStep = (status: string) => {
+    if (status === "SHIPPED") return shippedEvidence;
+    if (status === "DELIVERED") return deliveredEvidence;
+    return undefined;
+  };
 
   return (
     <>
@@ -20,7 +35,7 @@ const OrderSteps = ({ data }: { data: OrderTableData }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-white rounded-2xl  border border-slate-200 p-6 lg:p-8"
+          className="bg-white rounded-2xl border border-slate-200 p-6 lg:p-8"
         >
           <h2 className="text-lg font-bold text-slate-900 mb-6">
             Order Progress
@@ -40,10 +55,12 @@ const OrderSteps = ({ data }: { data: OrderTableData }) => {
 
             <div className="relative space-y-6">
               {orderSteps.map((step, index) => {
-                const isCompleted =
-                  index < currentStepIndex || index === currentStepIndex;
+                const isCompleted = index <= currentStepIndex;
                 const nextStep = index === currentStepIndex + 1;
                 const isPending = index > currentStepIndex;
+                const evidence = isCompleted
+                  ? getEvidenceForStep(step.status)
+                  : undefined;
 
                 return (
                   <motion.div
@@ -58,7 +75,6 @@ const OrderSteps = ({ data }: { data: OrderTableData }) => {
                         w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold relative z-10 shrink-0
                         transition-all duration-300
                         ${isCompleted ? "bg-green-600 text-white shadow-lg" : ""}
-                        
                         ${nextStep ? "bg-yellow-500 border-4 border-yellow-500 text-white shadow-lg scale-110" : ""}
                         ${isPending ? "bg-slate-200 text-slate-400 border-2 border-slate-300" : ""}
                       `}
@@ -68,16 +84,26 @@ const OrderSteps = ({ data }: { data: OrderTableData }) => {
 
                     <div className="flex-1 pt-1">
                       <p
-                        className={`
-                          text-sm font-bold leading-tight mb-1
-                          ${isCompleted ? "text-slate-900" : "text-slate-400"}
-                        `}
+                        className={`text-sm font-bold leading-tight mb-1 ${isCompleted ? "text-slate-900" : "text-slate-400"}`}
                       >
                         {step.label}
                       </p>
                       <p className="text-xs text-slate-500">
                         {step.description}
                       </p>
+
+                      {evidence && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.3 + index * 0.1,
+                          }}
+                        >
+                          <EvidenceBlock file={evidence} />
+                        </motion.div>
+                      )}
                     </div>
                   </motion.div>
                 );
