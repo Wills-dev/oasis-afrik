@@ -3,7 +3,7 @@ import { QuotePayloadType } from "../types";
 export const validateQuote = (quote: QuotePayloadType) => {
   const required = [
     ["amount", "Amount is required"],
-    ["currency", "Currency is required"],
+    // ["currency", "Currency is required"],
     ["quantity", "Quantity is required"],
     ["quantityUnitId", "Quantity unit is required"],
     ["address", "Delivery address is required"],

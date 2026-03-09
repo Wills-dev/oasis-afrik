@@ -13,7 +13,6 @@ import Label from "@/components/atoms/Label/Label";
 import Select from "@/components/atoms/Select/Select";
 import Textarea from "@/components/atoms/TextArea/Textarea";
 
-import { currency } from "@/lib/constants";
 import { QuotePayloadType } from "@/features/quotes/types";
 import { useGetUnits } from "@/features/products/hooks/useGetUnits";
 import { useGetPeriods } from "@/features/products/hooks/useGetPeriods";
@@ -51,26 +50,13 @@ const RequestQuote = ({
         <form className="space-y-2" onSubmit={handleSubmit}>
           <div className="">
             <Label title="Amount" />
-            <div className="flex gap-2">
-              <div className="w-4/6">
-                <Input
-                  value={quote.amount}
-                  onChange={handleChange}
-                  type="text"
-                  name="amount"
-                  placeholder=""
-                />
-              </div>
-              <div className="flex-1 w-full">
-                <Select
-                  value={quote?.currency}
-                  onChange={handleChange}
-                  name="currency"
-                  placeholder="Currency"
-                  options={currency}
-                />
-              </div>
-            </div>
+            <Input
+              value={quote.amount}
+              onChange={handleChange}
+              type="text"
+              name="amount"
+              placeholder=""
+            />
           </div>
           <div className="">
             <Label title="Quantity" />

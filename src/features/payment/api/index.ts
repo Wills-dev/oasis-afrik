@@ -28,3 +28,27 @@ export const paystackPayment = async ({ orderId }: { orderId: string }) => {
     throw error;
   }
 };
+
+export const bankTransferProof = async ({
+  orderId,
+  file,
+}: {
+  orderId: string;
+  file: File;
+}) => {
+  try {
+    const formData = new FormData();
+
+    formData.append("paymentProof", file);
+
+    const url = `/orders/${orderId}/initialize-manual-payment`;
+    const { data } = await axiosInstance.post(url, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
