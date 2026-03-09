@@ -49,7 +49,7 @@ export const requestQuote = async ({
     const payload: {
       productId: string;
       amount: string;
-      currency: string;
+      // currency: string;
       quantity: number;
       quantityUnitId: string;
       address: string;
@@ -61,7 +61,7 @@ export const requestQuote = async ({
     } = {
       productId,
       amount: removeCommas(amount),
-      currency,
+      // currency,
       quantity: Number(removeCommas(quantity)),
       quantityUnitId,
       address,
