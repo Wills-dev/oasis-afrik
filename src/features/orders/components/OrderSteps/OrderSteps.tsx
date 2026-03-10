@@ -10,10 +10,12 @@ const OrderSteps = ({
   data,
   shippedEvidence,
   deliveredEvidence,
+  paymentProof,
 }: {
   data: OrderTableData;
   shippedEvidence?: string;
   deliveredEvidence?: string;
+  paymentProof?: string;
 }) => {
   const getCurrentStepIndex = () => {
     if (data?.status === "CANCELLED") return -1;
@@ -23,6 +25,7 @@ const OrderSteps = ({
   const currentStepIndex = getCurrentStepIndex();
 
   const getEvidenceForStep = (status: string) => {
+    if (status === "AWAITING_PAYMENT_VERIFICATION") return paymentProof;
     if (status === "SHIPPED") return shippedEvidence;
     if (status === "DELIVERED") return deliveredEvidence;
     return undefined;

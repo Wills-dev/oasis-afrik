@@ -19,6 +19,11 @@ export const orderSteps: {
   {
     status: "PENDING_PAYMENT",
     label: "Payment Pending",
+    description: "Awaiting payment",
+  },
+  {
+    status: "AWAITING_PAYMENT_VERIFICATION",
+    label: "Reviewing Payment",
     description: "Awaiting payment confirmation",
   },
   {
