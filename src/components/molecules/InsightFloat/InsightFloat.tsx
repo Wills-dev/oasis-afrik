@@ -33,12 +33,12 @@ const InsightFloat = () => {
               className="flex items-center gap-8 whitespace-nowrap"
               animate={{ x: ["0%", "-50%"] }}
               transition={{
-                duration: 40,
+                duration: 20,
                 ease: "linear",
                 repeat: Infinity,
               }}
             >
-              {duplicatedInsights.map((news, index) => (
+              {duplicatedInsights?.map((news, index) => (
                 <Link
                   href={`/insights/info/${news?.id}`}
                   key={`${news.id}-${index}`}
