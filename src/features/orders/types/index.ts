@@ -25,6 +25,7 @@ export type Order = {
 
 export type OrderStatus =
   | "PENDING_PAYMENT"
+  | "AWAITING_PAYMENT_VERIFICATION"
   | "PAID"
   | "PROCESSING"
   | "SHIPPED"

@@ -24,7 +24,7 @@ const StatusBubble = ({ status }: { status: string }) => {
 
   return (
     <div
-      className={`rounded-full px-3 py-1 text-center w-32 text-sm ${
+      className={`rounded-full px-3 py-1 text-center w-34 text-sm ${
         statusStyles[status] || "text-orange-400 bg-orange-50"
       }`}
     >

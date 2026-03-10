@@ -117,7 +117,13 @@ export const Column = (isBuyer?: boolean) => [
       const status = getValue() as OrderTableData["status"];
       return (
         <StatusBubble
-          status={status === "PENDING_PAYMENT" ? "PENDING" : status}
+          status={
+            status === "PENDING_PAYMENT"
+              ? "PENDING"
+              : status === "AWAITING_PAYMENT_VERIFICATION"
+                ? "PAYMENT_REVIEW"
+                : status
+          }
         />
       );
     },

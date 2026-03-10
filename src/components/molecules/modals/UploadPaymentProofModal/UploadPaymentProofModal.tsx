@@ -79,9 +79,9 @@ const UploadPaymentProofModal = ({
               onSubmit={(e) => uploadBankTransferProof(e, orderId)}
             >
               <div className="space-y-2">
-                <DataField label="Bank Name" value="First Bank PLC" />
-                <DataField label="Account Name" value="OasisAfrik LTD" />
-                <DataField label="Account Number" value="30434575647" />
+                <DataField label="Bank Name" value="Union Bank" />
+                <DataField label="Account Name" value="Harvest Oasis Ltd" />
+                <DataField label="Account Number" value="0238723356" />
               </div>
               <div className="">
                 <Label title="Payment proof" />

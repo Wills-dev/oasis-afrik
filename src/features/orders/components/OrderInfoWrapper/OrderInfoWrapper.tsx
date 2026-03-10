@@ -74,6 +74,7 @@ const OrderInfoWrapper = ({ orderId }: { orderId: string }) => {
                 data={data}
                 shippedEvidence={data?.shippingEvidence}
                 deliveredEvidence={data?.deliveryEvidence}
+                paymentProof={data?.paymentProof}
               />
               <OrderPaymentSummary data={data} />
             </div>
